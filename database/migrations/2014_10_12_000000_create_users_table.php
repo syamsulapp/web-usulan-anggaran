@@ -14,9 +14,16 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->string('usurname');
             $table->string('password');
+<<<<<<< Updated upstream
+=======
+            $table->string('tipe');
+            $table->string('bagian');
+            $table->string('surat_keterangan');
+            $table->string('role');
+            $table->enum('is_active', ['yes', 'no']);
+>>>>>>> Stashed changes
             $table->rememberToken();
             $table->timestamps();
         });
