@@ -16,15 +16,12 @@ return new class extends Migration
             $table->string('name');
             $table->string('usurname');
             $table->string('password');
-<<<<<<< Updated upstream
-=======
             $table->string('tipe');
             $table->string('bagian');
             $table->string('surat_keterangan');
             $table->string('role');
             $table->enum('is_active', ['yes', 'no']);
->>>>>>> Stashed changes
-            $table->rememberToken();
+            $table->string('role');
             $table->timestamps();
         });
     }
