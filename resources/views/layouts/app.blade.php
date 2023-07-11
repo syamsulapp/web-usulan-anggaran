@@ -36,28 +36,20 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/summernote/summernote-bs4.min.css') }}">
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
-    <div class="wrapper">
-        <!-- Preloader -->
-        <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60"
-                width="60">
-        </div>
 
-
-        @if (Route::has('login'))
-            
-        @endif
+@if (Route::has('login'))
+    @auth
         @include('layouts.header.header')
-
         @include('layouts.sidebar.sidebar')
-
         @yield('content')
-
         @include('layouts.footer.footer')
-    </div>
+    @else
+        @yield('content')
+    @endauth
+@endif
 
-</html>
+
+
 
 <!-- jQuery -->
 <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
