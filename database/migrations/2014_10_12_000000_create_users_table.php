@@ -20,8 +20,7 @@ return new class extends Migration
             $table->string('bagian');
             $table->string('surat_keterangan');
             $table->string('role');
-            $table->enum('is_active', ['yes', 'no']);
-            $table->string('role');
+            $table->enum('is_active', ['N', 'Y']);
             $table->timestamps();
         });
     }

@@ -18,31 +18,33 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // Rute untuk superadmin
 Route::middleware('superadmin')->group(function () {
-    Route::get('/guest/dashboard', function () {
-        return view('superadmin.dashboard');
+    Route::prefix('guest')->group(function () {
+        Route::get('dashboard', function () {
+            return 'halo saya superadmin';
+        });
     });
 });
 
 // Rute untuk admin
 Route::middleware('admin')->group(function () {
-    Route::get('/admin/dashboard', function () {
-        return view('admin.dashboard');
+    Route::prefix('admin')->group(function () {
+        Route::get('dashboard', function () {
+            return 'halo saya dashboard';
+        });
     });
 });
 
 // Rute untuk pengguna
 Route::middleware('user')->group(function () {
-    Route::get('/user/dashboard', function () {
-        return view('user.dashboard');
+    Route::prefix('user')->group(function () {
+        Route::get('dashboard', function () {
+            return 'halo saya user';
+        });
     });
 });
