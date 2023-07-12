@@ -20,6 +20,7 @@ Route::get('/', function () {
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
+Route::post('/profile/submit', [App\Http\Controllers\HomeController::class, 'profileSubmit'])->name('profile.submit');
 
 Auth::routes();
 
@@ -27,7 +28,7 @@ Auth::routes();
 Route::middleware('superadmin')->group(function () {
     Route::prefix('guest')->group(function () {
         Route::get('dashboard', function () {
-            return 'halo saya superadmin';
+            return redirect()->route('home');
         });
     });
 });
@@ -36,7 +37,7 @@ Route::middleware('superadmin')->group(function () {
 Route::middleware('admin')->group(function () {
     Route::prefix('admin')->group(function () {
         Route::get('dashboard', function () {
-            return 'halo saya dashboard';
+            return redirect()->route('home');
         });
     });
 });
@@ -45,7 +46,7 @@ Route::middleware('admin')->group(function () {
 Route::middleware('user')->group(function () {
     Route::prefix('user')->group(function () {
         Route::get('dashboard', function () {
-            return 'halo saya user';
+            return redirect()->route('home');
         });
     });
 });
