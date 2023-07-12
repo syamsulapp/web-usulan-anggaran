@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class AccountSeeder extends Seeder
 {
@@ -16,7 +17,7 @@ class AccountSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'superadmin',
             'username' => 'superadmin',
-            'password' => 'superadmin1129321!@#',
+            'password' => Hash::make('superadmin1129321!@#'),
             'role' => 'superadmin',
             'is_active' => 'Y',
             'created_at' => \Carbon\Carbon::now(),
@@ -25,7 +26,7 @@ class AccountSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'admin',
             'username' => 'admin',
-            'password' => 'admin1129321!@#',
+            'password' => Hash::make('admin1129321!@#'),
             'role' => 'admin',
             'is_active' => 'Y',
             'created_at' => \Carbon\Carbon::now(),
