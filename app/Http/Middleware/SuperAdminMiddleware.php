@@ -20,6 +20,6 @@ class SuperAdminMiddleware
             return $next($request);
         }
 
-        return redirect('/login');
+        return redirect('/home');
     }
 }

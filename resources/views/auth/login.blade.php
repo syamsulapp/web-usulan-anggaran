@@ -65,7 +65,7 @@
                         <a href="{{ url('forgot-password') }}">Forgot Password</a>
                     </p>
                     <p class="mb-0">
-                        <a href="{{ route('register') }}" class="text-center">Register</a>
+                        <a href="{{ route('register') }}" class="text-center" target="_blank">Register</a>
                     </p>
                 </div>
                 <!-- /.card-body -->

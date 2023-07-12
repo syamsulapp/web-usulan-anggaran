@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -31,14 +32,17 @@ class RegisterController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
+    protected $uploadFile;
+
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Request $uploadFile)
     {
         $this->middleware('guest');
+        $this->uploadFile = $uploadFile;
     }
 
     /**
@@ -51,9 +55,14 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'username' => ['required', 'string', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'role' => ['required', 'in:superadmin,admin,user'], // role
+            'password_confirmation' => ['required', 'string', 'min:8'],
+            'surat_keterangan' => ['required', 'file', 'mimes:pdf', 'max:2048'],
+        ], [
+            'required' => ':attribute jangan di kosongkan',
+            'min' => 'minimal 8 karakter',
+            'confirmed' => 'password tidak sama',
         ]);
     }
 
@@ -63,13 +72,26 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
+
     protected function create(array $data)
     {
+
+        $file = $this->uploadFile->file('surat_keterangan');
+
+        $nama_file = time() . '-' . $file->getClientOriginalName();
+
+        $tujuan_upload = 'surat_keterangan';
+
+        $file->move($tujuan_upload, $nama_file);
+
         return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
+            'name' => $data['username'],
+            'username' => $data['username'],
+            'tipe' => $data['tipe'],
+            'bagian' => $data['bagian'],
             'password' => Hash::make($data['password']),
-            'role' => $data['role'],
+            'surat_keterangan' => $nama_file,
+            'role' => 'user',
         ]);
     }
 }
