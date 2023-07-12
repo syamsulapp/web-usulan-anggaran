@@ -43,11 +43,11 @@ class LoginController extends Controller
         $role = auth()->user()->role;
 
         if ($role == 'superadmin') {
-            return '.superadmin'; // Ganti dengan rute yang sesuai untuk admin
+            return '/guest/dashboard'; // Ganti dengan rute yang sesuai untuk admin
         } elseif ($role == 'admin') {
-            return '.admin'; // Ganti dengan rute yang sesuai untuk pengguna
+            return '/admin/dashboard'; // Ganti dengan rute yang sesuai untuk pengguna
         } else {
-            return '/'; // Ganti dengan rute yang sesuai untuk tamu
+            return '/user/dashboard'; // Ganti dengan rute yang sesuai untuk tamu
         }
     }
 }

@@ -19,7 +19,6 @@ class UserMiddleware
         if (Auth::check() && Auth::user()->role == 'user') {
             return $next($request);
         }
-
-        return redirect('/login');
+        return redirect('/');
     }
 }

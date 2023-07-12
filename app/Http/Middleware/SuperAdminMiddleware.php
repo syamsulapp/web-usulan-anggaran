@@ -14,12 +14,12 @@ class SuperAdminMiddleware
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next): Response
     {
         if (Auth::check() && Auth::user()->role == 'superadmin') {
             return $next($request);
         }
 
-        return redirect('/login');
+        return redirect('/');
     }
 }
