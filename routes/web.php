@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -18,9 +19,11 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
-Route::post('/profile/submit', [App\Http\Controllers\HomeController::class, 'profileSubmit'])->name('profile.submit');
+Route::prefix('home')->group(function () {
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('profile', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
+    Route::post('profile/submit', [App\Http\Controllers\HomeController::class, 'profileSubmit'])->name('profile.submit');
+});
 
 Auth::routes();
 
@@ -30,6 +33,9 @@ Route::middleware('superadmin')->group(function () {
         Route::get('dashboard', function () {
             return redirect()->route('home');
         });
+        Route::get('verifikasi-usulan', function () {
+            return 'halo';
+        })->name('superadmin.verifikasi_usulan');
     });
 });
 
@@ -39,6 +45,16 @@ Route::middleware('admin')->group(function () {
         Route::get('dashboard', function () {
             return redirect()->route('home');
         });
+        Route::get('users', [AdminController::class, 'index'])->name('admin.users');
+        Route::get('users/add', [AdminController::class, 'create'])->name('admin.users-add');
+        Route::post('users/store', [AdminController::class, 'store'])->name('admin.users-stire');
+        Route::get('users/edit/{id}', [AdminController::class, 'edit'])->name('admin.users-edit');
+        Route::put('users/update/{id}', [AdminController::class, 'update'])->name('admin.users-update');
+        Route::delete('users/delete/{id}', [AdminController::class, 'delete'])->name('admin.users-delete');
+
+        //activate account users
+        Route::post('users/activate/{id}', [AdminController::class, 'activate'])->name('admin.users-activate');
+        Route::post('users/inactive/{id}', [AdminController::class, 'inactive'])->name('admin.users-inactive');
     });
 });
 
@@ -48,5 +64,11 @@ Route::middleware('user')->group(function () {
         Route::get('dashboard', function () {
             return redirect()->route('home');
         });
+        Route::get('buat-usulan', function () {
+            return 'halo buat usulan';
+        })->name('users.buat_usulan');
+        Route::get('revisi-usulan', function () {
+            return 'halo buat usulan';
+        })->name('users.revisi_usulan');
     });
 });
