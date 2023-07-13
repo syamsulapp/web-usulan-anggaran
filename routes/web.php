@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +33,9 @@ Route::middleware('superadmin')->group(function () {
         Route::get('dashboard', function () {
             return redirect()->route('home');
         });
+        Route::get('verifikasi-usulan', function () {
+            return 'halo';
+        })->name('superadmin.verifikasi_usulan');
     });
 });
 
@@ -41,6 +45,7 @@ Route::middleware('admin')->group(function () {
         Route::get('dashboard', function () {
             return redirect()->route('home');
         });
+        Route::get('users', [AdminController::class, 'index'])->name('admin.users');
     });
 });
 
@@ -50,5 +55,11 @@ Route::middleware('user')->group(function () {
         Route::get('dashboard', function () {
             return redirect()->route('home');
         });
+        Route::get('buat-usulan', function () {
+            return 'halo buat usulan';
+        })->name('users.buat_usulan');
+        Route::get('revisi-usulan', function () {
+            return 'halo buat usulan';
+        })->name('users.revisi_usulan');
     });
 });
