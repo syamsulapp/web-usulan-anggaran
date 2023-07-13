@@ -316,27 +316,27 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label for="inputName2" class="col-sm-2 col-form-label">Password</label>
+                                                <label for="password" class="col-sm-2 col-form-label">Password</label>
                                                 <div class="col-sm-10">
                                                     <input type="password"
                                                         class="form-control  @error('password')
                                                     'is-invalid'
                                                 @enderror"
-                                                        id="inputName2" name="password" placeholder="Password">
+                                                        id="password" name="password" placeholder="Password">
                                                     @error('password')
                                                         <span class="text-danger">{{ $message }}</span>
                                                     @enderror
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label for="inputName2" class="col-sm-2 col-form-label">Password
+                                                <label for="password-confirmation" class="col-sm-2 col-form-label">Password
                                                     Confirmation</label>
                                                 <div class="col-sm-10">
                                                     <input type="password"
                                                         class="form-control  @error('password-confirmation')
                                                     'is-invalid'
                                                 @enderror"
-                                                        id="inputName2" name="password-confirmation"
+                                                        id="password-confirmation" name="password-confirmation"
                                                         placeholder="Password Confirmation">
                                                     @error('password-confirmation')
                                                         <span class="text-danger">{{ $message }}</span>
