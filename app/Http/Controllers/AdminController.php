@@ -16,13 +16,30 @@ class AdminController extends Controller
         $this->user = $user;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return view('layouts.view.admin.users');
+        $limit = 10;
+        if ($limit >= $request->limit) {
+            $limit = $request->limit;
+        }
+        $users = $this->user
+            ->orderByDesc('id')
+            ->when($request->name, function ($query) use ($request) {
+                return $query->where('name', 'LIKE', "%{$request->name}%");
+            })
+            ->when($request->username, function ($query) use ($request) {
+                return $query->where('username', 'LIKE', "%{$request->username}%");
+            })
+            ->when($request->is_active, function ($query) use ($request) {
+                return $query->where('is_active', 'LIKE', "%{$request->is_active}%");
+            })
+            ->paginate($limit);
+        return view('layouts.view.admin.users', compact('users'));
     }
 
     public function create()
     {
+        return 'tambah users';
     }
 
     public function store(Request $request)
@@ -39,5 +56,24 @@ class AdminController extends Controller
 
     public function delete($id)
     {
+    }
+
+    public function activate($id)
+    {
+        try {
+            $this->user->whereId($id)->update(['is_active' => 'Y']);
+            return redirect()->route('admin.users')->with('alert', 'Berhasil Mengaktifkan Akun Users');
+        } catch (\Exception $error) {
+            return $error;
+        }
+    }
+    public function inactive($id)
+    {
+        try {
+            $this->user->whereId($id)->update(['is_active' => 'N']);
+            return redirect()->route('admin.users')->with('alert', 'Berhasil Menonaktifkan Akun Users');
+        } catch (\Exception $error) {
+            return $error;
+        }
     }
 }
