@@ -1,6 +1,6 @@
 # introduce
 
-<h5>task vhi-web di build menggunakan framework laravel versi 10 dengan versi php 8.1>= dan versi composer 2.5.8, jadi pastikan versi php yang anda gunakan sudah sesuai</h5>
+<h5>project SIPP di build menggunakan framework laravel versi 10 dengan versi php 8.1>= dan versi composer 2.5.8, jadi pastikan versi php yang anda gunakan sudah sesuai</h5>
 
 <h5>
 aktifkan require module php yang dibutukan untuk menjalankan framework tersebut, beberapa modul yang di harus di aktifkan ialah pdo_mysqli, mysqli, xml  dan mbstring, zip, curl dan sodium
@@ -68,7 +68,7 @@ Zend OPcache
 composer install
 ```
 
-# Start Local Development Server API(laravel) RedComm
+# Start Local Development Server API(laravel) SIPP
 
 ```Bash
 php -S localhost:8000 -t public || php artisan serve
@@ -104,7 +104,7 @@ localhost:8000 -> sesuaikan dengan base url kalian
 
 ```
 
-# unit test notes crud
+# unit test notes feature
 
 ```bash
 php artisan test
