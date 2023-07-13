@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'profile')
+@section('title', 'Profile')
 
 @section('content')
     <div class="content-wrapper">
@@ -329,7 +329,8 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label for="password-confirmation" class="col-sm-2 col-form-label">Password
+                                                <label for="password-confirmation"
+                                                    class="col-sm-2 col-form-label">Password
                                                     Confirmation</label>
                                                 <div class="col-sm-10">
                                                     <input type="password"

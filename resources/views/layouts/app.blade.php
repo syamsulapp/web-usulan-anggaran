@@ -42,18 +42,21 @@
 
 </head>
 
-
 @if (Route::has('login'))
     @auth
-        @include('layouts.header.header')
-        @include('layouts.sidebar.sidebar')
-        @yield('content')
-        @include('layouts.footer.footer')
+
+        <body class="hold-transition sidebar-mini layout-fixed">
+            <div class="wrapper">
+                @include('layouts.header.header')
+                @include('layouts.sidebar.sidebar')
+                @yield('content')
+                @include('layouts.footer.footer')
+            </div>
+        </body>
     @else
         @yield('content')
     @endauth
 @endif
-
 
 
 
@@ -250,3 +253,5 @@
     }
     // DropzoneJS Demo Code End
 </script>
+
+</html>

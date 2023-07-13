@@ -18,9 +18,11 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
-Route::post('/profile/submit', [App\Http\Controllers\HomeController::class, 'profileSubmit'])->name('profile.submit');
+Route::prefix('home')->group(function () {
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('profile', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
+    Route::post('profile/submit', [App\Http\Controllers\HomeController::class, 'profileSubmit'])->name('profile.submit');
+});
 
 Auth::routes();
 
