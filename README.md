@@ -109,3 +109,15 @@ localhost:8000 -> sesuaikan dengan base url kalian
 ```bash
 php artisan test
 ```
+
+# account default
+
+```bash
+superadmin
+    ->username = superadmin
+    ->password = superadmin1129321!@#
+
+admin
+    ->username = admin
+    ->password = admin1129321!@#
+```
