@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,38 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
+});
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
+Route::post('/profile/submit', [App\Http\Controllers\HomeController::class, 'profileSubmit'])->name('profile.submit');
+
+Auth::routes();
+
+// Rute untuk superadmin
+Route::middleware('superadmin')->group(function () {
+    Route::prefix('guest')->group(function () {
+        Route::get('dashboard', function () {
+            return redirect()->route('home');
+        });
+    });
+});
+
+// Rute untuk admin
+Route::middleware('admin')->group(function () {
+    Route::prefix('admin')->group(function () {
+        Route::get('dashboard', function () {
+            return redirect()->route('home');
+        });
+    });
+});
+
+// Rute untuk pengguna
+Route::middleware('user')->group(function () {
+    Route::prefix('user')->group(function () {
+        Route::get('dashboard', function () {
+            return redirect()->route('home');
+        });
+    });
 });
