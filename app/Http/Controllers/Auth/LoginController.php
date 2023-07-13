@@ -50,4 +50,9 @@ class LoginController extends Controller
             return '/user/dashboard'; // Ganti dengan rute yang sesuai untuk tamu
         }
     }
+
+    public function username()
+    {
+        return 'username'; // Ubah 'username' sesuai dengan kolom yang ingin Anda gunakan sebagai username
+    }
 }
