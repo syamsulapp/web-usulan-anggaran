@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SuperadminController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -21,7 +22,8 @@ Route::get('/', function () {
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
 Route::post('/profile/submit', [App\Http\Controllers\HomeController::class, 'profileSubmit'])->name('profile.submit');
-
+Route::get('/superadmin', [SuperadminController::class, 'index'])->name('index');
+Route::get('/admin', [SuperadminController::class, 'index'])->name('index');
 Auth::routes();
 
 // Rute untuk superadmin
