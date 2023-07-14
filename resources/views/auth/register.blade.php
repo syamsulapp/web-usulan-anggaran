@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Registrasi Akun')
+
 @section('content')
     <br>
     <br>
