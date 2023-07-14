@@ -41,14 +41,22 @@
 
 </head>
 
-<body class="hold-transition login-page d-flex justify-content-center align-items-center">
+<body class="hold-transition login-page">
 
 
     <div class="login-box">
         <!-- /.login-logo -->
-        <img src="{{ asset('assets/img/logoSIPPWarna.png') }}" width="500" height="200">
+
+        <div class="login-logo">
+            <img src="{{ asset('assets/img/logoSIPPWarna.png') }}" width="100%">
+        </div>
+
         <div class="card card-outline card-primary">
+            <div class="card-img-top">
+
+            </div>
             <div class="card-header text-center">
+
                 <a href="{{ url('/') }}" class="h1"><b>SIPP </b>{{ __('Login') }}</a>
             </div>
             <div class="card-body">
@@ -64,9 +72,9 @@
                             </div>
                         </div>
                         @error('username')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
                         @enderror
                     </div>
                     <div class="input-group mb-3">
@@ -78,9 +86,9 @@
                             </div>
                         </div>
                         @error('password')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
                         @enderror
                     </div>
                     <div class="row">
