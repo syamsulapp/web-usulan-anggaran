@@ -680,9 +680,7 @@
                                 <div class="card-body">
                                     <div class="alert alert-danger alert-dismissible">
                                         <h5><i class="icon fas fa-ban"></i> Alert!</h5>
-                                        {{ __('akun anda belum aktif, harap aktifkan akun agar dapat menggunakan fitur di aplikasi ini.
-                                                                                                                                                                                                                                                                                                                            Silahkan hubungi pihak admin untuk mengaktifkan akun anda
-                                                                                                                                                                                                                                                                                                                        ') }}
+                                        {{ __('akun anda belum aktif, harap aktifkan akun agar dapat menggunakan fitur di aplikasi ini.Silahkan hubungi pihak admin untuk mengaktifkan akun anda') }}
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
@@ -755,7 +753,6 @@
     <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
-
     <script>
         $(function() {
             $("#example1").DataTable({
