@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+
+
+    // function index()
+    // {
+    //     return view('admin.index');
+    // }
     protected $user;
 
     public function __construct(User $user)
