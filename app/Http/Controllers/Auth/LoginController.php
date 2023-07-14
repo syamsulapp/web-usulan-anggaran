@@ -51,6 +51,11 @@ class LoginController extends Controller
         }
     }
 
+    public function showLoginForm()
+    {
+        return view('auth.login');
+    }
+
     public function username()
     {
         return 'username'; // Ubah 'username' sesuai dengan kolom yang ingin Anda gunakan sebagai username
