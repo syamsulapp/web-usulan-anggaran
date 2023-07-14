@@ -7,7 +7,9 @@
     <br>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-12">
+                <img src="{{ asset('assets/img/logoSIPPWarna.png') }}" width="500" height="200">
+
                 <div class="card">
                     <div class="card-header">{{ __('Register akun users') }}</div>
 

@@ -12,6 +12,8 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/sippCropped.png') }}">
+
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -41,7 +43,8 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css') }}">
     <!-- data table -->
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
 
 
@@ -53,15 +56,15 @@
 
 
         @if (Route::has('login'))
-        @auth
-        @include('layouts.header.header')
-        @include('layouts.sidebar.sidebar')
-        @yield('content')
-        @include('layouts.footer.footer')
-        @else
-        @yield('content')
+            @auth
+                @include('layouts.header.header')
+                @include('layouts.sidebar.sidebar')
+                @yield('content')
+                @include('layouts.footer.footer')
+            @else
+                @yield('content')
 
-        @endauth
+            @endauth
         @endif
 
 
