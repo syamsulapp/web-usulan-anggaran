@@ -142,28 +142,50 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form action="{{ route('admin.users-stores') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Name</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1"
-                                        placeholder="Enter email">
+                                    <input type="text"
+                                        class="form-control @error('name')
+                                        is-invalid
+                                    @enderror"
+                                        name="name" id="exampleInputEmail1" placeholder="Masukan Name"
+                                        value="{{ old('name') }}">
+                                    @error('name')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Username</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1"
-                                        placeholder="Enter email">
+                                    <input type="text"
+                                        class="form-control @error('username')
+                                    is-invalid
+                                @enderror"
+                                        name="username" id="exampleInputEmail1" placeholder="Masukan Username"
+                                        value="{{ old('name') }}">
+                                    @error('username')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Password</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1"
-                                        placeholder="Password">
+                                    <input type="password"
+                                        class="form-control @error('password')
+                                        is-invalid
+                                    @enderror"
+                                        name="password" id="exampleInputPassword1" placeholder="Password"
+                                        value="{{ old('name') }}">
+                                    @error('password')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-14">
                                         <!-- select -->
-                                        <label>Tipe</label>
-                                        <select class="custom-select">
+                                        <label>Pilih Tipe</label>
+                                        <select class="custom-select" name="tipe">
                                             <option>Tipe 1</option>
                                             <option>Tipe 2</option>
                                         </select>
@@ -172,10 +194,31 @@
                                 <div class="form-group">
                                     <div class="col-sm-14">
                                         <!-- select -->
-                                        <label>Bagian</label>
-                                        <select class="custom-select">
+                                        <label>Pilih Bagian</label>
+                                        <select class="custom-select" name="bagian">
                                             <option>Bagian 1</option>
                                             <option>Bagian 2</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-14">
+                                        <!-- select -->
+                                        <label>Pilih Role</label>
+                                        <select class="custom-select" name="role">
+                                            <option>suepradmin</option>
+                                            <option>admin</option>
+                                            <option>user</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-14">
+                                        <!-- select -->
+                                        <label>status</label>
+                                        <select class="custom-select" name="is_active">
+                                            <option value="Y">aktif</option>
+                                            <option value="N">non-aktif</option>
                                         </select>
                                     </div>
                                 </div>
@@ -183,20 +226,26 @@
                                     <label for="exampleInputFile">Surat Keterangan</label>
                                     <div class="input-group">
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="exampleInputFile">
+                                            <input type="file"
+                                                class="custom-file-input @error('skfile')
+                                                is-invalid
+                                            @enderror"
+                                                name="skfile" id="exampleInputFile">
                                             <label class="custom-file-label" for="exampleInputFile">Pilih File</label>
                                         </div>
                                         <div class="input-group-append">
                                             <span class="input-group-text">Upload</span>
                                         </div>
                                     </div>
+                                    @error('skfile')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
+                            <div class="modal-footer justify-content-between">
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
                         </form>
-                    </div>
-                    <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
                     </div>
                 </div>
                 <!-- /.modal-content -->
