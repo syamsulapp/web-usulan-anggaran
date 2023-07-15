@@ -47,10 +47,8 @@ Route::middleware('admin')->group(function () {
             return redirect()->route('home');
         });
         Route::get('users', [AdminController::class, 'index'])->name('admin.users');
-        Route::get('users/add', [AdminController::class, 'create'])->name('admin.users-add');
-        Route::post('users/store', [AdminController::class, 'store'])->name('admin.users-stire');
-        Route::get('users/edit/{id}', [AdminController::class, 'edit'])->name('admin.users-edit');
-        Route::put('users/update/{id}', [AdminController::class, 'update'])->name('admin.users-update');
+        Route::post('users/store', [AdminController::class, 'store'])->name('admin.users-stores');
+        Route::get('users/edit/{id}', [AdminController::class, 'update'])->name('admin.users-edit');
         Route::delete('users/delete/{id}', [AdminController::class, 'delete'])->name('admin.users-delete');
 
         //activate account users
