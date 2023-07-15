@@ -68,16 +68,42 @@ class AdminController extends Controller
         return redirect()->route('admin.users')->with('alert', 'berhasil tambah users');
     }
 
-    public function edit(User $id)
+    public function update($id, Request $request)
     {
-    }
+        $request->validate([
+            'name' => 'required',
+            'username' => 'required|unique:users,username',
+            'password' => 'required',
+            'tipe' => 'required',
+            'bagian' => 'required',
+            'role' => 'required',
+            'is_active' => 'required',
+            'skfile' => 'required|file|mimes:pdf|max:2048',
+        ], [
+            'required' => ':attribute jangan di kosongkan',
+            'unique' => 'username sudah ada'
+        ]);
 
-    public function update(User $id, Request $request)
-    {
+        $file = $request->file('skfile');
+
+        $nama_file = time() . '-' . $file->getClientOriginalName();
+
+        $tujuan_upload = 'surat_keterangan';
+
+        $file->move($tujuan_upload, $nama_file);
+
+        $updateData = $request->all();
+        $updateData['skfile'] = $nama_file;
+        $updateData['password'] = Hash::make($request->password);
+        $this->user->whereId($id)->update($updateData);
+
+        return redirect()->route('admin.users')->with('alert', 'berhasil update data');
     }
 
     public function delete($id)
     {
+        $this->user->whereId($id)->delete();
+        return redirect()->route('admin.users')->with('alert', 'berhasil delete data');
     }
 
     public function activate($id)
