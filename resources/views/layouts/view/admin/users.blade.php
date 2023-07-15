@@ -233,17 +233,17 @@
                                     <div class="input-group">
                                         <div class="custom-file">
                                             <input type="file"
-                                                class="custom-file-input @error('skfile')
+                                                class="custom-file-input @error('surat_keterangan')
                                                 is-invalid
                                             @enderror"
-                                                name="skfile" id="exampleInputFile">
+                                                name="surat_keterangan" id="exampleInputFile">
                                             <label class="custom-file-label" for="exampleInputFile">Pilih File</label>
                                         </div>
                                         <div class="input-group-append">
                                             <span class="input-group-text">Upload</span>
                                         </div>
                                     </div>
-                                    @error('skfile')
+                                    @error('surat_keterangan')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>

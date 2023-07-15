@@ -46,7 +46,7 @@ class AdminController extends Controller
             'bagian' => 'required',
             'role' => 'required',
             'is_active' => 'required',
-            'skfile' => 'required|file|mimes:pdf|max:2048',
+            'surat_keterangan' => 'required|file|mimes:pdf|max:2048',
         ], [
             'required' => ':attribute jangan di kosongkan',
             'unique' => 'username sudah ada'
@@ -61,7 +61,7 @@ class AdminController extends Controller
         $file->move($tujuan_upload, $nama_file);
 
         $submit = $request->all();
-        $submit['skfile'] = $nama_file;
+        $submit['surat_keterangan'] = $nama_file;
         $submit['password'] = Hash::make($request->password);
         $this->user->create($submit);
 
@@ -73,7 +73,7 @@ class AdminController extends Controller
         return view('layouts.view.admin.users-edit', compact('id'));
     }
 
-    public function update($id, Request $request)
+    public function update(Request $request, User $id)
     {
         $request->validate([
             'name' => 'required',
@@ -83,13 +83,13 @@ class AdminController extends Controller
             'bagian' => 'required',
             'role' => 'required',
             'is_active' => 'required',
-            'skfile' => 'required|file|mimes:pdf|max:2048',
+            'surat_keterangan' => 'required|file|mimes:pdf|max:2048',
         ], [
             'required' => ':attribute jangan di kosongkan',
             'unique' => 'username sudah ada'
         ]);
 
-        $file = $request->file('skfile');
+        $file = $request->file('surat_keterangan');
 
         $nama_file = time() . '-' . $file->getClientOriginalName();
 
@@ -97,10 +97,16 @@ class AdminController extends Controller
 
         $file->move($tujuan_upload, $nama_file);
 
-        $updateData = $request->all();
-        $updateData['skfile'] = $nama_file;
-        $updateData['password'] = Hash::make($request->password);
-        $this->user->whereId($id)->update($updateData);
+        $this->user->where('id', $id->id)->update([
+            'name' => $request->name,
+            'username' => $request->username,
+            'password' => Hash::make($request->password),
+            'tipe' => $request->tipe,
+            'bagian' => $request->bagian,
+            'role' => $request->role,
+            'is_active' => $request->is_active,
+            'surat_keterangan' => $nama_file
+        ]);
 
         return redirect()->route('admin.users')->with('alert', 'berhasil update data');
     }
