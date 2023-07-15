@@ -56,12 +56,15 @@
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
+    <!-- Preloader -->
+
     <div class="wrapper">
-
-
-
         @if (Route::has('login'))
             @auth
+                <div class="preloader flex-column justify-content-center align-items-center">
+                    <img class="animation__shake" src="{{ asset('assets/img/logoSIPPWarna.png') }}" alt="AdminLTELogo"
+                        width="25%">
+                </div>
                 @include('layouts.header.header')
                 @include('layouts.sidebar.sidebar')
                 @yield('content')
@@ -71,10 +74,6 @@
 
             @endauth
         @endif
-
-
-
-
 </body>
 
 </html>
