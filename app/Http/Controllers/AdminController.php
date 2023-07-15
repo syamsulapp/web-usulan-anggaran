@@ -68,6 +68,11 @@ class AdminController extends Controller
         return redirect()->route('admin.users')->with('alert', 'berhasil tambah users');
     }
 
+    public function edit(User $id)
+    {
+        return view('layouts.view.admin.users-edit');
+    }
+
     public function update($id, Request $request)
     {
         $request->validate([
