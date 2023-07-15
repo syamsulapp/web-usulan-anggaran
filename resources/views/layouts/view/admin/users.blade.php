@@ -40,10 +40,12 @@
                                 <br>
                                 <br>
                                 <div class="col-md-2">
-                                    <a href="{{ route('admin.users-add') }}" class="btn btn-outline-primary btn-block"><i
-                                            class="fa fa-edit"></i>
-                                        .tambah-users</a>
+                                    <button type="button" class="btn btn-outline-primary btn-block" data-toggle="modal"
+                                        data-target="#tambahData-lg"><i class="fa fa-edit"></i>
+                                        tambah users
+                                    </button>
                                 </div>
+
 
                             </div>
                             <!-- /.card-header -->
@@ -130,6 +132,78 @@
             </div>
             <!-- /.container-fluid -->
         </section>
+        <div class="modal fade" id="tambahData-lg">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Tambah Data Users</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Name</label>
+                                    <input type="email" class="form-control" id="exampleInputEmail1"
+                                        placeholder="Enter email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Username</label>
+                                    <input type="email" class="form-control" id="exampleInputEmail1"
+                                        placeholder="Enter email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Password</label>
+                                    <input type="password" class="form-control" id="exampleInputPassword1"
+                                        placeholder="Password">
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-14">
+                                        <!-- select -->
+                                        <label>Tipe</label>
+                                        <select class="custom-select">
+                                            <option>Tipe 1</option>
+                                            <option>Tipe 2</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-14">
+                                        <!-- select -->
+                                        <label>Bagian</label>
+                                        <select class="custom-select">
+                                            <option>Bagian 1</option>
+                                            <option>Bagian 2</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputFile">Surat Keterangan</label>
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="exampleInputFile">
+                                            <label class="custom-file-label" for="exampleInputFile">Pilih File</label>
+                                        </div>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">Upload</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
         <!-- /.content -->
     </div>
 
