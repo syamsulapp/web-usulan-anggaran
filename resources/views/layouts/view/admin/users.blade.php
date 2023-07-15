@@ -87,8 +87,13 @@
                                                         <div class="dropdown-menu" role="menu">
                                                             <a class="dropdown-item editBtn"
                                                                 href="{{ route('admin.users-edit', $item->id) }}">Edit</a>
-                                                            <a class="dropdown-item editBtn"
-                                                                href="{{ route('admin.users-delete', $item->id) }}">Delete</a>
+                                                            <form action="{{ route('admin.users-delete', $item->id) }}"
+                                                                method="POST">
+                                                                @method('delete')
+                                                                @csrf
+                                                                <button class="dropdown-item editBtn"
+                                                                    type="submit">Delete</button>
+                                                            </form>
                                                         </div>
                                                     </div>
                                                     <div class="btn-group">

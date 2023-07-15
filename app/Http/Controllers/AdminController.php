@@ -73,7 +73,7 @@ class AdminController extends Controller
         return view('layouts.view.admin.users-edit', compact('id'));
     }
 
-    public function update(Request $request, User $id)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'name' => 'required',
@@ -97,7 +97,7 @@ class AdminController extends Controller
 
         $file->move($tujuan_upload, $nama_file);
 
-        $this->user->where('id', $id->id)->update([
+        $this->user->whereId($id)->update([
             'name' => $request->name,
             'username' => $request->username,
             'password' => Hash::make($request->password),
@@ -114,7 +114,7 @@ class AdminController extends Controller
     public function delete($id)
     {
         try {
-            $this->user->whereId($id)->delete();
+            $this->user->destroy('id', $id);
             return redirect()->route('admin.users')->with('alert', 'berhasil delete data');
         } catch (\Exception $error) {
             return $error;
