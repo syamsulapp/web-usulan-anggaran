@@ -52,7 +52,7 @@ class AdminController extends Controller
             'unique' => 'username sudah ada'
         ]);
 
-        $file = $request->file('skfile');
+        $file = $request->file('surat_keterangan');
 
         $nama_file = time() . '-' . $file->getClientOriginalName();
 
