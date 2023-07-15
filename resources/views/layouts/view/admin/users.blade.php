@@ -14,8 +14,8 @@
 
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Users</li>
+                            <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                            <li class="breadcrumb-item active"><a href="{{ route('admin.users') }}">Master Data</a></li>
                         </ol>
                     </div>
                 </div>
@@ -57,6 +57,7 @@
                                             <th>Name</th>
                                             <th>Username</th>
                                             <th>Status Akun</th>
+                                            <th>Role</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -74,6 +75,7 @@
                                                         {{ __('Akun Belum Aktif') }}
                                                     @endif
                                                 </td>
+                                                <td>{{ $item->role }}</td>
                                                 <td>
                                                     <div class="btn-group">
                                                         <button type="button" class="btn btn-info">Detail</button>
@@ -83,10 +85,10 @@
                                                             <span class="sr-only">Toggle Dropdown</span>
                                                         </button>
                                                         <div class="dropdown-menu" role="menu">
-                                                            <button class="dropdown-item editBtn"
-                                                                value="{{ $item->id }}">Edit</button>
-                                                            <button class="dropdown-item editBtn"
-                                                                value="{{ $item->id }}">Delete</button>
+                                                            <a class="dropdown-item editBtn"
+                                                                href="{{ route('admin.users-edit', $item->id) }}">Edit</a>
+                                                            <a class="dropdown-item editBtn"
+                                                                href="{{ route('admin.users-delete', $item->id) }}">Delete</a>
                                                         </div>
                                                     </div>
                                                     <div class="btn-group">
@@ -119,6 +121,7 @@
                                             <th>Name</th>
                                             <th>Username</th>
                                             <th>Status Akun</th>
+                                            <th>Role</th>
                                             <th>Action</th>
                                         </tr>
                                     </tfoot>

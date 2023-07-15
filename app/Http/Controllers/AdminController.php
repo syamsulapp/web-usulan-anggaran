@@ -70,14 +70,14 @@ class AdminController extends Controller
 
     public function edit(User $id)
     {
-        return view('layouts.view.admin.users-edit');
+        return view('layouts.view.admin.users-edit', compact('id'));
     }
 
     public function update($id, Request $request)
     {
         $request->validate([
             'name' => 'required',
-            'username' => 'required|unique:users,username',
+            'username' => 'required',
             'password' => 'required',
             'tipe' => 'required',
             'bagian' => 'required',
@@ -107,8 +107,12 @@ class AdminController extends Controller
 
     public function delete($id)
     {
-        $this->user->whereId($id)->delete();
-        return redirect()->route('admin.users')->with('alert', 'berhasil delete data');
+        try {
+            $this->user->whereId($id)->delete();
+            return redirect()->route('admin.users')->with('alert', 'berhasil delete data');
+        } catch (\Exception $error) {
+            return $error;
+        }
     }
 
     public function activate($id)
