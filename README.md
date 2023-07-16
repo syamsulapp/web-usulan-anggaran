@@ -68,12 +68,6 @@ Zend OPcache
 composer install
 ```
 
-# Start Local Development Server API(laravel) SIPP
-
-```Bash
-php -S localhost:8000 -t public || php artisan serve
-```
-
 # migrate table db dan menjalankan seeder
 
 ```Bash
@@ -85,6 +79,12 @@ php artisan db:seed
 # jika ingin rollback table nya jalan kan perintah di bawah ini(optional)
 php artisan migrate:rollback || php artisan migrate:refresh (jika ingin merubah struktur field)
 
+```
+
+# Start Local Development Server API(laravel) SIPP
+
+```Bash
+php -S localhost:8000 -t public || php artisan serve
 ```
 
 # Endpoint Auth API dan Profile (jika ingin menggunakan fitur AUTH)
@@ -104,7 +104,7 @@ localhost:8000 -> sesuaikan dengan base url kalian
 
 ```
 
-# unit test notes feature
+# unit test SIPP feature
 
 ```bash
 php artisan test

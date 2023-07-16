@@ -14,8 +14,8 @@
 
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Users</li>
+                            <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                            <li class="breadcrumb-item active"><a href="{{ route('admin.users') }}">Master Data</a></li>
                         </ol>
                     </div>
                 </div>
@@ -57,6 +57,7 @@
                                             <th>Name</th>
                                             <th>Username</th>
                                             <th>Status Akun</th>
+                                            <th>Role</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -74,6 +75,7 @@
                                                         {{ __('Akun Belum Aktif') }}
                                                     @endif
                                                 </td>
+                                                <td>{{ $item->role }}</td>
                                                 <td>
                                                     <div class="btn-group">
                                                         <button type="button" class="btn btn-info">Detail</button>
@@ -83,12 +85,15 @@
                                                             <span class="sr-only">Toggle Dropdown</span>
                                                         </button>
                                                         <div class="dropdown-menu" role="menu">
-                                                            <a class="dropdown-item"
-                                                                href="{{ route('admin.users-edit', $item->id) }}"
-                                                                onclick="updateData_lg(this)" data-target="#updateData_lg"
-                                                                data-toggle="modal" data-id="{{ $item->id }}">Edit</a>
-                                                            <a class="dropdown-item"
-                                                                href="{{ route('admin.users-delete', $item->id) }}">Delete</a>
+                                                            <a class="dropdown-item editBtn"
+                                                                href="{{ route('admin.users-edit', $item->id) }}">Edit</a>
+                                                            <form action="{{ route('admin.users-delete', $item->id) }}"
+                                                                method="POST">
+                                                                @method('delete')
+                                                                @csrf
+                                                                <button class="dropdown-item editBtn"
+                                                                    type="submit">Delete</button>
+                                                            </form>
                                                         </div>
                                                     </div>
                                                     <div class="btn-group">
@@ -121,6 +126,7 @@
                                             <th>Name</th>
                                             <th>Username</th>
                                             <th>Status Akun</th>
+                                            <th>Role</th>
                                             <th>Action</th>
                                         </tr>
                                     </tfoot>
@@ -136,6 +142,7 @@
             </div>
             <!-- /.container-fluid -->
         </section>
+        <!-- /.content -->
         <div class="modal fade" id="tambahData-lg">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -231,17 +238,17 @@
                                     <div class="input-group">
                                         <div class="custom-file">
                                             <input type="file"
-                                                class="custom-file-input @error('skfile')
+                                                class="custom-file-input @error('surat_keterangan')
                                                 is-invalid
                                             @enderror"
-                                                name="skfile" id="exampleInputFile">
+                                                name="surat_keterangan" id="exampleInputFile">
                                             <label class="custom-file-label" for="exampleInputFile">Pilih File</label>
                                         </div>
                                         <div class="input-group-append">
                                             <span class="input-group-text">Upload</span>
                                         </div>
                                     </div>
-                                    @error('skfile')
+                                    @error('surat_keterangan')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -256,133 +263,8 @@
             </div>
             <!-- /.modal-dialog -->
         </div>
-
-        <div class="modal fade" id="updateData_lg">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Update Data</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="{{ route('profile') }}" method="POST" enctype="multipart/form-data">
-                            @method('put')
-                            @csrf
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Name</label>
-                                    <input type="text"
-                                        class="form-control @error('name')
-                                        is-invalid
-                                    @enderror"
-                                        name="name" id="exampleInputEmail1" placeholder="Masukan Name"
-                                        value="{{ old('name') }}">
-                                    @error('name')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Username</label>
-                                    <input type="text"
-                                        class="form-control @error('username')
-                                    is-invalid
-                                @enderror"
-                                        name="username" id="exampleInputEmail1" placeholder="Masukan Username"
-                                        value="{{ old('username') }}">
-                                    @error('username')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Password</label>
-                                    <input type="password"
-                                        class="form-control @error('password')
-                                        is-invalid
-                                    @enderror"
-                                        name="password" id="exampleInputPassword1" placeholder="Password"
-                                        value="{{ old('password') }}">
-                                    @error('password')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-sm-14">
-                                        <!-- select -->
-                                        <label>Pilih Tipe</label>
-                                        <select class="custom-select" name="tipe">
-                                            <option>Tipe 1</option>
-                                            <option>Tipe 2</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-sm-14">
-                                        <!-- select -->
-                                        <label>Pilih Bagian</label>
-                                        <select class="custom-select" name="bagian">
-                                            <option>Bagian 1</option>
-                                            <option>Bagian 2</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-sm-14">
-                                        <!-- select -->
-                                        <label>Pilih Role</label>
-                                        <select class="custom-select" name="role">
-                                            <option>suepradmin</option>
-                                            <option>admin</option>
-                                            <option>user</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-sm-14">
-                                        <!-- select -->
-                                        <label>status</label>
-                                        <select class="custom-select" name="is_active">
-                                            <option value="Y">aktif</option>
-                                            <option value="N">non-aktif</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">Surat Keterangan</label>
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file"
-                                                class="custom-file-input @error('skfile')
-                                                is-invalid
-                                            @enderror"
-                                                name="skfile" id="exampleInputFile">
-                                            <label class="custom-file-label" for="exampleInputFile">Pilih File</label>
-                                        </div>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">Upload</span>
-                                        </div>
-                                    </div>
-                                    @error('skfile')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="modal-footer justify-content-between">
-                                <button type="submit" class="btn btn-primary">Save changes</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-        </div>
-        <!-- /.modal -->
-        <!-- /.content -->
     </div>
 
     @yield('scripts')
 
-    <script></script>
 @endsection

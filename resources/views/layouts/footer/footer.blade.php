@@ -1,11 +1,10 @@
 <footer class="main-footer">
-    <strong>Copyright &copy; 2014-2021 <a href="#"></a>.</strong>
-    All rights reserved.
+    <strong>Copyright &copy; {{ now()->year }} <a href="{{ route('home') }}"></a>.</strong>
+    {{ __('SIPP(Sistem Informasi Perencanaan Penganggaran)') }} .
     <div class="float-right d-none d-sm-inline-block">
-        <b>Version</b> 3.2.0
+        <b>Version</b> 1.0.0
     </div>
 </footer>
-
 
 
 <!-- jQuery -->
@@ -38,8 +37,6 @@
 <script src="{{ asset('assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('assets/dist/js/adminlte.js') }}"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="{{ asset('assets/dist/js/demo.js') }}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('assets/dist/js/pages/dashboard.js') }}"></script>
 
@@ -60,9 +57,15 @@
 <script src="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
 <!-- Toastr -->
 <script src="{{ asset('assets/plugins/toastr/toastr.min.js') }}"></script>
+<!-- input file -->
+<script src="{{ asset('assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
+
 
 
 <script>
+    $(function() {
+        bsCustomFileInput.init();
+    });
     $(function() {
         $("#example1").DataTable({
             "responsive": true,

@@ -46,13 +46,13 @@ class AdminController extends Controller
             'bagian' => 'required',
             'role' => 'required',
             'is_active' => 'required',
-            'skfile' => 'required|file|mimes:pdf|max:2048',
+            'surat_keterangan' => 'required|file|mimes:pdf|max:2048',
         ], [
             'required' => ':attribute jangan di kosongkan',
             'unique' => 'username sudah ada'
         ]);
 
-        $file = $request->file('skfile');
+        $file = $request->file('surat_keterangan');
 
         $nama_file = time() . '-' . $file->getClientOriginalName();
 
@@ -61,30 +61,35 @@ class AdminController extends Controller
         $file->move($tujuan_upload, $nama_file);
 
         $submit = $request->all();
-        $submit['skfile'] = $nama_file;
+        $submit['surat_keterangan'] = $nama_file;
         $submit['password'] = Hash::make($request->password);
         $this->user->create($submit);
 
         return redirect()->route('admin.users')->with('alert', 'berhasil tambah users');
     }
 
-    public function update($id, Request $request)
+    public function edit(User $id)
+    {
+        return view('layouts.view.admin.users-edit', compact('id'));
+    }
+
+    public function update(Request $request, $id)
     {
         $request->validate([
             'name' => 'required',
-            'username' => 'required|unique:users,username',
+            'username' => 'required',
             'password' => 'required',
             'tipe' => 'required',
             'bagian' => 'required',
             'role' => 'required',
             'is_active' => 'required',
-            'skfile' => 'required|file|mimes:pdf|max:2048',
+            'surat_keterangan' => 'required|file|mimes:pdf|max:2048',
         ], [
             'required' => ':attribute jangan di kosongkan',
             'unique' => 'username sudah ada'
         ]);
 
-        $file = $request->file('skfile');
+        $file = $request->file('surat_keterangan');
 
         $nama_file = time() . '-' . $file->getClientOriginalName();
 
@@ -92,18 +97,28 @@ class AdminController extends Controller
 
         $file->move($tujuan_upload, $nama_file);
 
-        $updateData = $request->all();
-        $updateData['skfile'] = $nama_file;
-        $updateData['password'] = Hash::make($request->password);
-        $this->user->whereId($id)->update($updateData);
+        $this->user->whereId($id)->update([
+            'name' => $request->name,
+            'username' => $request->username,
+            'password' => Hash::make($request->password),
+            'tipe' => $request->tipe,
+            'bagian' => $request->bagian,
+            'role' => $request->role,
+            'is_active' => $request->is_active,
+            'surat_keterangan' => $nama_file
+        ]);
 
         return redirect()->route('admin.users')->with('alert', 'berhasil update data');
     }
 
     public function delete($id)
     {
-        $this->user->whereId($id)->delete();
-        return redirect()->route('admin.users')->with('alert', 'berhasil delete data');
+        try {
+            $this->user->destroy('id', $id);
+            return redirect()->route('admin.users')->with('alert', 'berhasil delete data');
+        } catch (\Exception $error) {
+            return $error;
+        }
     }
 
     public function activate($id)
