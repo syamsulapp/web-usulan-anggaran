@@ -58,7 +58,11 @@ Route::middleware('admin')->group(function () {
         Route::post('users/inactive/{id}', [AdminController::class, 'inactive'])->name('admin.users-inactive');
 
         // PAGU MANAGEMENT
+        Route::get('/admin/pagu', [PaguController::class, 'index'])->name('layouts.view.admin.pagu');
+
         Route::get('pagu', [PaguController::class, 'index'])->name('pagu.index');
+        Route::post('pagu/tambah_pagu', [PaguController::class, 'tambah_pagu'])->name('tambah_pagu');
+        Route::post('pagu/tambah-anggaran', [PaguController::class, 'tambah_anggaran'])->name('tambah_anggaran');
     });
 });
 

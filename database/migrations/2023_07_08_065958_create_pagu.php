@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('pagu', function (Blueprint $table) {
             $table->id();
             $table->string('jenis_alokasi_anggaran');
-            $table->foreignId('anggaran_kodeakun')->constrained('anggaran')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('anggaran_kodeakun');
         });
     }
 

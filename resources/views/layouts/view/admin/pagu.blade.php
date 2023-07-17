@@ -9,7 +9,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Users Management</h1>
+                    <h1>Pagu Management</h1>
                 </div>
 
                 <div class="col-sm-6">
@@ -42,7 +42,11 @@
                             <div class="col-md-2">
                                 <button type="button" class="btn btn-outline-primary btn-block" data-toggle="modal"
                                     data-target="#tambahData-lg"><i class="fa fa-edit"></i>
-                                    Tambah Pagu
+                                    Tambah Data Anggaran
+                                </button>
+                                <button type="button" class="btn btn-outline-primary btn-block" data-toggle="modal"
+                                    data-target="#tambahDatapagu-lg"><i class="fa fa-edit"></i>
+                                    Tambah Data Pagu
                                 </button>
                             </div>
 
@@ -60,12 +64,15 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($users as $item)
+                                    @foreach ($listpagu->groupBy('jenis_alokasi_anggaran') as $jenisAlokasi =>
+                                    $paguItems)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->jenis_alokasi_anggaran }}
+                                        <td>{{ $jenisAlokasi }}
                                         </td>
-                                        <td>{{ $item->anggaran }}</td>
+                                        <td> @foreach ($paguItems as $pagu)
+                                            {{ $pagu->anggaran->keterangan }}<br>
+                                            @endforeach</td>
                                         <td>
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-info">Detail</button>
@@ -74,10 +81,8 @@
                                                     <span class="sr-only">Toggle Dropdown</span>
                                                 </button>
                                                 <div class="dropdown-menu" role="menu">
-                                                    <a class="dropdown-item editBtn"
-                                                        href="{{ route('admin.users-edit', $item->id) }}">Edit</a>
-                                                    <form action="{{ route('admin.users-delete', $item->id) }}"
-                                                        method="POST">
+                                                    <a class="dropdown-item editBtn" href="#">Edit</a>
+                                                    <form action="#" method="POST">
                                                         @method('delete')
                                                         @csrf
                                                         <button class="dropdown-item editBtn"
@@ -113,40 +118,56 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
+                    <h4 class="modal-title">Tambah Data Anggaran</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('tambah_anggaran') }}" method="POST">
+                        @csrf
+                        <div class="form-group">
+                            <label for="keterangan">Keterangan</label>
+                            <input type="text" class="form-control" id="keterangan" name="keterangan">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Tambah Anggaran</button>
+                    </form>
+
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <div class="modal fade" id="tambahDatapagu-lg">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
                     <h4 class="modal-title">Tambah Data Pagu</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('admin.users-stores') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('tambah_pagu') }}" method="POST">
                         @csrf
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Jenis Alokasi Anggaran</label>
-                                <input type="text" class="form-control @error('name')
-                                        is-invalid
-                                    @enderror" name="jenis_alokasi_anggaran" id="exampleInputEmail1"
-                                    placeholder="Masukan Jenis Alokasi Anggaran"
-                                    value="{{ old('jenis_alokasi_anggaran') }}">
-                                @error('jenis_alokasi_anggaran')
-                                <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-14">
-                                    <!-- select -->
-                                    <label>Anggaran</label>
-                                    <select class="custom-select" name="bagian">
-                                        <option>Bagian 1</option>
-                                        <option>Bagian 2</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="modal-footer justify-content-between">
-                                <button type="submit" class="btn btn-primary">Save changes</button>
-                            </div>
+                        <div class="form-group">
+                            <label for="jenis_alokasi_anggaran">Jenis Alokasi Anggaran</label>
+                            <input type="text" class="form-control" id="jenis_alokasi_anggaran"
+                                name="jenis_alokasi_anggaran">
+                        </div>
+                        <div class="form-group">
+                            <label for="anggaran_kodeakun">Anggaran Kode Akun</label>
+                            <select class="form-control" id="anggaran_kodeakun" name="anggaran_kodeakun">
+                                <option value="">Pilih Anggaran Kode Akun</option>
+                                @foreach ($anggarans as $anggaran)
+                                <option value="{{ $anggaran->id }}">{{ $anggaran->keterangan }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Simpan Pagu</button>
                     </form>
+
                 </div>
             </div>
             <!-- /.modal-content -->
