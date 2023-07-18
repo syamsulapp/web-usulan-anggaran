@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('username');
             $table->string('password');
-            $table->string('id_lembaga')->nullable();
+            $table->foreignId('id_lembaga')->constrained('lembaga')->cascadeOnUpdate()->cascadeOnDelete();
             $table->string('surat_keterangan')->nullable();
             $table->string('role');
             $table->enum('is_active', ['N', 'Y']);

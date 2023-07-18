@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Uraian extends Model
 {
     use HasFactory;
-
+    public $timestamps = false;
+    protected $table = 'uraian';
     protected $fillable = [
         'nama_kegiatan'
     ];

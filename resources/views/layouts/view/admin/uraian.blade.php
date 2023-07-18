@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Lembaga(Bagian) Management')
+@section('title', 'Uraian Management')
 
 @section('content')
 <div class="content-wrapper">
@@ -25,7 +25,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Lembaga(Bagian) Management</h1>
+                    <h1>Uraian Management</h1>
                 </div>
 
                 <div class="col-sm-6">
@@ -52,13 +52,13 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Lembaga(Bagian) Management</h3>
+                            <h3 class="card-title">Uraians Management</h3>
                             <br>
                             <br>
                             <div class="col-md-2">
                                 <button type="button" class="btn btn-outline-primary btn-block" data-toggle="modal"
                                     data-target="#tambahData-lg"><i class="fa fa-edit"></i>
-                                    Tambah Data Lembaga(Bagian)
+                                    Tambah Data Uraian
                                 </button>
                             </div>
 
@@ -70,16 +70,16 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Nama Lembaga</th>
+                                        <th>Nama Uraian</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($listlembaga as $lembaga)
+                                    @foreach ($listuraian as $uraian)
                                     <tr>
 
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $lembaga->nama_lembaga }}</td>
+                                        <td>{{ $uraian->nama_kegiatan }}</td>
                                         <td>
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-info">Detail</button>
@@ -88,20 +88,20 @@
                                                     <span class="sr-only">Toggle Dropdown</span>
                                                 </button>
                                                 <div class="dropdown-menu" role="menu">
-                                                    <a href="#editModal{{ $lembaga->id }}" class="dropdown-item editBtn"
+                                                    <a href="#editModal{{ $uraian->id }}" class="dropdown-item editBtn"
                                                         data-toggle="modal">
                                                         Edit
                                                     </a>
 
 
 
-                                                    <form id="delete-form-{{ $lembaga->id }}"
-                                                        action="{{ route('lembaga.destroy', $lembaga->id) }}"
+                                                    <form id="delete-form-{{ $uraian->id }}"
+                                                        action="{{ route('uraian.destroy', $uraian->id) }}"
                                                         method="POST">
                                                         @method('delete')
                                                         @csrf
                                                         <button
-                                                            onclick="event.preventDefault(); confirmDelete('{{ $lembaga->id }}')"
+                                                            onclick="event.preventDefault(); confirmDelete('{{ $uraian->id }}')"
                                                             class="dropdown-item deleteBtn"
                                                             type="submit">Delete</button>
                                                     </form>
@@ -115,7 +115,7 @@
                                 <tfoot>
                                     <tr>
                                         <th>No</th>
-                                        <th>Nama Lembaga</th>
+                                        <th>Nama uraian</th>
                                         <th>Action</th>
                                     </tr>
                                 </tfoot>
@@ -138,21 +138,21 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Tambah Data Lembaga</h4>
+                    <h4 class="modal-title">Tambah Data uraian</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('lembaga.store') }}" method="POST">
+                    <form action="{{ route('uraian.store') }}" method="POST">
                         @csrf
 
                         <div class="form-group">
-                            <label>Nama Lembaga</label>
-                            <input type="text" class="form-control @error('nama_lembaga') is-invalid @enderror"
-                                name="nama_lembaga" id="nama_lembaga" placeholder="Masukkan Nama Lembaga"
-                                value="{{ old('nama_lembaga') }}">
-                            @error('nama_lembaga')
+                            <label>Nama uraian</label>
+                            <input type="text" class="form-control @error('nama_kegiatan') is-invalid @enderror"
+                                name="nama_kegiatan" id="nama_kegiatan" placeholder="Masukkan Nama Kegiatan"
+                                value="{{ old('nama_kegiatan') }}">
+                            @error('nama_kegiatan')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -170,27 +170,27 @@
     {{-- MODAL TAMBAH --}}
 
     <!-- Modal Edit -->
-    @foreach ($listlembaga as $lembaga)
+    @foreach ($listuraian as $uraian)
     <!-- Modal Edit -->
-    <div class="modal fade" id="editModal{{ $lembaga->id }}" tabindex="-1" role="dialog"
-        aria-labelledby="editModal{{ $lembaga->id }}Label" aria-hidden="true">
+    <div class="modal fade" id="editModal{{ $uraian->id }}" tabindex="-1" role="dialog"
+        aria-labelledby="editModal{{ $uraian->id }}Label" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="editModal{{ $lembaga->id }}Label">Edit Lembaga</h4>
+                    <h4 class="modal-title" id="editModal{{ $uraian->id }}Label">Edit uraian</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('lembaga.update', $lembaga->id) }}" method="POST">
+                    <form action="{{ route('uraian.update', $uraian->id) }}" method="POST">
                         @csrf
                         @method('PUT')
 
                         <div class="form-group">
-                            <label for="editNamaLembaga{{ $lembaga->id }}">Nama Lembaga</label>
-                            <input type="text" class="form-control" id="editNamaLembaga{{ $lembaga->id }}"
-                                name="nama_lembaga" value="{{ $lembaga->nama_lembaga }}">
+                            <label for="editNamauraian{{ $uraian->id }}">Nama uraian</label>
+                            <input type="text" class="form-control" id="editNamauraian{{ $uraian->id }}"
+                                name="nama_kegiatan" value="{{ $uraian->nama_kegiatan }}">
                         </div>
                         <button type="submit" class="btn btn-primary">Simpan</button>
                     </form>

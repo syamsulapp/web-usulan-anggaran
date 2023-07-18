@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\PaguController;
+use App\Http\Controllers\UraianController;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,9 +69,15 @@ Route::middleware('admin')->group(function () {
 
         //Lembaga MANAGEMENT
         Route::get('lembaga', [LembagaController::class, 'index'])->name('lembaga.index');
-        Route::post('lembaga/store', [LembagaController::class, 'store'])->name('lembaga-store');
+        Route::post('lembaga/store', [LembagaController::class, 'store'])->name('lembaga.store');
         Route::put('lembaga/{id}', [LembagaController::class, 'update'])->name('lembaga.update');
         Route::delete('lembaga/{id}', [LembagaController::class, 'destroy'])->name('lembaga.destroy');
+
+        //Lembaga MANAGEMENT
+        Route::get('uraian', [UraianController::class, 'index'])->name('uraian.index');
+        Route::post('uraian/store', [UraianController::class, 'store'])->name('uraian.store');
+        Route::put('uraian/{id}', [UraianController::class, 'update'])->name('uraian.update');
+        Route::delete('uraian/{id}', [UraianController::class, 'destroy'])->name('uraian.destroy');
     });
 });
 
