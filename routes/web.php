@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\LembagaController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
@@ -58,11 +59,18 @@ Route::middleware('admin')->group(function () {
         Route::post('users/inactive/{id}', [AdminController::class, 'inactive'])->name('admin.users-inactive');
 
         // PAGU MANAGEMENT
-        Route::get('/admin/pagu', [PaguController::class, 'index'])->name('layouts.view.admin.pagu');
+
 
         Route::get('pagu', [PaguController::class, 'index'])->name('pagu.index');
         Route::post('pagu/tambah_pagu', [PaguController::class, 'tambah_pagu'])->name('tambah_pagu');
         Route::post('pagu/tambah-anggaran', [PaguController::class, 'tambah_anggaran'])->name('tambah_anggaran');
+
+
+        //Lembaga MANAGEMENT
+        Route::get('lembaga', [LembagaController::class, 'index'])->name('lembaga.index');
+        Route::post('lembaga/store', [LembagaController::class, 'store'])->name('lembaga-store');
+        Route::put('lembaga/{id}', [LembagaController::class, 'update'])->name('lembaga.update');
+        Route::delete('lembaga/{id}', [LembagaController::class, 'destroy'])->name('lembaga.destroy');
     });
 });
 

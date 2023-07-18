@@ -117,9 +117,9 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/tables/jsgrid.html" class="nav-link">
+                            <a href="{{route('lembaga.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Tipe</p>
+                                <p>Lembaga(Bagian)</p>
                             </a>
                         </li>
                         <li class="nav-item">

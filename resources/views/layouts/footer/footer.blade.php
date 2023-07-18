@@ -84,3 +84,20 @@
         });
     });
 </script>
+
+<script>
+    $(document).ready(function() {
+        // Inisialisasi modal
+        $('.editBtn').click(function() {
+            var targetModalId = $(this).attr('data-target');
+            $(targetModalId).modal('show');
+        });
+    });
+</script>
+<script>
+    function confirmDelete(id) {
+       if (confirm('Apakah Anda yakin ingin menghapus lembaga ini?')) {
+          document.getElementById('delete-form-' + id).submit();
+       }
+    }
+</script>

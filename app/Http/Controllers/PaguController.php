@@ -51,7 +51,7 @@ class PaguController extends Controller
         $pagu->anggaran_kodeakun = $request->input('anggaran_kodeakun');
         $pagu->save();
 
-        return redirect()->route('layouts.view.admin.pagu')->with('success', 'Data berhasil disimpan.');
+        return redirect()->route('pagu.index')->with('success', 'Data berhasil disimpan.');
     }
 
     public function tambah_anggaran(Request $request)
@@ -64,6 +64,6 @@ class PaguController extends Controller
         $anggaran->keterangan = $request->input('keterangan');
         $anggaran->save();
 
-        return redirect()->route('layouts.view.admin.pagu')->with('success', 'Data berhasil disimpan.');
+        return redirect()->route('pagu.index')->with('success', 'Data berhasil disimpan.');
     }
 }
