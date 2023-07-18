@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-
-
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -37,25 +36,89 @@ class AdminController extends Controller
         return view('layouts.view.admin.users', compact('users'));
     }
 
-    public function create()
-    {
-        return 'tambah users';
-    }
-
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required',
+            'username' => 'required|unique:users,username',
+            'password' => 'required',
+            'tipe' => 'required',
+            'bagian' => 'required',
+            'role' => 'required',
+            'is_active' => 'required',
+            'surat_keterangan' => 'required|file|mimes:pdf|max:2048',
+        ], [
+            'required' => ':attribute jangan di kosongkan',
+            'unique' => 'username sudah ada'
+        ]);
+
+        $file = $request->file('surat_keterangan');
+
+        $nama_file = time() . '-' . $file->getClientOriginalName();
+
+        $tujuan_upload = 'surat_keterangan';
+
+        $file->move($tujuan_upload, $nama_file);
+
+        $submit = $request->all();
+        $submit['surat_keterangan'] = $nama_file;
+        $submit['password'] = Hash::make($request->password);
+        $this->user->create($submit);
+
+        return redirect()->route('admin.users')->with('alert', 'berhasil tambah users');
     }
 
-    public function edit($id)
+    public function edit(User $id)
     {
+        return view('layouts.view.admin.users-edit', compact('id'));
     }
 
-    public function update(User $id, Request $request)
+    public function update(Request $request, $id)
     {
+        $request->validate([
+            'name' => 'required',
+            'username' => 'required',
+            'password' => 'required',
+            'tipe' => 'required',
+            'bagian' => 'required',
+            'role' => 'required',
+            'is_active' => 'required',
+            'surat_keterangan' => 'required|file|mimes:pdf|max:2048',
+        ], [
+            'required' => ':attribute jangan di kosongkan',
+            'unique' => 'username sudah ada'
+        ]);
+
+        $file = $request->file('surat_keterangan');
+
+        $nama_file = time() . '-' . $file->getClientOriginalName();
+
+        $tujuan_upload = 'surat_keterangan';
+
+        $file->move($tujuan_upload, $nama_file);
+
+        $this->user->whereId($id)->update([
+            'name' => $request->name,
+            'username' => $request->username,
+            'password' => Hash::make($request->password),
+            'tipe' => $request->tipe,
+            'bagian' => $request->bagian,
+            'role' => $request->role,
+            'is_active' => $request->is_active,
+            'surat_keterangan' => $nama_file
+        ]);
+
+        return redirect()->route('admin.users')->with('alert', 'berhasil update data');
     }
 
     public function delete($id)
     {
+        try {
+            $this->user->destroy('id', $id);
+            return redirect()->route('admin.users')->with('alert', 'berhasil delete data');
+        } catch (\Exception $error) {
+            return $error;
+        }
     }
 
     public function activate($id)
