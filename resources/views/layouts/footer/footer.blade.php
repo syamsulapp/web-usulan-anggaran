@@ -52,6 +52,8 @@
 <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+<!-- AdminLTE for demo purposes -->
+
 
 <!-- SweetAlert2 -->
 <script src="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
@@ -60,7 +62,13 @@
 <!-- input file -->
 <script src="{{ asset('assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
 
+<script>
+    $('.your-iframe-element').IFrame({
+  autoIframeMode: true,
+  autoDarkMode: true
+});
 
+</script>
 
 <script>
     $(function() {

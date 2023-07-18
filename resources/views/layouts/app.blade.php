@@ -43,8 +43,7 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css') }}">
     <!-- data table -->
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
-    <link rel="stylesheet"
-        href="{{ asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
 
     <!-- SweetAlert2 -->
@@ -58,21 +57,18 @@
 <body class="hold-transition sidebar-mini layout-fixed">
     <!-- Preloader -->
 
-    <div class="wrapper">
+    <div class="wrapper" data-widget="iframe">
         @if (Route::has('login'))
-            @auth
-                <div class="preloader flex-column justify-content-center align-items-center">
-                    <img class="animation__shake" src="{{ asset('assets/img/logoSIPPWarna.png') }}" alt="AdminLTELogo"
-                        width="25%">
-                </div>
-                @include('layouts.header.header')
-                @include('layouts.sidebar.sidebar')
-                @yield('content')
-                @include('layouts.footer.footer')
-            @else
-                @yield('content')
+        @auth
 
-            @endauth
+        @include('layouts.header.header')
+        @include('layouts.sidebar.sidebar')
+        @yield('content')
+        @include('layouts.footer.footer')
+        @else
+        @yield('content')
+
+        @endauth
         @endif
 </body>
 
