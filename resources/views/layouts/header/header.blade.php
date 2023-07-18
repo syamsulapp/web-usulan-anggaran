@@ -1,3 +1,10 @@
+<!-- Preloader -->
+<div class="preloader flex-column justify-content-center align-items-center">
+    <img class="animation__shake" src="{{ asset('assets/img/logoSIPPWarna.png') }}" alt="logosipp" width="25%"
+        height="25%">
+</div>
+{{-- preloader --}}
+
 <!-- Navbar -->
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->

@@ -16,8 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('username');
             $table->string('password');
-            $table->string('tipe')->nullable();
-            $table->string('bagian')->nullable();
+            $table->string('id_lembaga')->nullable();
             $table->string('surat_keterangan')->nullable();
             $table->string('role');
             $table->enum('is_active', ['N', 'Y']);
