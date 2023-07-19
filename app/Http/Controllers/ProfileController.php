@@ -42,7 +42,7 @@ class ProfileController extends Controller
                     'about_me' => 'no content about me',
                 ];
             }
-            $data_role = $this->role->whereId($this->user->user()->id_role)->first();
+            $data_role = $this->role->whereId($this->user->user()->id_role)->first(); //query data roles sesuai dengan session usersnya
             return view('layouts.view.profile.profile', compact('data_profile', 'data_role'));
         } catch (\Exception $error) {
             return view('layouts.view.profile.profile')->with('alertError', $error);
