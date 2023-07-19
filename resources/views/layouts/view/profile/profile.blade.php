@@ -25,6 +25,13 @@
                         {{ session('alert') }}
                     </div>
                 @endif
+                @if (session('alertError'))
+                    <div class="alert alert-danger alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <h5><i class="icon fas fa-check"></i> Error!</h5>
+                        {{ session('alertError') }}
+                    </div>
+                @endif
             </div><!-- /.container-fluid -->
         </section>
 
@@ -39,12 +46,12 @@
                             <div class="card-body box-profile">
                                 <div class="text-center">
                                     <img class="profile-user-img img-fluid img-circle"
-                                        src="{{ asset('/assets/dist/img/user4-128x128.jpg') }}" alt="User profile picture">
+                                        src="{{ url('photo_profile', $data_profile['photos']) }}" alt="User profile picture">
                                 </div>
 
-                                <h3 class="profile-username text-center">{{ Auth::user()->username }}</h3>
+                                <h3 class="profile-username text-center">{{ $data_profile['nama_lengkap'] }}</h3>
 
-                                <p class="text-muted text-center">{{ Auth::user()->role }}</p>
+                                <p class="text-muted text-center">{{ $data_role['name'] }}</p>
 
                                 <ul class="list-group list-group-unbordered mb-3">
                                     <li class="list-group-item">
@@ -82,33 +89,50 @@
                                 <strong><i class="fas fa-book mr-1"></i> Education</strong>
 
                                 <p class="text-muted">
-                                    B.S. in Computer Science from the University of Tennessee at Knoxville
+                                    @if ($data_profile['education'])
+                                        {{ $data_profile['education'] }}
+                                    @else
+                                        {{ __('education belum ada') }}
+                                    @endif
                                 </p>
 
                                 <hr>
 
                                 <strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
 
-                                <p class="text-muted">Malibu, California</p>
+                                <p class="text-muted">
+                                    @if ($data_profile['location'])
+                                        {{ $data_profile['location'] }}
+                                    @else
+                                        {{ __('location belum ada') }}
+                                    @endif
+                                </p>
 
                                 <hr>
 
                                 <strong><i class="fas fa-pencil-alt mr-1"></i> Skills</strong>
 
                                 <p class="text-muted">
-                                    <span class="tag tag-danger">UI Design</span>
-                                    <span class="tag tag-success">Coding</span>
-                                    <span class="tag tag-info">Javascript</span>
-                                    <span class="tag tag-warning">PHP</span>
-                                    <span class="tag tag-primary">Node.js</span>
+                                    <span class="tag tag-danger">
+                                        @if ($data_profile['skill'])
+                                            {{ $data_profile['skill'] }}
+                                        @else
+                                            {{ __('skill belum ada') }}
+                                        @endif
+                                    </span>
                                 </p>
 
                                 <hr>
 
-                                <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
+                                <strong><i class="far fa-file-alt mr-1"></i> About Me</strong>
 
-                                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
-                                    fermentum enim neque.</p>
+                                <p class="text-muted">
+                                    @if ($data_profile['about_me'])
+                                        {{ $data_profile['about_me'] }}
+                                    @else
+                                        {{ __('about me belum ada') }}
+                                    @endif
+                                </p>
                             </div>
                             <!-- /.card-body -->
                         </div>
@@ -286,18 +310,19 @@
 
                                     <div class="tab-pane" id="settings">
                                         <form class="form-horizontal" action="{{ route('profile.submit') }}"
-                                            method="POST">
+                                            method="POST" enctype="multipart/form-data">
                                             @csrf
                                             <div class="form-group row">
-                                                <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+                                                <label for="inputName" class="col-sm-2 col-form-label">Nama
+                                                    Lengkap</label>
                                                 <div class="col-sm-10">
                                                     <input type="text"
-                                                        class="form-control @error('name')
+                                                        class="form-control @error('nama_lengkap')
                                                         'is-invalid'
                                                     @enderror"
-                                                        id="inputName" placeholder="Name" name="name"
-                                                        value="{{ Auth::user()->name }}">
-                                                    @error('name')
+                                                        id="inputName" placeholder="Name" name="nama_lengkap"
+                                                        value="{{ $data_profile['nama_lengkap'] }}">
+                                                    @error('nama_lengkap')
                                                         <span class="text-danger">{{ $message }}</span>
                                                     @enderror
                                                 </div>
@@ -312,6 +337,62 @@
                                                         id="inputEmail" placeholder="Username" name="username"
                                                         value="{{ Auth::user()->username }}">
                                                     @error('username')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="inputEmail" class="col-sm-2 col-form-label">education</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text"
+                                                        class="form-control  @error('education')
+                                                    'is-invalid'
+                                                @enderror"
+                                                        id="inputEmail" placeholder="education" name="education"
+                                                        value="{{ $data_profile['education'] }}">
+                                                    @error('education')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="inputEmail" class="col-sm-2 col-form-label">location</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text"
+                                                        class="form-control  @error('location')
+                                                    'is-invalid'
+                                                @enderror"
+                                                        id="inputEmail" placeholder="location" name="location"
+                                                        value="{{ $data_profile['location'] }}">
+                                                    @error('location')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="inputEmail" class="col-sm-2 col-form-label">skill</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text"
+                                                        class="form-control  @error('skill')
+                                                    'is-invalid'
+                                                @enderror"
+                                                        id="inputEmail" placeholder="skill" name="skill"
+                                                        value="{{ $data_profile['skill'] }}">
+                                                    @error('skill')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="inputEmail" class="col-sm-2 col-form-label">about me</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text"
+                                                        class="form-control  @error('about_me')
+                                                    'is-invalid'
+                                                @enderror"
+                                                        id="inputEmail" placeholder="about_me" name="about_me"
+                                                        value="{{ $data_profile['about_me'] }}">
+                                                    @error('about_me')
                                                         <span class="text-danger">{{ $message }}</span>
                                                     @enderror
                                                 </div>
@@ -340,6 +421,24 @@
                                                         id="inputName2" name="password-confirmation"
                                                         placeholder="Password Confirmation">
                                                     @error('password-confirmation')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="inputName2" class="col-sm-2 col-form-label">photos</label>
+                                                <div class="col-sm-10">
+                                                    <div class="custom-file">
+                                                        <input type="file"
+                                                            class="custom-file-input @error('photos') is-invalid @enderror"
+                                                            name="photos" id="exampleInputFile">
+                                                        <label class="custom-file-label" for="exampleInputFile">Pilih
+                                                            Photos</label>
+                                                    </div>
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">Upload</span>
+                                                    </div>
+                                                    @error('photos')
                                                         <span class="text-danger">{{ $message }}</span>
                                                     @enderror
                                                 </div>

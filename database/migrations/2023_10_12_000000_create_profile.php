@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('education')->nullable();
             $table->string('location')->nullable();
             $table->string('skill')->nullable();
+            $table->string('photos')->nullable();
             $table->foreignId('id_users')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
         });
