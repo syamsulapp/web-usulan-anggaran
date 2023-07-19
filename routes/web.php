@@ -63,6 +63,8 @@ Route::middleware('admin')->group(function () {
         Route::get('pagu', [PaguController::class, 'index'])->name('pagu.index');
         Route::post('pagu/tambah_pagu', [PaguController::class, 'tambah_pagu'])->name('tambah_pagu');
         Route::post('pagu/tambah-anggaran', [PaguController::class, 'tambah_anggaran'])->name('tambah_anggaran');
+        Route::put('pagu/update/{id}', [PaguController::class, 'update'])->name('edit_pagu');
+        Route::delete('pagu/delete/{id}', [PaguController::class, 'delete'])->name('delete_pagu');
 
 
         //Lembaga MANAGEMENT

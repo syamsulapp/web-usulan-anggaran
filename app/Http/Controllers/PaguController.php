@@ -66,4 +66,12 @@ class PaguController extends Controller
 
         return redirect()->route('pagu.index')->with('success', 'Data berhasil disimpan.');
     }
+
+    public function update()
+    {
+    }
+
+    public function delete()
+    {
+    }
 }

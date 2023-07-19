@@ -114,6 +114,12 @@
         }
     }
 
+    function confirmDeletePagu(id) {
+        if (confirm('Apakah Anda yakin ingin menghapus Pagu ini?')) {
+            document.getElementById('delete-pagu-form-' + id).submit();
+        }
+    }
+
     function activeAccount(id) {
         if (confirm('Apakah Anda Ingin Mengaktifkan akun users ini?')) {
             document.getElementById('active-form-' + id).submit();
