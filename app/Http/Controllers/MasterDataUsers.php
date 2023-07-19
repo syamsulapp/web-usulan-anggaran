@@ -78,20 +78,11 @@ class MasterDataUsers extends Controller
         return redirect()->route('admin.users')->with('alert', 'berhasil tambah users');
     }
 
-    public function edit(User $id)
-    {
-        return view('layouts.view.admin.users-edit', compact('id'));
-    }
-
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required',
             'username' => 'required|unique:users,username',
             'password' => 'required',
-            'id_lembaga' => 'required',
-            'role' => 'required',
-            'is_active' => 'required',
             'surat_keterangan' => 'required|file|mimes:pdf|max:2048',
         ], [
             'required' => ':attribute jangan di kosongkan',

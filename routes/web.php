@@ -52,7 +52,6 @@ Route::middleware('admin')->group(function () {
         // USER MANAGEMENT
         Route::get('users', [MasterDataUsers::class, 'index'])->name('admin.users');
         Route::post('users/store', [MasterDataUsers::class, 'store'])->name('admin.users-stores');
-        Route::get('users/edit/{id}', [MasterDataUsers::class, 'edit'])->name('admin.users-edit');
         Route::put('users/update/{id}', [MasterDataUsers::class, 'update'])->name('admin.users-update');
         Route::delete('users/delete/{id}', [MasterDataUsers::class, 'delete'])->name('admin.users-delete');
         Route::post('users/activate/{id}', [MasterDataUsers::class, 'activate'])->name('admin.users-activate');
