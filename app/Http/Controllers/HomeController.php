@@ -33,7 +33,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $photos = $this->profileModels->whereid_users($this->user->user()->id)->first();
+        if ($photo = $this->profileModels->whereid_users($this->user->user()->id)->first()) {
+            $photos = $photo;
+        } else {
+            $photos = [
+                'photos' => 'no_image',
+                'nama_lengkap' => 'belum ada nama lengkap'
+            ];
+        }
         return view('home', compact('photos'));
     }
 }
