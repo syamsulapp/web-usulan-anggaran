@@ -103,8 +103,7 @@ class MasterDataUsers extends Controller
             'name' => $request->name,
             'username' => $request->username,
             'password' => Hash::make($request->password),
-            'tipe' => $request->tipe,
-            'bagian' => $request->bagian,
+            'id_lembaga' => $request->id_lembaga,
             'role' => $request->role,
             'is_active' => $request->is_active,
             'surat_keterangan' => $nama_file

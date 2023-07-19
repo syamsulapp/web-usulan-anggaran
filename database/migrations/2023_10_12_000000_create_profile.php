@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nama_lengkap')->nullable();
             $table->string('about_me')->nullable();
             $table->string('education')->nullable();
-            $table->string('keterangan')->nullable();
+            $table->string('location')->nullable();
             $table->string('skill')->nullable();
             $table->foreignId('id_users')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
