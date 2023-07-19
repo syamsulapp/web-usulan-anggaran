@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
 use App\Models\Anggaran;
 use App\Models\Pagu;
-use Illuminate\Support\Facades\DB;
 
 class PaguController extends Controller
 {
@@ -20,9 +18,6 @@ class PaguController extends Controller
 
     public function index(Request $request)
     {
-
-
-
         $anggarans = Anggaran::all();
 
         $listpagu = Pagu::with('anggaran')->get();

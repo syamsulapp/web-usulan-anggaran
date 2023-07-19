@@ -98,6 +98,7 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Jenis Alokasi Anggaran</th>
+                                        <th>Anggaran</th>
                                         <th>Action</th>
                                     </tr>
                                 </tfoot>

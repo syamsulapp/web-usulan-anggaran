@@ -64,10 +64,9 @@
 
 <script>
     $('.your-iframe-element').IFrame({
-  autoIframeMode: true,
-  autoDarkMode: true
-});
-
+        autoIframeMode: true,
+        autoDarkMode: true
+    });
 </script>
 
 <script>
@@ -104,8 +103,8 @@
 </script>
 <script>
     function confirmDelete(id) {
-       if (confirm('Apakah Anda yakin ingin menghapus lembaga ini?')) {
-          document.getElementById('delete-form-' + id).submit();
-       }
+        if (confirm('Apakah Anda yakin ingin menghapus lembaga ini?')) {
+            document.getElementById('delete-form-' + id).submit();
+        }
     }
 </script>
