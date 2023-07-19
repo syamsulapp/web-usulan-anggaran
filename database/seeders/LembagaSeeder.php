@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class LembagaSeeder extends Seeder
 {
+    use WithoutModelEvents;
     /**
      * Run the database seeds.
      */
@@ -16,7 +17,6 @@ class LembagaSeeder extends Seeder
     {
         DB::table('lembaga')->insert([
             'nama_lembaga' => 'Rektor'
-
         ]);
     }
 }
