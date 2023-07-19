@@ -52,7 +52,6 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Name</th>
                                             <th>Username</th>
                                             <th>Status Akun</th>
                                             <th>Role</th>
@@ -63,7 +62,6 @@
                                         @foreach ($users as $item)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $item->name }}
                                                 </td>
                                                 <td>{{ $item->username }}</td>
                                                 <td>
@@ -73,7 +71,15 @@
                                                         {{ __('Akun Belum Aktif') }}
                                                     @endif
                                                 </td>
-                                                <td>{{ $item->role }}</td>
+                                                <td>
+                                                    @if ($item->id_role === 1)
+                                                        {{ __('SuperAdmin') }}
+                                                    @elseif($item->id_role === 2)
+                                                        {{ __('Admin') }}
+                                                    @else
+                                                        {{ __('User') }}
+                                                    @endif
+                                                </td>
                                                 <td>
                                                     <div class="btn-group">
                                                         <button type="button" class="btn btn-info">Detail</button>
@@ -132,7 +138,6 @@
                                     <tfoot>
                                         <tr>
                                             <th>No</th>
-                                            <th>Name</th>
                                             <th>Username</th>
                                             <th>Status Akun</th>
                                             <th>Role</th>

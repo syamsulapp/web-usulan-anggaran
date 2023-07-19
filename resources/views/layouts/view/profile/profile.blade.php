@@ -42,7 +42,7 @@
                                     src="{{ asset('/assets/dist/img/user4-128x128.jpg') }}" alt="User profile picture">
                             </div>
 
-                            <h3 class="profile-username text-center">{{ Auth::user()->name }}</h3>
+                            <h3 class="profile-username text-center">{{ Auth::user()->username }}</h3>
 
                             <p class="text-muted text-center">{{ Auth::user()->role }}</p>
 

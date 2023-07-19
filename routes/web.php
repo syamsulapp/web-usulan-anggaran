@@ -5,7 +5,9 @@ use App\Http\Controllers\LembagaController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PaguController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UraianController;
 
 /*
@@ -22,9 +24,9 @@ use App\Http\Controllers\UraianController;
 Route::get('/', [LoginController::class, 'showLoginForm'])->name('login');
 
 Route::prefix('home')->group(function () {
-    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::get('profile', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
-    Route::post('profile/submit', [App\Http\Controllers\HomeController::class, 'profileSubmit'])->name('profile.submit');
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('profile', [ProfileController::class, 'profile'])->name('profile');
+    Route::post('profile/submit', [ProfileController::class, 'profileSubmit'])->name('profile.submit');
 });
 
 Auth::routes();
