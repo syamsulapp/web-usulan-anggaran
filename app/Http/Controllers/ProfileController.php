@@ -95,9 +95,6 @@ class ProfileController extends Controller
             ]);
         }
 
-
-
-
         return redirect()->route('profile')->with('alert', 'Berhasil Ubah Profile');
     }
 }

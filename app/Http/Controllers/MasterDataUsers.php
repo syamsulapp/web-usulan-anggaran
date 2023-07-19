@@ -78,34 +78,56 @@ class MasterDataUsers extends Controller
         return redirect()->route('admin.users')->with('alert', 'berhasil tambah users');
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, User $id)
     {
         $request->validate([
-            'username' => 'required|unique:users,username',
-            'password' => 'required',
-            'surat_keterangan' => 'required|file|mimes:pdf|max:2048',
+            'surat_keterangan' => 'file|mimes:pdf|max:2048',
         ], [
             'required' => ':attribute jangan di kosongkan',
             'unique' => 'username sudah ada'
         ]);
 
-        $file = $request->file('surat_keterangan');
+        if ($file = $request->file('surat_keterangan')) {
+            $nama_file = time() . '-' . $file->getClientOriginalName();
 
-        $nama_file = time() . '-' . $file->getClientOriginalName();
+            $tujuan_upload = 'surat_keterangan';
 
-        $tujuan_upload = 'surat_keterangan';
+            $file->move($tujuan_upload, $nama_file);
 
-        $file->move($tujuan_upload, $nama_file);
+            if (empty($request->password)) {
+                $this->user->whereId($id->id)->update([
+                    'username' => empty($request->username) ? $id->username : $request->username,
+                    'id_lembaga' => $request->id_lembaga,
+                    'id_role' => $request->id_role,
+                    'surat_keterangan' => $nama_file
+                ]);
+            } else {
+                $this->user->whereId($id->id)->update([
+                    'username' => empty($request->username) ? $id->username : $request->username,
+                    'password' => Hash::make($request->password),
+                    'id_lembaga' => $request->id_lembaga,
+                    'id_role' => $request->id_role,
+                    'surat_keterangan' => $nama_file
+                ]);
+            }
+        } else {
+            if (empty($request->password)) {
+                $this->user->whereId($id->id)->update([
+                    'username' => empty($request->username) ? $id->username : $request->username,
+                    'id_lembaga' => $request->id_lembaga,
+                    'id_role' => $request->id_role,
+                ]);
+            } else {
+                $this->user->whereId($id->id)->update([
+                    'username' => empty($request->username) ? $id->username : $request->username,
+                    'password' => Hash::make($request->password),
+                    'id_lembaga' => $request->id_lembaga,
+                    'id_role' => $request->id_role,
+                ]);
+            }
+        }
 
-        $this->user->whereId($id)->update([
-            'name' => $request->name,
-            'username' => $request->username,
-            'password' => Hash::make($request->password),
-            'id_lembaga' => $request->id_lembaga,
-            'role' => $request->role,
-            'is_active' => $request->is_active,
-            'surat_keterangan' => $nama_file
-        ]);
+
 
         return redirect()->route('admin.users')->with('alert', 'berhasil update data');
     }
