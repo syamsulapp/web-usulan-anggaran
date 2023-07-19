@@ -299,7 +299,9 @@
                                             <label>Lembaga</label>
                                             <select class="custom-select" name="id_lembaga">
                                                 @foreach ($lembaga as $l)
-                                                    <option value="{{ $l->id }}">{{ $l->nama_lembaga }}</option>
+                                                    <option
+                                                        value="{{ $l->id_lembaga }}"{{ $item->id_lembaga === $l->id ? 'selected' : '' }}>
+                                                        {{ $l->nama_lembaga }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -310,7 +312,9 @@
                                             <label>Role</label>
                                             <select class="custom-select" name="id_role">
                                                 @foreach ($role as $r)
-                                                    <option value="{{ $r->id }}">{{ $r->name }}</option>
+                                                    <option value="{{ $item->id_role }}"
+                                                        {{ $item->id_role === $r->id ? 'selected' : '' }}>
+                                                        {{ $r->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
