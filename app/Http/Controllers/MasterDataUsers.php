@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Lembaga;
 use App\Models\ProfileModels;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -16,16 +17,22 @@ class MasterDataUsers extends Controller
 
     protected $profileModels;
 
-    public function __construct(User $user, Lembaga $lembaga, ProfileModels $profileModels)
+    protected $role;
+
+    public function __construct(User $user, Lembaga $lembaga, ProfileModels $profileModels, Role $role)
     {
         $this->lembaga = $lembaga;
         $this->user = $user;
         $this->profileModels = $profileModels;
+        $this->role = $role;
     }
 
     public function index(Request $request)
     {
         $photos = $this->profileModels->whereid_users($this->user->user()->id)->first();
+        $lembaga = $this->lembaga->all();
+        $role = $this->role->all();
+
         $limit = 10;
         if ($limit >= $request->limit) {
             $limit = $request->limit;
@@ -42,18 +49,14 @@ class MasterDataUsers extends Controller
                 return $query->where('is_active', 'LIKE', "%{$request->is_active}%");
             })
             ->paginate($limit);
-        return view('layouts.view.admin.users', compact('users', 'photos'));
+        return view('layouts.view.admin.users', compact('users', 'photos', 'lembaga', 'role'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
             'username' => 'required|unique:users,username',
             'password' => 'required',
-            'id_lembaga' => 'required',
-            'role' => 'required',
-            'is_active' => 'required',
             'surat_keterangan' => 'required|file|mimes:pdf|max:2048',
         ], [
             'required' => ':attribute jangan di kosongkan',
@@ -72,7 +75,6 @@ class MasterDataUsers extends Controller
         $submit['surat_keterangan'] = $nama_file;
         $submit['password'] = Hash::make($request->password);
         $this->user->create($submit);
-
         return redirect()->route('admin.users')->with('alert', 'berhasil tambah users');
     }
 

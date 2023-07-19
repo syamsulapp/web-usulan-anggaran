@@ -171,25 +171,13 @@
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Name</label>
-                                    <input type="text"
-                                        class="form-control @error('name')
-                                        is-invalid
-                                    @enderror"
-                                        name="name" id="exampleInputEmail1" placeholder="Masukan Name"
-                                        value="{{ old('name') }}">
-                                    @error('name')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
                                     <label for="exampleInputEmail1">Username</label>
                                     <input type="text"
                                         class="form-control @error('username')
                                     is-invalid
                                 @enderror"
                                         name="username" id="exampleInputEmail1" placeholder="Masukan Username"
-                                        value="{{ old('name') }}">
+                                        value="{{ old('username') }}">
                                     @error('username')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -201,7 +189,7 @@
                                         is-invalid
                                     @enderror"
                                         name="password" id="exampleInputPassword1" placeholder="Password"
-                                        value="{{ old('name') }}">
+                                        value="{{ old('password') }}">
                                     @error('password')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -211,8 +199,9 @@
                                         <!-- lembaga -->
                                         <label>Lembaga</label>
                                         <select class="custom-select" name="id_lembaga">
-                                            <option>Tipe 1</option>
-                                            <option>Tipe 2</option>
+                                            @foreach ($lembaga as $l)
+                                                <option value="{{ $l->id }}">{{ $l->nama_lembaga }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -220,9 +209,10 @@
                                     <div class="col-sm-14">
                                         <!-- lembaga -->
                                         <label>Role</label>
-                                        <select class="custom-select" name="role">
-                                            <option>Tipe 1</option>
-                                            <option>Tipe 2</option>
+                                        <select class="custom-select" name="id_role">
+                                            @foreach ($role as $r)
+                                                <option value="{{ $r->id }}">{{ $r->name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
