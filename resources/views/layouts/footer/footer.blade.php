@@ -107,4 +107,22 @@
             document.getElementById('delete-form-' + id).submit();
         }
     }
+
+    function confirmDeleteUsers(id) {
+        if (confirm('Apakah Anda yakin ingin menghapus Users ini?')) {
+            document.getElementById('delete-users-form-' + id).submit();
+        }
+    }
+
+    function activeAccount(id) {
+        if (confirm('Apakah Anda Ingin Mengaktifkan akun users ini?')) {
+            document.getElementById('active-form-' + id).submit();
+        }
+    }
+
+    function inactiveAccount(id) {
+        if (confirm('Apakah Anda Ingin Menonaktifkan akun users ini?')) {
+            document.getElementById('inactive-form-' + id).submit();
+        }
+    }
 </script>

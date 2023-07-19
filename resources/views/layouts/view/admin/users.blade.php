@@ -87,11 +87,14 @@
                                                         <div class="dropdown-menu" role="menu">
                                                             <a class="dropdown-item editBtn"
                                                                 href="{{ route('admin.users-edit', $item->id) }}">Edit</a>
-                                                            <form action="{{ route('admin.users-delete', $item->id) }}"
+                                                            <form id="delete-users-form-{{ $item->id }}"
+                                                                action="{{ route('admin.users-delete', $item->id) }}"
                                                                 method="POST">
-                                                                @method('delete')
                                                                 @csrf
-                                                                <button class="dropdown-item editBtn"
+                                                                @method('delete')
+                                                                <button
+                                                                    onclick="event.preventDefault(); confirmDeleteUsers('{{ $item->id }}')"
+                                                                    class="dropdown-item activeBtn"
                                                                     type="submit">Delete</button>
                                                             </form>
                                                         </div>
@@ -104,15 +107,23 @@
                                                             <span class="sr-only">Toggle Dropdown</span>
                                                         </button>
                                                         <div class="dropdown-menu" role="menu">
-                                                            <form action="{{ route('admin.users-activate', $item->id) }}"
+                                                            <form id="active-form-{{ $item->id }}"
+                                                                action="{{ route('admin.users-activate', $item->id) }}"
                                                                 method="POST">
                                                                 @csrf
-                                                                <button class="dropdown-item">Active</button>
+                                                                <button
+                                                                    onclick="event.preventDefault(); activeAccount('{{ $item->id }}')"
+                                                                    class="dropdown-item activeBtn"
+                                                                    type="submit">Active</button>
                                                             </form>
-                                                            <form action="{{ route('admin.users-inactive', $item->id) }}"
+                                                            <form id="inactive-form-{{ $item->id }}"
+                                                                action="{{ route('admin.users-inactive', $item->id) }}"
                                                                 method="POST">
                                                                 @csrf
-                                                                <button class="dropdown-item">Inactive</button>
+                                                                <button
+                                                                    onclick="event.preventDefault(); inactiveAccount('{{ $item->id }}')"
+                                                                    class="dropdown-item inactiveBtn"
+                                                                    type="submit">Inactive</button>
                                                             </form>
                                                         </div>
                                                     </div>
