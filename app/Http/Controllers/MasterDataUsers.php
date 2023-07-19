@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Lembaga;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -10,8 +11,11 @@ class MasterDataUsers extends Controller
 {
     protected $user;
 
-    public function __construct(User $user)
+    protected $lembaga;
+
+    public function __construct(User $user, Lembaga $lembaga)
     {
+        $this->lembaga = $lembaga;
         $this->user = $user;
     }
 
@@ -42,8 +46,7 @@ class MasterDataUsers extends Controller
             'name' => 'required',
             'username' => 'required|unique:users,username',
             'password' => 'required',
-            'tipe' => 'required',
-            'bagian' => 'required',
+            'id_lembaga' => 'required',
             'role' => 'required',
             'is_active' => 'required',
             'surat_keterangan' => 'required|file|mimes:pdf|max:2048',
@@ -77,10 +80,9 @@ class MasterDataUsers extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'username' => 'required',
+            'username' => 'required|unique:users,username',
             'password' => 'required',
-            'tipe' => 'required',
-            'bagian' => 'required',
+            'id_lembaga' => 'required',
             'role' => 'required',
             'is_active' => 'required',
             'surat_keterangan' => 'required|file|mimes:pdf|max:2048',

@@ -18,7 +18,7 @@ class AdminMiddleware
     {
         if (
             Auth::check()
-            && Auth::user()->role == 'admin'
+            && Auth::user()->id_role == 2
             && Auth::user()->is_active === 'Y'
         ) {
             return $next($request);

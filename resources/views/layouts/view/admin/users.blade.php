@@ -45,8 +45,6 @@
                                         tambah users
                                     </button>
                                 </div>
-
-
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -205,9 +203,9 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-14">
-                                        <!-- select -->
-                                        <label>Pilih Tipe</label>
-                                        <select class="custom-select" name="tipe">
+                                        <!-- lembaga -->
+                                        <label>Lembaga</label>
+                                        <select class="custom-select" name="id_lembaga">
                                             <option>Tipe 1</option>
                                             <option>Tipe 2</option>
                                         </select>
@@ -215,32 +213,11 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-14">
-                                        <!-- select -->
-                                        <label>Pilih Bagian</label>
-                                        <select class="custom-select" name="bagian">
-                                            <option>Bagian 1</option>
-                                            <option>Bagian 2</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-sm-14">
-                                        <!-- select -->
-                                        <label>Pilih Role</label>
+                                        <!-- lembaga -->
+                                        <label>Role</label>
                                         <select class="custom-select" name="role">
-                                            <option>suepradmin</option>
-                                            <option>admin</option>
-                                            <option>user</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-sm-14">
-                                        <!-- select -->
-                                        <label>status</label>
-                                        <select class="custom-select" name="is_active">
-                                            <option value="Y">aktif</option>
-                                            <option value="N">non-aktif</option>
+                                            <option>Tipe 1</option>
+                                            <option>Tipe 2</option>
                                         </select>
                                     </div>
                                 </div>
