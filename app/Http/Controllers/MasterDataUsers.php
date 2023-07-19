@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Lembaga;
+use App\Models\ProfileModels;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -13,14 +14,18 @@ class MasterDataUsers extends Controller
 
     protected $lembaga;
 
-    public function __construct(User $user, Lembaga $lembaga)
+    protected $profileModels;
+
+    public function __construct(User $user, Lembaga $lembaga, ProfileModels $profileModels)
     {
         $this->lembaga = $lembaga;
         $this->user = $user;
+        $this->profileModels = $profileModels;
     }
 
     public function index(Request $request)
     {
+        $photos = $this->profileModels->whereid_users($this->user->user()->id)->first();
         $limit = 10;
         if ($limit >= $request->limit) {
             $limit = $request->limit;
@@ -37,7 +42,7 @@ class MasterDataUsers extends Controller
                 return $query->where('is_active', 'LIKE', "%{$request->is_active}%");
             })
             ->paginate($limit);
-        return view('layouts.view.admin.users', compact('users'));
+        return view('layouts.view.admin.users', compact('users', 'photos'));
     }
 
     public function store(Request $request)

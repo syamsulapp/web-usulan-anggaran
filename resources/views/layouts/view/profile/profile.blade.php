@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app', ['photos' => $data_profile['photos'], 'nama_lengkap' => $data_profile['nama_lengkap']])
 
 @section('title', 'profile')
 
@@ -46,7 +46,8 @@
                             <div class="card-body box-profile">
                                 <div class="text-center">
                                     <img class="profile-user-img img-fluid img-circle"
-                                        src="{{ url('photo_profile', $data_profile['photos']) }}" alt="User profile picture">
+                                        src="{{ url('photo_profile', $data_profile['photos']) }}"
+                                        alt="User profile picture">
                                 </div>
 
                                 <h3 class="profile-username text-center">{{ $data_profile['nama_lengkap'] }}</h3>

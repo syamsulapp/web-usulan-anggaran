@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ProfileModels;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -16,10 +17,13 @@ class HomeController extends Controller
 
     protected $user;
 
-    public function __construct(User $user)
+    protected $profileModels;
+
+    public function __construct(User $user, ProfileModels $profileModels)
     {
         $this->middleware('auth');
         $this->user = $user;
+        $this->profileModels = $profileModels;
     }
 
     /**
@@ -29,6 +33,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $photos = $this->profileModels->whereid_users($this->user->user()->id)->first();
+        return view('home', compact('photos'));
     }
 }

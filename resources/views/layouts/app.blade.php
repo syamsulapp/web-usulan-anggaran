@@ -43,7 +43,8 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css') }}">
     <!-- data table -->
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
 
     <!-- SweetAlert2 -->
@@ -59,16 +60,15 @@
 
     <div class="wrapper" data-widget="iframe">
         @if (Route::has('login'))
-        @auth
+            @auth
+                @include('layouts.header.header')
+                @include('layouts.sidebar.sidebar', ['photo' => $photos, 'nama_lengkap' => $nama_lengkap])
+                @yield('content')
+                @include('layouts.footer.footer')
+            @else
+                @yield('content')
 
-        @include('layouts.header.header')
-        @include('layouts.sidebar.sidebar')
-        @yield('content')
-        @include('layouts.footer.footer')
-        @else
-        @yield('content')
-
-        @endauth
+            @endauth
         @endif
 </body>
 

@@ -6,18 +6,23 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Anggaran;
 use App\Models\Pagu;
+use App\Models\ProfileModels;
 
 class PaguController extends Controller
 {
     protected $user;
 
-    public function __construct(User $user)
+    protected $profileModels;
+    public function __construct(User $user, ProfileModels $profileModels)
     {
         $this->user = $user;
+        $this->profileModels = $profileModels;
     }
 
     public function index(Request $request)
     {
+        $photos = $this->profileModels->whereid_users($this->user->user()->id)->first();
+
         $anggarans = Anggaran::all();
 
         $listpagu = Pagu::with('anggaran')->get();
@@ -31,7 +36,7 @@ class PaguController extends Controller
                 return $query->where('jenis_alokasi_anggaran', 'LIKE', "%{$request->jenis_alokasi_anggaran}%");
             })
             ->paginate($limit);
-        return view('layouts.view.admin.pagu', compact('users', 'listpagu', 'anggarans'));
+        return view('layouts.view.admin.pagu', compact('users', 'listpagu', 'anggarans', 'photos'));
     }
 
     public function tambah_pagu(Request $request)

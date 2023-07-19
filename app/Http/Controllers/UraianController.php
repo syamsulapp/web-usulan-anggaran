@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ProfileModels;
 use App\Models\Uraian;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UraianController extends Controller
 {
-    public function index()
+    public function index(ProfileModels $profileModels, User $user)
     {
+        $photos = $profileModels->whereid_users($user->user()->id)->first();
+
         $listuraian = Uraian::all();
-        return view('layouts.view.admin.uraian', compact('listuraian'));
+        return view('layouts.view.admin.uraian', compact('listuraian', 'photos'));
     }
 
     public function store(Request $request)

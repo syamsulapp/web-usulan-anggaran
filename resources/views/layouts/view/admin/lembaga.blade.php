@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app', ['photos' => $photos['photos'], 'nama_lengkap' => $photos['nama_lengkap']])
 
 @section('title', 'Lembaga(Bagian) Management')
 
