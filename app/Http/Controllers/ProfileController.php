@@ -47,6 +47,8 @@ class ProfileController extends Controller
             'same' => 'password tidak sama'
         ]);
 
+
+        //jika photos di kosongkan/tidak di isi maka tidak di upload fotonya
         if ($file = $request->file('photos')) {
 
             $nama_file = time() . '-' . $file->getClientOriginalName();
