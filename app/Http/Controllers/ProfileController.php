@@ -32,7 +32,7 @@ class ProfileController extends Controller
             if ($profile  = $this->profileModels->whereid_users($this->user->user()->id)->first()) {
                 $data_profile = $profile;
             } else {
-                // jika pertama kali register dan belum update profile maka kirim data ini
+                // jika pertama kali register dan belum ada data profilenya maka kirim data ini
                 $data_profile = [
                     'photos' => 'no_image',
                     'nama_lengkap' => 'nama lengkap belum ada',
