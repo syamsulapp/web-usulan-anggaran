@@ -20,9 +20,6 @@ use App\Http\Controllers\UraianController;
 */
 
 Route::get('/', [LoginController::class, 'showLoginForm'])->name('login');
-// Route::get('/', function () {
-//     return redirect()->route('login');
-// });
 
 Route::prefix('home')->group(function () {
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -32,7 +29,7 @@ Route::prefix('home')->group(function () {
 
 Auth::routes();
 
-// Rute untuk superadmin
+// Routes untuk fitur superadmin
 Route::middleware('superadmin')->group(function () {
     Route::prefix('guest')->group(function () {
         Route::get('dashboard', function () {
@@ -44,7 +41,7 @@ Route::middleware('superadmin')->group(function () {
     });
 });
 
-// Rute untuk admin
+// Routes untuk fitur admin
 Route::middleware('admin')->group(function () {
     Route::prefix('admin')->group(function () {
         Route::get('dashboard', function () {
@@ -81,7 +78,7 @@ Route::middleware('admin')->group(function () {
     });
 });
 
-// Rute untuk pengguna
+// Routes untuk fitur pengguna
 Route::middleware('user')->group(function () {
     Route::prefix('user')->group(function () {
         Route::get('dashboard', function () {
