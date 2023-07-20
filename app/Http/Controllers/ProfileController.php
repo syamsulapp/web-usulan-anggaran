@@ -70,7 +70,7 @@ class ProfileController extends Controller
                 $file->move($tujuan_upload, $nama_file);
 
                 if (
-                    empty($request->password) &&
+                    empty($request->password) ||
                     empty($request->username)
                 ) {
                     // jika username dan password di kosongkan maka update username and password
@@ -116,7 +116,7 @@ class ProfileController extends Controller
                 $file->move($tujuan_upload, $nama_file);
 
                 if (
-                    empty($request->password) && //jika ingin mengubah username maka harus mengisi dengan passwordnya jg
+                    empty($request->password) || //jika ingin mengubah username maka harus mengisi dengan passwordnya jg
                     empty($request->username)
                 ) {
                     // jika username dan password di kosongkan maka update username and password
