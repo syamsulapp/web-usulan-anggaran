@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Hash;
 class ProfileController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * property menyimpan modals.
      */
     protected $user;
 
@@ -73,7 +73,7 @@ class ProfileController extends Controller
                     empty($request->password) ||
                     empty($request->username)
                 ) {
-                    // jika username dan password di kosongkan maka update username and password
+                    // jika username atau password di kosongkan maka update username and password
                     // di table users tidak di jalankan atau fun update tidak di eksekusi
                     $this->profileModels->whereid_users($this->user->user()->id)->update([
                         'nama_lengkap' => $request->nama_lengkap,
@@ -119,7 +119,7 @@ class ProfileController extends Controller
                     empty($request->password) || //jika ingin mengubah username maka harus mengisi dengan passwordnya jg
                     empty($request->username)
                 ) {
-                    // jika username dan password di kosongkan maka update username and password
+                    // jika username atau password di kosongkan maka update username and password
                     // di table users tidak di jalankan atau fun update tidak di eksekusi
                     $this->profileModels->create([
                         'nama_lengkap' => $request->nama_lengkap,
