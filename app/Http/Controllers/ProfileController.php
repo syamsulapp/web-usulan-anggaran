@@ -135,7 +135,7 @@ class ProfileController extends Controller
                         'username' => $request->username,
                         'password' => Hash::make($request->password),
                     ]);
-                    $this->create([
+                    $this->profileModels->create([
                         'nama_lengkap' => $request->nama_lengkap,
                         'education' => $request->education,
                         'location' => $request->location,
@@ -146,7 +146,7 @@ class ProfileController extends Controller
                     ]);
                 }
             } else {
-                $this->create([
+                $this->profileModels->create([
                     'nama_lengkap' => $request->nama_lengkap,
                     'education' => $request->education,
                     'location' => $request->location,

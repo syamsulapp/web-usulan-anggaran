@@ -50,21 +50,16 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="bagian"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('Bagian') }}</label>
+                                <label for="lembaga"
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Lembaga') }}</label>
 
                                 <div class="col-md-6">
-                                    <select name="bagian" id="bagian"
-                                        class="form-control @error('bagian') is-invalid @enderror" autocomplete="bagian"
+                                    <select name="lembaga" id="lembaga" class="form-control" autocomplete="lembaga"
                                         autofocus>
-                                        <option value="Lembaga1">L1</option>
-                                        <option value="Lembaga2">l2</option>=
+                                        @foreach ($lembaga as $l)
+                                            <option value="{{ $l->id }}">{{ $l->nama_lembaga }}</option>
+                                        @endforeach
                                     </select>
-                                    @error('bagian')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
                                 </div>
                             </div>
 

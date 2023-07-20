@@ -87,11 +87,10 @@ class RegisterController extends Controller
         return User::create([
             'name' => $data['username'],
             'username' => $data['username'],
-            'tipe' => $data['tipe'],
-            'bagian' => $data['bagian'],
+            'id_lembaga' => $data['lembaga'],
             'password' => Hash::make($data['password']),
             'surat_keterangan' => $nama_file,
-            'role' => 'user',
+            'id_role' => 3 // default users after registrasi
         ]);
     }
 }
