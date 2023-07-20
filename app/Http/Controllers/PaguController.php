@@ -26,17 +26,8 @@ class PaguController extends Controller
         $anggarans = Anggaran::all();
 
         $listpagu = Pagu::with('anggaran')->get();
-        $limit = 10;
-        if ($limit >= $request->limit) {
-            $limit = $request->limit;
-        }
-        $users = $this->user
-            ->orderByDesc('id')
-            ->when($request->name, function ($query) use ($request) {
-                return $query->where('jenis_alokasi_anggaran', 'LIKE', "%{$request->jenis_alokasi_anggaran}%");
-            })
-            ->paginate($limit);
-        return view('layouts.view.admin.pagu', compact('users', 'listpagu', 'anggarans', 'photos'));
+
+        return view('layouts.view.admin.pagu', compact('listpagu', 'anggarans', 'photos'));
     }
 
     public function tambah_pagu(Request $request)
