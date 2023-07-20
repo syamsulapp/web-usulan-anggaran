@@ -50,24 +50,6 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="tipe"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('Type Bagian') }}</label>
-
-                                <div class="col-md-6">
-                                    <select name="tipe" id="tipe"
-                                        class="form-control @error('tipe') is-invalid @enderror" autocomplete="tipe"
-                                        autofocus>
-                                        <option value="Lembaga1">L1</option>
-                                        <option value="Lembaga2">l2</option>=
-                                    </select>
-                                    @error('tipe')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row mb-3">
                                 <label for="bagian"
                                     class="col-md-4 col-form-label text-md-end">{{ __('Bagian') }}</label>
 
