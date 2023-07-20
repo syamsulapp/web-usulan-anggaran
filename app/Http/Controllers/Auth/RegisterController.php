@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Lembaga;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -34,15 +35,24 @@ class RegisterController extends Controller
 
     protected $uploadFile;
 
+    protected $lembaga;
+
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(Request $uploadFile)
+    public function __construct(Request $uploadFile, Lembaga $lembaga)
     {
         $this->middleware('guest');
         $this->uploadFile = $uploadFile;
+        $this->lembaga = $lembaga;
+    }
+
+    public function showRegistrationForm()
+    {
+        $lembaga = $this->lembaga->all();
+        return view('auth.register', compact('lembaga'));
     }
 
     /**
