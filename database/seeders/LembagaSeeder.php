@@ -16,7 +16,7 @@ class LembagaSeeder extends Seeder
     public function run(): void
     {
         DB::table('lembaga')->insert([
-            'nama_lembaga' => 'Rektor'
+            'nama_lembaga' => 'Bagian Umum dan Kemahasiswaan'
         ]);
     }
 }

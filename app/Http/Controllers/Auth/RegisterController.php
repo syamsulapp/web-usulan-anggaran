@@ -85,7 +85,6 @@ class RegisterController extends Controller
         $file->move($tujuan_upload, $nama_file);
 
         return User::create([
-            'name' => $data['username'],
             'username' => $data['username'],
             'id_lembaga' => $data['lembaga'],
             'password' => Hash::make($data['password']),
