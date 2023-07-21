@@ -26,6 +26,13 @@
                         {{ session('alert') }}
                     </div>
                 @endif
+                @if (session('alertError'))
+                    <div class="alert alert-danger alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <h5><i class="icon fas fa-ban"></i> Error!</h5>
+                        {{ session('alertError') }}
+                    </div>
+                @endif
             </div><!-- /.container-fluid -->
         </section>
 
@@ -114,24 +121,10 @@
                                                             <span class="sr-only">Toggle Dropdown</span>
                                                         </button>
                                                         <div class="dropdown-menu" role="menu">
-                                                            <form id="active-form-{{ $item->id }}"
-                                                                action="{{ route('admin.users-activate', $item->id) }}"
-                                                                method="POST">
-                                                                @csrf
-                                                                <button
-                                                                    onclick="event.preventDefault(); activeAccount('{{ $item->id }}')"
-                                                                    class="dropdown-item activeBtn"
-                                                                    type="submit">Active</button>
-                                                            </form>
-                                                            <form id="inactive-form-{{ $item->id }}"
-                                                                action="{{ route('admin.users-inactive', $item->id) }}"
-                                                                method="POST">
-                                                                @csrf
-                                                                <button
-                                                                    onclick="event.preventDefault(); inactiveAccount('{{ $item->id }}')"
-                                                                    class="dropdown-item inactiveBtn"
-                                                                    type="submit">Inactive</button>
-                                                            </form>
+                                                            {{-- Verify users --}}
+                                                            <a class="dropdown-item editBtn"
+                                                                href="#verifyModal{{ $item->id }}"
+                                                                data-toggle="modal">Verify</a>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -176,24 +169,24 @@
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Username</label>
+                                    <label for="username">Username</label>
                                     <input type="text"
                                         class="form-control @error('username')
                                     is-invalid
                                 @enderror"
-                                        name="username" id="exampleInputEmail1" placeholder="Masukan Username"
+                                        name="username" id="username" placeholder="Masukan Username"
                                         value="{{ old('username') }}">
                                     @error('username')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Password</label>
+                                    <label for="password">Password</label>
                                     <input type="password"
                                         class="form-control @error('password')
                                         is-invalid
                                     @enderror"
-                                        name="password" id="exampleInputPassword1" placeholder="Password"
+                                        name="password" id="password" placeholder="Password"
                                         value="{{ old('password') }}">
                                     @error('password')
                                         <span class="text-danger">{{ $message }}</span>
@@ -222,15 +215,15 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputFile">Surat Keterangan</label>
+                                    <label for="surat_keterangan">Surat Keterangan</label>
                                     <div class="input-group">
                                         <div class="custom-file">
                                             <input type="file"
                                                 class="custom-file-input @error('surat_keterangan')
                                                 is-invalid
                                             @enderror"
-                                                name="surat_keterangan" id="exampleInputFile">
-                                            <label class="custom-file-label" for="exampleInputFile">Pilih File</label>
+                                                name="surat_keterangan" id="surat_keterangan">
+                                            <label class="custom-file-label" for="surat_keterangan">Pilih File</label>
                                         </div>
                                         <div class="input-group-append">
                                             <span class="input-group-text">Upload</span>
@@ -270,24 +263,24 @@
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Username</label>
+                                        <label for="username">Username</label>
                                         <input type="text"
                                             class="form-control @error('username')
                                     is-invalid
                                 @enderror"
-                                            name="username" id="exampleInputEmail1" placeholder="Masukan Username"
+                                            name="username" id="username" placeholder="Masukan Username"
                                             value="{{ $item->username }}">
                                         @error('username')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">Password</label>
+                                        <label for="password">Password</label>
                                         <input type="password"
                                             class="form-control @error('password')
                                         is-invalid
                                     @enderror"
-                                            name="password" id="exampleInputPassword1" placeholder="Password"
+                                            name="password" id="password" placeholder="Password"
                                             value="{{ old('password') }}">
                                         @error('password')
                                             <span class="text-danger">{{ $message }}</span>
@@ -320,15 +313,15 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputFile">Surat Keterangan</label>
+                                        <label for="surat_keterangan">Surat Keterangan</label>
                                         <div class="input-group">
                                             <div class="custom-file">
                                                 <input type="file"
                                                     class="custom-file-input @error('surat_keterangan')
                                                 is-invalid
                                             @enderror"
-                                                    name="surat_keterangan" id="exampleInputFile">
-                                                <label class="custom-file-label" for="exampleInputFile">Pilih File</label>
+                                                    name="surat_keterangan" id="surat_keterangan">
+                                                <label class="custom-file-label" for="surat_keterangan">Pilih File</label>
                                             </div>
                                             <div class="input-group-append">
                                                 <span class="input-group-text">Upload</span>
@@ -343,6 +336,69 @@
                                     <button type="submit" class="btn btn-primary">Save changes</button>
                                 </div>
                             </form>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+        @endforeach
+
+
+        {{-- modals verify data --}}
+        @foreach ($users as $item)
+            <div class="modal fade" id="verifyModal{{ $item->id }}">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="verifyModal{{ $item->id }}">Verify Users</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card card-outline card-primary">
+                                        <div class="card-header">
+                                            <h3 class="card-title">Surat Keterangan</h3>
+
+                                            <div class="card-tools">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                    <i class="fas fa-minus"></i>
+                                                </button>
+                                            </div>
+                                            <!-- /.card-tools -->
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <div class="card-body">
+                                            @if ($item->surat_keterangan)
+                                                <p><b>Suket</b>: <a
+                                                        href="{{ url('surat_keterangan', $item->surat_keterangan) }}"
+                                                        target="_blank">Lihat File</a></p>
+                                            @else
+                                                <p><b>Suket</b>: Belum Ada</p>
+                                            @endif
+                                        </div>
+                                        <!-- /.card-body -->
+                                        <form id="active-form" action="{{ route('admin.users-verify', $item->id) }}"
+                                            method="POST">
+                                            @csrf
+                                            <div class="card-body">
+                                                <input type="checkbox" id="verify" name="verify"
+                                                    data-bootstrap-switch data-off-color="danger" data-on-color="success"
+                                                    data-id="{{ $item->id }}" class="verify-account"
+                                                    {{ $item->is_active === 'Y' ? 'checked' : '' }}>
+                                            </div>
+                                            <div class="modal-footer justify-content-between">
+                                                <button onclick="event.preventDefault(); verifyAccount()" type="submit"
+                                                    class="btn btn-primary">Verify</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <!-- /.card -->
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- /.modal-content -->
