@@ -54,8 +54,7 @@ Route::middleware('admin')->group(function () {
         Route::post('users/store', [MasterDataUsers::class, 'store'])->name('admin.users-stores');
         Route::put('users/update/{id}', [MasterDataUsers::class, 'update'])->name('admin.users-update');
         Route::delete('users/delete/{id}', [MasterDataUsers::class, 'delete'])->name('admin.users-delete');
-        Route::post('users/activate/{id}', [MasterDataUsers::class, 'activate'])->name('admin.users-activate');
-        Route::post('users/inactive/{id}', [MasterDataUsers::class, 'inactive'])->name('admin.users-inactive');
+        Route::post('users/verify/{id}', [MasterDataUsers::class, 'verifyAccountUsers'])->name('admin.users-verify');
 
         // PAGU MANAGEMENT
 

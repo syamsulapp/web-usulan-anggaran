@@ -160,4 +160,27 @@ class MasterDataUsers extends Controller
             return $error;
         }
     }
+
+    public function verifyAccountUsers($id, Request $request)
+    {
+        try {
+            $account = $this->user->whereId($id)->first();
+            if ($request->verify === 'on') {
+                $result = [
+                    'insert_status' => 'Y',
+                    'message' => 'Akun' . ' ' . $account->username . ' ' . 'Berhasil di aktifkan',
+                ];
+            } else {
+                $result = [
+                    'insert_status' => 'N',
+                    'message' => 'Akun' . ' ' . $account->username . ' ' . 'Berhasil di nonaktifkan',
+                ];
+            }
+            $account->update(['is_active' => $result['insert_status']]);
+            $result = redirect()->route('admin.users')->with('alert', $result['message']);
+        } catch (\Exception $error) {
+            $result = redirect()->route('admin.users')->with('alertError', $error);
+        }
+        return $result;
+    }
 }

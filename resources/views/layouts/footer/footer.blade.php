@@ -53,8 +53,8 @@
 <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
-
-
+<!-- Bootstrap Switch -->
+<script src="{{ asset('assets/plugins/bootstrap-switch/js/bootstrap-switch.min.js') }}"></script>
 <!-- SweetAlert2 -->
 <script src="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
 <!-- Toastr -->
@@ -73,6 +73,9 @@
     $(function() {
         bsCustomFileInput.init();
     });
+    $(".verify-account").each(function() {
+        $(this).bootstrapSwitch('state', $(this).prop('checked'));
+    })
     $(function() {
         $("#example1").DataTable({
             "responsive": true,
@@ -120,15 +123,9 @@
         }
     }
 
-    function activeAccount(id) {
-        if (confirm('Apakah Anda Ingin Mengaktifkan akun users ini?')) {
-            document.getElementById('active-form-' + id).submit();
-        }
-    }
-
-    function inactiveAccount(id) {
-        if (confirm('Apakah Anda Ingin Menonaktifkan akun users ini?')) {
-            document.getElementById('inactive-form-' + id).submit();
+    function verifyAccount() {
+        if (confirm('Apakah Anda Ingin Memverifikasi Akun Ini?')) {
+            document.getElementById('active-form').submit();
         }
     }
 </script>
