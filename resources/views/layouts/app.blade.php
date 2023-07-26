@@ -58,15 +58,11 @@
 <body class="hold-transition sidebar-mini layout-fixed">
     <!-- Preloader -->
 
-    <div class="wrapper">
+    <div class="wrapper" data-widget="iframe">
         @if (Route::has('login'))
             @auth
-                <div class="preloader flex-column justify-content-center align-items-center">
-                    <img class="animation__shake" src="{{ asset('assets/img/logoSIPPWarna.png') }}" alt="AdminLTELogo"
-                        width="25%">
-                </div>
                 @include('layouts.header.header')
-                @include('layouts.sidebar.sidebar')
+                @include('layouts.sidebar.sidebar', ['photo' => $photos, 'nama_lengkap' => $nama_lengkap])
                 @yield('content')
                 @include('layouts.footer.footer')
             @else

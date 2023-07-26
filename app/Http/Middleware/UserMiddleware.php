@@ -18,7 +18,7 @@ class UserMiddleware
     {
         if (
             Auth::check()
-            && Auth::user()->role == 'user'
+            && Auth::user()->id_role == 3
             && Auth::user()->is_active === 'Y'
         ) {
             return $next($request);

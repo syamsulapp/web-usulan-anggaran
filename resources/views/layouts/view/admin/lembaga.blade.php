@@ -1,15 +1,31 @@
 @extends('layouts.app', ['photos' => $photos['photos'], 'nama_lengkap' => $photos['nama_lengkap']])
 
-@section('title', 'Pagu Management')
+@section('title', 'Lembaga(Bagian) Management')
 
 @section('content')
     <div class="content-wrapper">
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h5><i class="icon fas fa-check"></i> Success!</h5>
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if (session('error'))
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h5><i class="icon fas fa-times"></i> Error!</h5>
+                {{ session('error') }}
+            </div>
+        @endif
+
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Pagu Management</h1>
+                        <h1>Lembaga(Bagian) Management</h1>
                     </div>
 
                     <div class="col-sm-6">
@@ -36,17 +52,13 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Pagu Management</h3>
+                                <h3 class="card-title">Lembaga(Bagian) Management</h3>
                                 <br>
                                 <br>
                                 <div class="col-md-2">
                                     <button type="button" class="btn btn-outline-primary btn-block" data-toggle="modal"
                                         data-target="#tambahData-lg"><i class="fa fa-edit"></i>
-                                        Tambah Data Anggaran
-                                    </button>
-                                    <button type="button" class="btn btn-outline-primary btn-block" data-toggle="modal"
-                                        data-target="#tambahDatapagu-lg"><i class="fa fa-edit"></i>
-                                        Tambah Data Pagu
+                                        Tambah Data Lembaga(Bagian)
                                     </button>
                                 </div>
 
@@ -58,22 +70,16 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Jenis Alokasi Anggaran</th>
-                                            <th>Anggaran</th>
+                                            <th>Nama Lembaga</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($listpagu->groupBy('jenis_alokasi_anggaran') as $jenisAlokasi => $paguItems)
+                                        @foreach ($listlembaga as $lembaga)
                                             <tr>
+
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $jenisAlokasi }}
-                                                </td>
-                                                <td>
-                                                    @foreach ($paguItems as $pagu)
-                                                        {{ $pagu->anggaran->keterangan }}<br>
-                                                    @endforeach
-                                                </td>
+                                                <td>{{ $lembaga->nama_lembaga }}</td>
                                                 <td>
                                                     <div class="btn-group">
                                                         <button type="button" class="btn btn-info">Detail</button>
@@ -83,20 +89,24 @@
                                                             <span class="sr-only">Toggle Dropdown</span>
                                                         </button>
                                                         <div class="dropdown-menu" role="menu">
-                                                            <a class="dropdown-item editBtn"
-                                                                href="#editModal{{ $jenisAlokasi }}"
-                                                                data-toggle="modal">Edit</a>
-                                                            <form id="delete-pagu-form-{{ $jenisAlokasi }}"
-                                                                action="{{ route('delete_pagu', $jenisAlokasi) }}"
+                                                            <a href="#editModal{{ $lembaga->id }}"
+                                                                class="dropdown-item editBtn" data-toggle="modal">
+                                                                Edit
+                                                            </a>
+
+                                                            <form id="delete-form-{{ $lembaga->id }}"
+                                                                action="{{ route('lembaga.destroy', $lembaga->id) }}"
                                                                 method="POST">
                                                                 @method('delete')
                                                                 @csrf
                                                                 <button
-                                                                    onclick="event.preventDefault(); confirmDeletePagu('{{ $jenisAlokasi }}')"class="dropdown-item editBtn"
+                                                                    onclick="event.preventDefault(); confirmDelete('{{ $lembaga->id }}')"
+                                                                    class="dropdown-item deleteBtn"
                                                                     type="submit">Delete</button>
                                                             </form>
                                                         </div>
                                                     </div>
+
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -104,8 +114,7 @@
                                     <tfoot>
                                         <tr>
                                             <th>No</th>
-                                            <th>Jenis Alokasi Anggaran</th>
-                                            <th>Anggaran</th>
+                                            <th>Nama Lembaga</th>
                                             <th>Action</th>
                                         </tr>
                                     </tfoot>
@@ -122,24 +131,33 @@
             <!-- /.container-fluid -->
         </section>
         <!-- /.content -->
-        {{-- tambah anggaran --}}
+
+        {{-- MODAL TAMBAH --}}
         <div class="modal fade" id="tambahData-lg">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Tambah Data Anggaran</h4>
+                        <h4 class="modal-title">Tambah Data Lembaga</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('tambah_anggaran') }}" method="POST">
+                        <form action="{{ route('lembaga.store') }}" method="POST">
                             @csrf
+
                             <div class="form-group">
-                                <label for="keterangan">Keterangan</label>
-                                <input type="text" class="form-control" id="keterangan" name="keterangan">
+                                <label>Nama Lembaga</label>
+                                <input type="text" class="form-control @error('nama_lembaga') is-invalid @enderror"
+                                    name="nama_lembaga" id="nama_lembaga" placeholder="Masukkan Nama Lembaga"
+                                    value="{{ old('nama_lembaga') }}">
+                                @error('nama_lembaga')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
-                            <button type="submit" class="btn btn-primary">Tambah Anggaran</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
 
                     </div>
@@ -148,83 +166,48 @@
             </div>
             <!-- /.modal-dialog -->
         </div>
-        {{-- tambah pagu --}}
-        <div class="modal fade" id="tambahDatapagu-lg">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Tambah Data Pagu</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="{{ route('tambah_pagu') }}" method="POST">
-                            @csrf
-                            <div class="form-group">
-                                <label for="jenis_alokasi_anggaran">Jenis Alokasi Anggaran</label>
-                                <input type="text" class="form-control" id="jenis_alokasi_anggaran"
-                                    name="jenis_alokasi_anggaran">
-                            </div>
-                            <div class="form-group">
-                                <label for="anggaran_kodeakun">Anggaran Kode Akun</label>
-                                <select class="form-control" id="anggaran_kodeakun" name="anggaran_kodeakun">
-                                    <option value="">Pilih Anggaran Kode Akun</option>
-                                    @foreach ($anggarans as $anggaran)
-                                        <option value="{{ $anggaran->id }}">{{ $anggaran->keterangan }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Simpan Pagu</button>
-                        </form>
+        {{-- MODAL TAMBAH --}}
 
-                    </div>
-                </div>
-                <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-        </div>
-        {{-- edit pagu --}}
-        @foreach ($listpagu as $pagu)
-            <div class="modal fade" id="editModal{{ $pagu->jenis_alokasi_anggaran }}">
-                <div class="modal-dialog modal-lg">
+        <!-- Modal Edit -->
+        @foreach ($listlembaga as $lembaga)
+            <!-- Modal Edit -->
+            <div class="modal fade" id="editModal{{ $lembaga->id }}" tabindex="-1" role="dialog"
+                aria-labelledby="editModal{{ $lembaga->id }}Label" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="editModal{{ $pagu->jenis_alokasi_anggaran }}">Edit Data Pagu</h4>
+                            <h4 class="modal-title" id="editModal{{ $lembaga->id }}Label">Edit Lembaga</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="{{ route('edit_pagu', $pagu->jenis_alokasi_anggaran) }}" method="POST">
-                                @method('put')
+                            <form action="{{ route('lembaga.update', $lembaga->id) }}" method="POST">
                                 @csrf
-                                <div class="form-group">
-                                    <label for="jenis_alokasi_anggaran">Jenis Alokasi Anggaran</label>
-                                    <input type="text" class="form-control" id="jenis_alokasi_anggaran"
-                                        name="jenis_alokasi_anggaran" value="{{ $pagu->jenis_alokasi_anggaran }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="anggaran_kodeakun">Anggaran Kode Akun</label>
-                                    <select class="form-control" id="anggaran_kodeakun" name="anggaran_kodeakun">
-                                        <option value="">Pilih Anggaran Kode Akun</option>
-                                        @foreach ($anggarans as $anggaran)
-                                            <option value="{{ $anggaran->id }}"
-                                                {{ $pagu->anggaran_kodeakun === $anggaran->id ? 'selected' : '' }}>
-                                                {{ $anggaran->keterangan }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Update Pagu</button>
-                            </form>
+                                @method('PUT')
 
+                                <div class="form-group">
+                                    <label for="editNamaLembaga{{ $lembaga->id }}">Nama Lembaga</label>
+                                    <input type="text" class="form-control" id="editNamaLembaga{{ $lembaga->id }}"
+                                        name="nama_lembaga" value="{{ $lembaga->nama_lembaga }}">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Simpan</button>
+                            </form>
                         </div>
                     </div>
-                    <!-- /.modal-content -->
                 </div>
-                <!-- /.modal-dialog -->
             </div>
         @endforeach
+
+
+        {{-- MODAL EDIT --}}
+
+    </div>
+    </div>
+    <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+    </div>
     </div>
 
 @endsection

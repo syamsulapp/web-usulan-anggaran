@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app', ['photos' => $photos['photos'], 'nama_lengkap' => $photos['nama_lengkap']])
 
 @section('title', 'Users Management')
 
@@ -26,6 +26,13 @@
                         {{ session('alert') }}
                     </div>
                 @endif
+                @if (session('alertError'))
+                    <div class="alert alert-danger alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <h5><i class="icon fas fa-ban"></i> Error!</h5>
+                        {{ session('alertError') }}
+                    </div>
+                @endif
             </div><!-- /.container-fluid -->
         </section>
 
@@ -45,8 +52,6 @@
                                         tambah users
                                     </button>
                                 </div>
-
-
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -54,7 +59,6 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Name</th>
                                             <th>Username</th>
                                             <th>Status Akun</th>
                                             <th>Role</th>
@@ -65,7 +69,6 @@
                                         @foreach ($users as $item)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $item->name }}
                                                 </td>
                                                 <td>{{ $item->username }}</td>
                                                 <td>
@@ -75,7 +78,15 @@
                                                         {{ __('Akun Belum Aktif') }}
                                                     @endif
                                                 </td>
-                                                <td>{{ $item->role }}</td>
+                                                <td>
+                                                    @if ($item->id_role === 1)
+                                                        {{ __('SuperAdmin') }}
+                                                    @elseif($item->id_role === 2)
+                                                        {{ __('Admin') }}
+                                                    @else
+                                                        {{ __('User') }}
+                                                    @endif
+                                                </td>
                                                 <td>
                                                     <div class="btn-group">
                                                         <button type="button" class="btn btn-info">Detail</button>
@@ -85,13 +96,19 @@
                                                             <span class="sr-only">Toggle Dropdown</span>
                                                         </button>
                                                         <div class="dropdown-menu" role="menu">
+                                                            {{-- edit users --}}
                                                             <a class="dropdown-item editBtn"
-                                                                href="{{ route('admin.users-edit', $item->id) }}">Edit</a>
-                                                            <form action="{{ route('admin.users-delete', $item->id) }}"
+                                                                href="#editModal{{ $item->id }}"
+                                                                data-toggle="modal">Edit</a>
+                                                            {{-- delete users --}}
+                                                            <form id="delete-users-form-{{ $item->id }}"
+                                                                action="{{ route('admin.users-delete', $item->id) }}"
                                                                 method="POST">
-                                                                @method('delete')
                                                                 @csrf
-                                                                <button class="dropdown-item editBtn"
+                                                                @method('delete')
+                                                                <button
+                                                                    onclick="event.preventDefault(); confirmDeleteUsers('{{ $item->id }}')"
+                                                                    class="dropdown-item activeBtn"
                                                                     type="submit">Delete</button>
                                                             </form>
                                                         </div>
@@ -104,16 +121,10 @@
                                                             <span class="sr-only">Toggle Dropdown</span>
                                                         </button>
                                                         <div class="dropdown-menu" role="menu">
-                                                            <form action="{{ route('admin.users-activate', $item->id) }}"
-                                                                method="POST">
-                                                                @csrf
-                                                                <button class="dropdown-item">Active</button>
-                                                            </form>
-                                                            <form action="{{ route('admin.users-inactive', $item->id) }}"
-                                                                method="POST">
-                                                                @csrf
-                                                                <button class="dropdown-item">Inactive</button>
-                                                            </form>
+                                                            {{-- Verify users --}}
+                                                            <a class="dropdown-item editBtn"
+                                                                href="#verifyModal{{ $item->id }}"
+                                                                data-toggle="modal">Verify</a>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -123,7 +134,6 @@
                                     <tfoot>
                                         <tr>
                                             <th>No</th>
-                                            <th>Name</th>
                                             <th>Username</th>
                                             <th>Status Akun</th>
                                             <th>Role</th>
@@ -143,6 +153,8 @@
             <!-- /.container-fluid -->
         </section>
         <!-- /.content -->
+
+        {{-- modals tambah --}}
         <div class="modal fade" id="tambahData-lg">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -157,92 +169,61 @@
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Name</label>
-                                    <input type="text"
-                                        class="form-control @error('name')
-                                        is-invalid
-                                    @enderror"
-                                        name="name" id="exampleInputEmail1" placeholder="Masukan Name"
-                                        value="{{ old('name') }}">
-                                    @error('name')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Username</label>
+                                    <label for="username">Username</label>
                                     <input type="text"
                                         class="form-control @error('username')
                                     is-invalid
                                 @enderror"
-                                        name="username" id="exampleInputEmail1" placeholder="Masukan Username"
-                                        value="{{ old('name') }}">
+                                        name="username" id="username" placeholder="Masukan Username"
+                                        value="{{ old('username') }}">
                                     @error('username')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Password</label>
+                                    <label for="password">Password</label>
                                     <input type="password"
                                         class="form-control @error('password')
                                         is-invalid
                                     @enderror"
-                                        name="password" id="exampleInputPassword1" placeholder="Password"
-                                        value="{{ old('name') }}">
+                                        name="password" id="password" placeholder="Password"
+                                        value="{{ old('password') }}">
                                     @error('password')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-14">
-                                        <!-- select -->
-                                        <label>Pilih Tipe</label>
-                                        <select class="custom-select" name="tipe">
-                                            <option>Tipe 1</option>
-                                            <option>Tipe 2</option>
+                                        <!-- lembaga -->
+                                        <label>Lembaga</label>
+                                        <select class="custom-select" name="id_lembaga">
+                                            @foreach ($lembaga as $l)
+                                                <option value="{{ $l->id }}">{{ $l->nama_lembaga }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-14">
-                                        <!-- select -->
-                                        <label>Pilih Bagian</label>
-                                        <select class="custom-select" name="bagian">
-                                            <option>Bagian 1</option>
-                                            <option>Bagian 2</option>
+                                        <!-- lembaga -->
+                                        <label>Role</label>
+                                        <select class="custom-select" name="id_role">
+                                            @foreach ($role as $r)
+                                                <option value="{{ $r->id }}">{{ $r->name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <div class="col-sm-14">
-                                        <!-- select -->
-                                        <label>Pilih Role</label>
-                                        <select class="custom-select" name="role">
-                                            <option>suepradmin</option>
-                                            <option>admin</option>
-                                            <option>user</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-sm-14">
-                                        <!-- select -->
-                                        <label>status</label>
-                                        <select class="custom-select" name="is_active">
-                                            <option value="Y">aktif</option>
-                                            <option value="N">non-aktif</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">Surat Keterangan</label>
+                                    <label for="surat_keterangan">Surat Keterangan</label>
                                     <div class="input-group">
                                         <div class="custom-file">
                                             <input type="file"
                                                 class="custom-file-input @error('surat_keterangan')
                                                 is-invalid
                                             @enderror"
-                                                name="surat_keterangan" id="exampleInputFile">
-                                            <label class="custom-file-label" for="exampleInputFile">Pilih File</label>
+                                                name="surat_keterangan" id="surat_keterangan">
+                                            <label class="custom-file-label" for="surat_keterangan">Pilih File</label>
                                         </div>
                                         <div class="input-group-append">
                                             <span class="input-group-text">Upload</span>
@@ -263,6 +244,168 @@
             </div>
             <!-- /.modal-dialog -->
         </div>
+
+        {{-- modals edit data --}}
+        @foreach ($users as $item)
+            <div class="modal fade" id="editModal{{ $item->id }}">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="editModal{{ $item->id }}">Edit Users</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ route('admin.users-update', $item->id) }}" method="POST"
+                                enctype="multipart/form-data">
+                                @method('put')
+                                @csrf
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="username">Username</label>
+                                        <input type="text"
+                                            class="form-control @error('username')
+                                    is-invalid
+                                @enderror"
+                                            name="username" id="username" placeholder="Masukan Username"
+                                            value="{{ $item->username }}">
+                                        @error('username')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">Password</label>
+                                        <input type="password"
+                                            class="form-control @error('password')
+                                        is-invalid
+                                    @enderror"
+                                            name="password" id="password" placeholder="Password"
+                                            value="{{ old('password') }}">
+                                        @error('password')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-14">
+                                            <!-- lembaga -->
+                                            <label>Lembaga</label>
+                                            <select class="custom-select" name="id_lembaga">
+                                                @foreach ($lembaga as $l)
+                                                    <option
+                                                        value="{{ $l->id }}"{{ $item->id_lembaga === $l->id ? 'selected' : '' }}>
+                                                        {{ $l->nama_lembaga }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-14">
+                                            <!-- lembaga -->
+                                            <label>Role</label>
+                                            <select class="custom-select" name="id_role">
+                                                @foreach ($role as $r)
+                                                    <option value="{{ $r->id }}"
+                                                        {{ $item->id_role === $r->id ? 'selected' : '' }}>
+                                                        {{ $r->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="surat_keterangan">Surat Keterangan</label>
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file"
+                                                    class="custom-file-input @error('surat_keterangan')
+                                                is-invalid
+                                            @enderror"
+                                                    name="surat_keterangan" id="surat_keterangan">
+                                                <label class="custom-file-label" for="surat_keterangan">Pilih File</label>
+                                            </div>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">Upload</span>
+                                            </div>
+                                        </div>
+                                        @error('surat_keterangan')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="modal-footer justify-content-between">
+                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+        @endforeach
+
+
+        {{-- modals verify data --}}
+        @foreach ($users as $item)
+            <div class="modal fade" id="verifyModal{{ $item->id }}">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="verifyModal{{ $item->id }}">Verify Users</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card card-outline card-primary">
+                                        <div class="card-header">
+                                            <h3 class="card-title">Surat Keterangan</h3>
+
+                                            <div class="card-tools">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                    <i class="fas fa-minus"></i>
+                                                </button>
+                                            </div>
+                                            <!-- /.card-tools -->
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <div class="card-body">
+                                            @if ($item->surat_keterangan)
+                                                <p><b>Suket</b>: <a
+                                                        href="{{ url('surat_keterangan', $item->surat_keterangan) }}"
+                                                        target="_blank">Lihat File</a></p>
+                                            @else
+                                                <p><b>Suket</b>: Belum Ada</p>
+                                            @endif
+                                        </div>
+                                        <!-- /.card-body -->
+                                        <form id="active-form" action="{{ route('admin.users-verify', $item->id) }}"
+                                            method="POST">
+                                            @csrf
+                                            <div class="card-body">
+                                                <input type="checkbox" id="verify" name="verify"
+                                                    data-bootstrap-switch data-off-color="danger" data-on-color="success"
+                                                    data-id="{{ $item->id }}" class="verify-account"
+                                                    {{ $item->is_active === 'Y' ? 'checked' : '' }}>
+                                            </div>
+                                            <div class="modal-footer justify-content-between">
+                                                <button onclick="event.preventDefault(); verifyAccount()" type="submit"
+                                                    class="btn btn-primary">Verify</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <!-- /.card -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+        @endforeach
     </div>
 
     @yield('scripts')
