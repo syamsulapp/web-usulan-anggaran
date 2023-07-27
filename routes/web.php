@@ -88,5 +88,6 @@ Route::middleware('user')->group(function () {
             return redirect()->route('home');
         });
         Route::get('buat-usulan', [UsulanController::class, 'index'])->name('users.buat_usulan');
+        Route::post('submit-usulan', [UsulanController::class, 'store'])->name('users.submit_usulan');
     });
 });

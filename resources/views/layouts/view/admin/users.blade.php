@@ -48,7 +48,7 @@
                                 <br>
                                 <div class="col-md-2">
                                     <button type="button" class="btn btn-outline-primary btn-block" data-toggle="modal"
-                                        data-target="#tambahData-lg"><i class="fa fa-edit"></i>
+                                        data-target="#tambahData-lg"><i class="fa fa-plus"></i>
                                         tambah users
                                     </button>
                                 </div>
