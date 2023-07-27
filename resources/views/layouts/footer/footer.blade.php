@@ -123,9 +123,9 @@
         }
     }
 
-    function verifyAccount() {
+    function verifyAccount(id) {
         if (confirm('Apakah Anda Ingin Memverifikasi Akun Ini?')) {
-            document.getElementById('active-form').submit();
+            document.getElementById('verify-account-' + id).submit();
         }
     }
 </script>
