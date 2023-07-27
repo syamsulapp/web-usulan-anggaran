@@ -33,6 +33,9 @@ class UsulanController extends Controller
      */
     public function index()
     {
+        $countUsulan = $this->rincian
+            ->whereuser_id($this->user->user()->id)
+            ->sum('total'); //count total item anggaran
         $pagu = $this->pagu->all(); //query lembaga
         $uraian = $this->uraian->all(); //query uraian
         $photos = $this->profileModels
@@ -47,7 +50,7 @@ class UsulanController extends Controller
         }
         $usulanList = $this->usulanModels->all();
 
-        return view('layouts.view.users.usulan', compact('usulanList', 'photos', 'pagu', 'uraian'));
+        return view('layouts.view.users.usulan', compact('usulanList', 'photos', 'pagu', 'uraian', 'countUsulan'));
     }
 
     /**
@@ -83,10 +86,7 @@ class UsulanController extends Controller
     public function destroy($usulanModels)
     {
         try {
-            $this->usulanModels
-                ->whereuser_id($this->user->user()->id)
-                ->first()
-                ->delete(['id' => $usulanModels]);
+            $this->usulanModels->destroy($usulanModels);
             return redirect()->route('users.buat_usulan')->with('success', 'Berhasil Delete Usulan');
         } catch (\Exception $error) {
             return redirect()->route('users.buat_usulan')->with('error', $error);

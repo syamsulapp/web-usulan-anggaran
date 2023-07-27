@@ -147,7 +147,7 @@
                                         <table class="table">
                                             <tr>
                                                 <th style="width:50%">Subtotal:</th>
-                                                <td>Rp.500.000</td>
+                                                <td>{{ $countUsulan }}</td>
                                             </tr>
                                         </table>
                                     </div>
