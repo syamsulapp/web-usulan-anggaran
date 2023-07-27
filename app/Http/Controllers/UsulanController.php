@@ -35,7 +35,9 @@ class UsulanController extends Controller
     {
         $pagu = $this->pagu->all(); //query lembaga
         $uraian = $this->uraian->all(); //query uraian
-        $photos = $this->profileModels->whereid_users($this->user->user()->id)->first(); // detail photos and username by session users
+        $photos = $this->profileModels
+            ->whereid_users($this->user->user()->id)
+            ->first(); // detail photos and username by session users
 
         if (is_null($photos)) {
             $photos = [
@@ -81,10 +83,13 @@ class UsulanController extends Controller
     public function destroy($usulanModels)
     {
         try {
-            $this->usulanModels->destroy($usulanModels);
+            $this->usulanModels
+                ->whereuser_id($this->user->user()->id)
+                ->first()
+                ->delete(['id' => $usulanModels]);
             return redirect()->route('users.buat_usulan')->with('success', 'Berhasil Delete Usulan');
         } catch (\Exception $error) {
-            return redirect()->route('users.buat_usulan')->with('success', $error);
+            return redirect()->route('users.buat_usulan')->with('error', $error);
         }
     }
 }
