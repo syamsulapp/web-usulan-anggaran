@@ -142,25 +142,6 @@ class MasterDataUsers extends Controller
         }
     }
 
-    public function activate($id)
-    {
-        try {
-            $this->user->whereId($id)->update(['is_active' => 'Y']);
-            return redirect()->route('admin.users')->with('alert', 'Berhasil Mengaktifkan Akun Users');
-        } catch (\Exception $error) {
-            return $error;
-        }
-    }
-    public function inactive($id)
-    {
-        try {
-            $this->user->whereId($id)->update(['is_active' => 'N']);
-            return redirect()->route('admin.users')->with('alert', 'Berhasil Menonaktifkan Akun Users');
-        } catch (\Exception $error) {
-            return $error;
-        }
-    }
-
     public function verifyAccountUsers($id, Request $request)
     {
         try {
