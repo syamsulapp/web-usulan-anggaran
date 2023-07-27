@@ -145,39 +145,10 @@
                         <!-- role untuk fitur users-->
                         <li class="nav-header">USERS</li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-table"></i>
-                                <p>
-                                    Tambah Usulan
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="pages/tables/simple.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Pagu</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/tables/data.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Tipe Bagian</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/tables/jsgrid.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Tipe</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a href="pages/calendar.html" class="nav-link">
+                            <a href="{{ route('users.buat_usulan') }}" class="nav-link">
                                 <i class="nav-icon far fa-share-square"></i>
                                 <p>
-                                    Status Usulan
+                                    Kirim Usulan
                                     <span class="badge badge-info right">2</span>
                                 </p>
                             </a>
@@ -186,7 +157,7 @@
                             <a href="pages/gallery.html" class="nav-link">
                                 <i class="nav-icon fas fa-pen-square"></i>
                                 <p>
-                                    Revisi Usulan
+                                    Usulan
                                 </p>
                             </a>
                         </li>

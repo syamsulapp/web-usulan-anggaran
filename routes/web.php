@@ -9,6 +9,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PaguController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UraianController;
+use App\Http\Controllers\UsulanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -86,11 +87,6 @@ Route::middleware('user')->group(function () {
         Route::get('dashboard', function () {
             return redirect()->route('home');
         });
-        Route::get('buat-usulan', function () {
-            return 'halo buat usulan';
-        })->name('users.buat_usulan');
-        Route::get('revisi-usulan', function () {
-            return 'halo buat usulan';
-        })->name('users.revisi_usulan');
+        Route::get('buat-usulan', [UsulanController::class, 'index'])->name('users.buat_usulan');
     });
 });

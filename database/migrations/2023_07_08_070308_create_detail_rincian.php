@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('hasil');
             $table->foreignId('rincian_id')->constrained('rincian')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->enum('status', ['pending', 'ditolak', 'diterima', 'revisi']);
             $table->timestamps();
         });
     }

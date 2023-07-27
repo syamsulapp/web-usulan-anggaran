@@ -21,7 +21,6 @@ return new class extends Migration
             $table->integer('harga_satuan');
             $table->string('satuan');
             $table->integer('total');
-            $table->enum('status', ['diterima', 'ditolak', 'revisi']);
             $table->timestamps();
         });
     }
