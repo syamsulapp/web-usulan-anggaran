@@ -238,18 +238,6 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <div class="form-group">
-                                <label for="total">Total</label>
-                                <input type="text"
-                                    class="form-control @error('total')
-                                is-invalid
-                            @enderror"
-                                    name="total" id="total" placeholder="Masukan total"
-                                    value="{{ old('total') }}">
-                                @error('total')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
                         </div>
                         <div class="modal-footer justify-content-between">
                             <button type="submit" class="btn btn-primary">Save</button>

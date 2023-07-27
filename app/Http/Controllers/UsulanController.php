@@ -53,9 +53,20 @@ class UsulanController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate([
+            'nama_barang' => 'required',
+            'volume' => 'required',
+            'harga_satuan' => 'required',
+            'satuan' => 'required',
+        ], [
+            'required' => ':attribute jangan di kosongkan'
+        ]);
+
         try {
             $data = $request->all();
             $data['user_id'] = $this->user->user()->id;
+            $data['total'] = $request->harga_satuan * $request->satuan; //logic total
             $this->rincian->create($data);
 
             return redirect()->route('users.buat_usulan')->with('success', 'Success add anggaran');
