@@ -18,7 +18,7 @@ class SuperAdminMiddleware
     {
         if (
             Auth::check()
-            && Auth::user()->role == 'superadmin'
+            && Auth::user()->id_role == 1
             && Auth::user()->is_active === 'Y'
         ) {
             return $next($request);

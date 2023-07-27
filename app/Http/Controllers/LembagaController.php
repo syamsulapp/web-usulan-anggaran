@@ -3,15 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Lembaga;
+use App\Models\ProfileModels;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class LembagaController extends Controller
 {
     //
-    public function index()
+    public function index(ProfileModels $profileModels, User $user)
     {
+        $photos = $profileModels->whereid_users($user->user()->id)->first();
         $listlembaga = Lembaga::all();
-        return view('layouts.view.admin.lembaga', compact('listlembaga'));
+        return view('layouts.view.admin.lembaga', compact('listlembaga', 'photos'));
     }
 
     public function store(Request $request)

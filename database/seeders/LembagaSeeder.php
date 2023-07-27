@@ -9,14 +9,14 @@ use Illuminate\Support\Facades\DB;
 
 class LembagaSeeder extends Seeder
 {
+    use WithoutModelEvents;
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
         DB::table('lembaga')->insert([
-            'nama_lembaga' => 'Rektor'
-
+            'nama_lembaga' => 'Bagian Umum dan Kemahasiswaan'
         ]);
     }
 }

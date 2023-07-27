@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Lembaga;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -34,15 +35,24 @@ class RegisterController extends Controller
 
     protected $uploadFile;
 
+    protected $lembaga;
+
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(Request $uploadFile)
+    public function __construct(Request $uploadFile, Lembaga $lembaga)
     {
         $this->middleware('guest');
         $this->uploadFile = $uploadFile;
+        $this->lembaga = $lembaga;
+    }
+
+    public function showRegistrationForm()
+    {
+        $lembaga = $this->lembaga->all();
+        return view('auth.register', compact('lembaga'));
     }
 
     /**
@@ -54,7 +64,6 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'password_confirmation' => ['required', 'string', 'min:8'],
@@ -85,13 +94,11 @@ class RegisterController extends Controller
         $file->move($tujuan_upload, $nama_file);
 
         return User::create([
-            'name' => $data['username'],
             'username' => $data['username'],
-            'tipe' => $data['tipe'],
-            'bagian' => $data['bagian'],
+            'id_lembaga' => $data['lembaga'],
             'password' => Hash::make($data['password']),
             'surat_keterangan' => $nama_file,
-            'role' => 'user',
+            'id_role' => 3 // default users after registrasi
         ]);
     }
 }

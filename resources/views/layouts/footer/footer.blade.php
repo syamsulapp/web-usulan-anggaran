@@ -53,8 +53,8 @@
 <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
-
-
+<!-- Bootstrap Switch -->
+<script src="{{ asset('assets/plugins/bootstrap-switch/js/bootstrap-switch.min.js') }}"></script>
 <!-- SweetAlert2 -->
 <script src="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
 <!-- Toastr -->
@@ -64,16 +64,18 @@
 
 <script>
     $('.your-iframe-element').IFrame({
-  autoIframeMode: true,
-  autoDarkMode: true
-});
-
+        autoIframeMode: true,
+        autoDarkMode: true
+    });
 </script>
 
 <script>
     $(function() {
         bsCustomFileInput.init();
     });
+    $(".verify-account").each(function() {
+        $(this).bootstrapSwitch('state', $(this).prop('checked'));
+    })
     $(function() {
         $("#example1").DataTable({
             "responsive": true,
@@ -104,8 +106,26 @@
 </script>
 <script>
     function confirmDelete(id) {
-       if (confirm('Apakah Anda yakin ingin menghapus lembaga ini?')) {
-          document.getElementById('delete-form-' + id).submit();
-       }
+        if (confirm('Apakah Anda yakin ingin menghapus lembaga ini?')) {
+            document.getElementById('delete-form-' + id).submit();
+        }
+    }
+
+    function confirmDeleteUsers(id) {
+        if (confirm('Apakah Anda yakin ingin menghapus Users ini?')) {
+            document.getElementById('delete-users-form-' + id).submit();
+        }
+    }
+
+    function confirmDeletePagu(id) {
+        if (confirm('Apakah Anda yakin ingin menghapus Pagu ini?')) {
+            document.getElementById('delete-pagu-form-' + id).submit();
+        }
+    }
+
+    function verifyAccount() {
+        if (confirm('Apakah Anda Ingin Memverifikasi Akun Ini?')) {
+            document.getElementById('active-form').submit();
+        }
     }
 </script>
