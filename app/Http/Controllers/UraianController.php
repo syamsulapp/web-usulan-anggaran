@@ -27,7 +27,7 @@ class UraianController extends Controller
         $uraian->nama_kegiatan = $validatedData['nama_kegiatan'];
         $uraian->save();
 
-        return redirect()->route('uraian.index')->with('success', 'Data lembaga berhasil disimpan.');
+        return redirect()->route('uraian.index')->with('success', 'Data Uraian berhasil disimpan.');
     }
 
     public function update(Request $request, $id)
@@ -40,7 +40,7 @@ class UraianController extends Controller
         $uraian->nama_kegiatan = $validatedData['nama_kegiatan'];
         $uraian->save();
 
-        return redirect()->route('uraian.index')->with('success', 'Data lembaga berhasil diperbarui.');
+        return redirect()->route('uraian.index')->with('success', 'Data Uraian berhasil diperbarui.');
     }
 
     public function destroy($id)
@@ -49,7 +49,7 @@ class UraianController extends Controller
         $uraian = Uraian::find($id);
 
         if (!$uraian) {
-            return redirect()->back()->with('error', 'Lembaga tidak ditemukan.');
+            return redirect()->back()->with('error', 'Uraian tidak ditemukan.');
         }
 
         $uraian->delete();
