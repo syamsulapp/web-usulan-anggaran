@@ -76,34 +76,15 @@ class UsulanController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(UsulanModels $usulanModels)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(UsulanModels $usulanModels)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, UsulanModels $usulanModels)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      */
-    public function destroy(UsulanModels $usulanModels)
+    public function destroy($usulanModels)
     {
-        //
+        try {
+            $this->usulanModels->destroy($usulanModels);
+            return redirect()->route('users.buat_usulan')->with('success', 'Berhasil Delete Usulan');
+        } catch (\Exception $error) {
+            return redirect()->route('users.buat_usulan')->with('success', $error);
+        }
     }
 }

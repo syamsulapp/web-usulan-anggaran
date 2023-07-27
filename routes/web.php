@@ -89,5 +89,6 @@ Route::middleware('user')->group(function () {
         });
         Route::get('buat-usulan', [UsulanController::class, 'index'])->name('users.buat_usulan');
         Route::post('submit-usulan', [UsulanController::class, 'store'])->name('users.submit_usulan');
+        Route::delete('delete-usulan/{usulanModels}', [UsulanController::class, 'destroy'])->name('users.delete-usulan');
     });
 });

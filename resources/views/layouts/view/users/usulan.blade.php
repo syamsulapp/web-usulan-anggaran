@@ -93,6 +93,7 @@
                                                 <th>Harga Satuan</th>
                                                 <th>Satuan Total</th>
                                                 <th>Subtotal</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -104,6 +105,29 @@
                                                         <td>{{ $item->harga_satuan }}</td>
                                                         <td>{{ $item->satuan }}</td>
                                                         <td>Rp.{{ $item->total }}</td>
+                                                        <td>
+                                                            <div class="btn-group">
+                                                                <button type="button" class="btn btn-info">Detail</button>
+                                                                <button type="button"
+                                                                    class="btn btn-info dropdown-toggle dropdown-icon"
+                                                                    data-toggle="dropdown">
+                                                                    <span class="sr-only">Toggle Dropdown</span>
+                                                                </button>
+                                                                <div class="dropdown-menu" role="menu">
+                                                                    {{-- delete users --}}
+                                                                    <form id="usulan-anggaran-{{ $item->id }}"
+                                                                        action="{{ route('users.delete-usulan', $item->id) }}"
+                                                                        method="POST">
+                                                                        @csrf
+                                                                        @method('delete')
+                                                                        <button
+                                                                            onclick="event.preventDefault(); deleteUsulanAnggaran('{{ $item->id }}')"
+                                                                            class="dropdown-item activeBtn"
+                                                                            type="submit">Delete</button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </td>
                                                     </tr>
                                                 @endif
                                             @endforeach
@@ -209,7 +233,8 @@
                                     class="form-control @error('volume')
                                 is-invalid
                             @enderror"
-                                    name="volume" id="volume" placeholder="Masukan volume" value="{{ old('volume') }}">
+                                    name="volume" id="volume" placeholder="Masukan volume"
+                                    value="{{ old('volume') }}">
                                 @error('volume')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror

@@ -128,4 +128,10 @@
             document.getElementById('verify-account-' + id).submit();
         }
     }
+
+    function deleteUsulanAnggaran(id) {
+        if(confirm('Apakah anda ingin menghapus list usulan')){
+            document.getElementById('usulan-anggaran-'+ id).submit();
+        }
+    }
 </script>
