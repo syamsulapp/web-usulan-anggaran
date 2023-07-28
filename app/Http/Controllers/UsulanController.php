@@ -48,7 +48,7 @@ class UsulanController extends Controller
             ->whereid_users($this->user->user()->id)
             ->first(); // detail photos and username by session users
 
-        $hasilCurrency = $this->currency($countUsulan);
+        $hasilCurrency = $this->currency($countUsulan); //format currency Rp.
         if (is_null($photos)) {
             $photos = [
                 'photos' => 'photo belum ada',
