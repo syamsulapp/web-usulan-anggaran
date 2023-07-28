@@ -59,7 +59,7 @@
                                 <!-- /.col -->
                             </div>
                             <!-- info row -->
-                            <div class="row invoice-info">
+                            {{-- <div class="row invoice-info">
                                 <div class="col-sm-4 invoice-col">
                                     <address>
                                         <strong>Pagu.</strong><br>
@@ -79,7 +79,7 @@
                                         {{ Auth::user()->username }}<br>
                                     </address>
                                 </div>
-                            </div>
+                            </div> --}}
                             <!-- /.row -->
 
                             <!-- Table row -->
