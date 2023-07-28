@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ProfileModels;
 use App\Models\Role;
+use App\Models\StatusUsulanModels;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -14,17 +15,14 @@ class ProfileController extends Controller
     /**
      * property menyimpan modals.
      */
-    protected $user;
+    protected $user, $profileModels, $role, $statusUsulanModels;
 
-    protected $profileModels;
-
-    protected $role;
-
-    public function __construct(User $user, ProfileModels $profileModels, Role $role)
+    public function __construct(User $user, ProfileModels $profileModels, Role $role, StatusUsulanModels $statusUsulanModels)
     {
         $this->user = $user;
         $this->profileModels = $profileModels;
         $this->role = $role;
+        $this->statusUsulanModels = $statusUsulanModels;
     }
     public function profile()
     {
@@ -44,7 +42,8 @@ class ProfileController extends Controller
                 ];
             }
             $data_role = $this->role->whereId($this->user->user()->id_role)->first(); //query data roles sesuai dengan session usersnya
-            return view('layouts.view.profile.profile', compact('data_profile', 'data_role'));
+            $timeLineUsulanAnggaran = $this->statusUsulanModels->all();
+            return view('layouts.view.profile.profile', compact('data_profile', 'data_role', 'timeLineUsulanAnggaran'));
         } catch (\Exception $error) {
             return view('layouts.view.profile.profile')->with('alertError', $error);
         }
