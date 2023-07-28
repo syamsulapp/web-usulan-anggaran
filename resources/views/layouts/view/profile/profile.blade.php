@@ -146,7 +146,10 @@
                                 <ul class="nav nav-pills">
                                     <li class="nav-item"><a class="nav-link active" href="#activity"
                                             data-toggle="tab">Activity</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Timeline</a>
+                                    @if (Auth::user()->id === 3)
+                                        <li class="nav-item"><a class="nav-link" href="#timeline"
+                                                data-toggle="tab">Timeline</a>
+                                    @endif
                                     </li>
                                     <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Settings</a>
                                     </li>
