@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('detail_rincian', function (Blueprint $table) {
+        Schema::create('status_usulan', function (Blueprint $table) {
             $table->id();
-            $table->integer('total');
+            $table->string('status', 128);
             $table->foreignId('user_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
         });
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('detail_rincian');
+        Schema::dropIfExists('status_usulan');
     }
 };

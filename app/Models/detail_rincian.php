@@ -7,10 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class detail_rincian extends Model
 {
+    protected $table = 'detail_rincian';
+
     use HasFactory;
 
     protected $fillable = [
-        'hasil',
-        'rincian_id'
+        'total',
+        'user_id',
+        'created_at',
+        'updated_at',
     ];
 }
