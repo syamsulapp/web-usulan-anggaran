@@ -102,9 +102,10 @@
                                                     <tr>
                                                         <td>{{ $item->nama_barang }}</td>
                                                         <td>{{ $item->volume }}</td>
-                                                        <td>{{ $item->harga_satuan }}</td>
+                                                        <td>{{ 'Rp.' . number_format($item->harga_satuan, 0, ',', '.') }}
+                                                        </td>
                                                         <td>{{ $item->satuan }}</td>
-                                                        <td>Rp.{{ $item->total }}</td>
+                                                        <td>{{ 'Rp.' . number_format($item->total, 0, ',', '.') }}</td>
                                                         <td>
                                                             <div class="btn-group">
                                                                 <button type="button" class="btn btn-info">Detail</button>
@@ -146,8 +147,8 @@
                                     <div class="table-responsive">
                                         <table class="table">
                                             <tr>
-                                                <th style="width:50%">Subtotal:</th>
-                                                <td>{{ $countUsulan }}</td>
+                                                <th style="width:50%">Total:</th>
+                                                <td>{{ $hasilCurrency }}</td>
                                             </tr>
                                         </table>
                                     </div>

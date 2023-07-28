@@ -31,6 +31,12 @@ class UsulanController extends Controller
     /**
      * list usulan anggaran
      */
+
+    public static function currency($uang)
+    {
+        $value = floatval($uang);
+        return "Rp. " . number_format($value, 0, ',', '.');
+    }
     public function index()
     {
         $countUsulan = $this->rincian
@@ -42,6 +48,7 @@ class UsulanController extends Controller
             ->whereid_users($this->user->user()->id)
             ->first(); // detail photos and username by session users
 
+        $hasilCurrency = $this->currency($countUsulan);
         if (is_null($photos)) {
             $photos = [
                 'photos' => 'photo belum ada',
@@ -50,7 +57,7 @@ class UsulanController extends Controller
         }
         $usulanList = $this->usulanModels->all();
 
-        return view('layouts.view.users.usulan', compact('usulanList', 'photos', 'pagu', 'uraian', 'countUsulan'));
+        return view('layouts.view.users.usulan', compact('usulanList', 'photos', 'pagu', 'uraian', 'hasilCurrency'));
     }
 
     /**
