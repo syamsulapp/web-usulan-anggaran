@@ -47,8 +47,6 @@ class ProfileController extends Controller
         } catch (\Exception $error) {
             return view('layouts.view.profile.profile')->with('alertError', $error);
         }
-
-        return view('layouts.view.profile.profile', compact('data_profile'));
     }
     public function profileSubmit(Request $request)
     {

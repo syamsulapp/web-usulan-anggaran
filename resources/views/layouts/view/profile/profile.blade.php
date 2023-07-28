@@ -271,7 +271,8 @@
                                                             <i class="fas fa-user bg-info"></i>
 
                                                             <div class="timeline-item">
-                                                                <span class="time"><i class="far fa-clock"></i> {{ $u->created_at }}</span>
+                                                                <span class="time"><i class="far fa-clock"></i>
+                                                                    {{ $u->created_at }}</span>
 
                                                                 <h3 class="timeline-header border-0"><a
                                                                         href="#">{{ $data_profile['nama_lengkap'] }}</a>
