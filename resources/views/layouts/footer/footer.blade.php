@@ -130,8 +130,20 @@
     }
 
     function deleteUsulanAnggaran(id) {
-        if(confirm('Apakah anda ingin menghapus list usulan')){
-            document.getElementById('usulan-anggaran-'+ id).submit();
+        if (confirm('Apakah anda ingin menghapus list usulan')) {
+            document.getElementById('usulan-anggaran-' + id).submit();
+        }
+    }
+
+    function confirmVerifyUsulan(id) {
+        if (confirm('Apakah Anda Ingin Menyetujui Usulan Anggaran ini')) {
+            document.getElementById('menyetujui-usulan-' + id).submit();
+        }
+    }
+
+    function confirmNotVerifyUsulan(id) {
+        if (confirm('Apakah Anda Tidak Ingin Menyetujui Usulan Anggaran ini')) {
+            document.getElementById('tidak-menyetujui-usulan-' + id).submit();
         }
     }
 </script>

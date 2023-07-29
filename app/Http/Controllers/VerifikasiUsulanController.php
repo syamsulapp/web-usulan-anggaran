@@ -78,4 +78,12 @@ class VerifikasiUsulanController extends Controller
             'request' => $request->status
         ]);
     }
+
+    public function notVerifyUsulanAnggaran($verifikasiUsulanModels, Request $request)
+    {
+        dd([
+            'id' => $verifikasiUsulanModels,
+            'request' => $request->status
+        ]);
+    }
 }

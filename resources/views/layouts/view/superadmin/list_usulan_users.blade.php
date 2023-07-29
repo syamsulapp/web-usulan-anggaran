@@ -84,16 +84,26 @@
                             <!-- this row will not appear when printing -->
                             <div class="row no-print">
                                 <div class="col-12">
-                                    <form
+                                    <!-- verify usulan-->
+                                    <form id="menyetujui-usulan-{{ $totalRincianUsulan->user_id }}"
                                         action="{{ route('superadmin.verify-usulan-post', $totalRincianUsulan->user_id) }}"
                                         method="POST">
                                         @csrf
+                                        <input type="text" name="status" value="diterima" hidden>
                                         <button type="submit" name="status" class="btn btn-success float-right"
+                                            onclick="event.preventDefault();confirmVerifyUsulan('{{ $totalRincianUsulan->user_id }}') "
                                             value="disetujui"><i class="far fa-check-circle"></i> Disetujui
                                         </button>
+                                    </form>
+                                    <!-- not verify usulan-->
+                                    <form id="tidak-menyetujui-usulan-{{ $totalRincianUsulan->user_id }}"
+                                        action="{{ route('superadmin.not-verify-usulan-post', $totalRincianUsulan->user_id) }}"
+                                        method="POST">
+                                        @csrf
+                                        <input type="text" name="status" value="ditolak" hidden>
                                         <button type="submit" name="status" style="margin-right: 5px;"
-                                            class="btn btn-danger float-right" value="ditolak"><i
-                                                class="far fa-check-circle"></i> Ditolak
+                                            onclick="event.preventDefault(); confirmNotVerifyUsulan('{{ $totalRincianUsulan->user_id }}')"
+                                            class="btn btn-danger float-right"><i class="far fa-check-circle"></i> Ditolak
                                         </button>
                                     </form>
                                 </div>
