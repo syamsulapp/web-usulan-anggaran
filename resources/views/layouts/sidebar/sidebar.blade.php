@@ -54,7 +54,7 @@
                                 <i class="nav-icon far fa-check-circle"></i>
                                 <p>
                                     Verifikasi Usulan
-                                    <span class="badge badge-info right">2</span>
+                                    {{-- <span class="badge badge-info right">2</span> //hide badge belum di pake --}}
                                 </p>
                             </a>
                         </li>
@@ -112,7 +112,7 @@
                                 <i class="nav-icon far fa-share-square"></i>
                                 <p>
                                     Kirim Usulan
-                                    <span class="badge badge-info right">2</span>
+                                    {{-- <span class="badge badge-info right">2</span>  //hide badge belum di pake --}}
                                 </p>
                             </a>
                         </li>
