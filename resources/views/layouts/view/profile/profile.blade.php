@@ -171,7 +171,7 @@
                                                 </div>
                                                 <!-- /.user-block -->
                                                 <p>
-                                                    {{ $a->keterangan }},
+                                                    {{ $a->keterangan }}.
                                                     @if ($a->status === 'disetujui')
                                                         <span class="badge badge-success right">{{ $a->status }}</span>
                                                     @elseif($a->status === 'ditolak')
