@@ -58,30 +58,6 @@
                                 </div>
                                 <!-- /.col -->
                             </div>
-                            <!-- info row -->
-                            {{-- <div class="row invoice-info">
-                                <div class="col-sm-4 invoice-col">
-                                    <address>
-                                        <strong>Pagu.</strong><br>
-                                        795 Folsom Ave, Suite 600<br>
-                                    </address>
-                                </div>
-                                <!-- /.col -->
-                                <div class="col-sm-4 invoice-col">
-                                    <address>
-                                        <strong>Uraian</strong><br>
-                                        795 Folsom Ave, Suite 600<br>
-                                    </address>
-                                </div>
-                                <div class="col-sm-4 invoice-col">
-                                    <address>
-                                        <strong>Users</strong><br>
-                                        {{ Auth::user()->username }}<br>
-                                    </address>
-                                </div>
-                            </div> --}}
-                            <!-- /.row -->
-
                             <!-- Table row -->
                             <div class="row">
                                 <div class="col-12 table-responsive">

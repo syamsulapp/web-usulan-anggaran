@@ -50,48 +50,11 @@
                         <!-- role untuk fitur superadmin -->
                         <li class="nav-header">SUPER ADMIN</li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-table"></i>
-                                <p>
-                                    Master Data
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="pages/tables/simple.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Pagu</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/tables/data.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Tipe Bagian</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/tables/jsgrid.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Tipe</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a href="pages/calendar.html" class="nav-link">
+                            <a href="{{ route('superadmin.verifikasi_usulan') }}" class="nav-link">
                                 <i class="nav-icon far fa-check-circle"></i>
                                 <p>
                                     Verifikasi Usulan
                                     <span class="badge badge-info right">2</span>
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="pages/gallery.html" class="nav-link">
-                                <i class="nav-icon fas fa-book"></i>
-                                <p>
-                                    Cetak Dokumen
                                 </p>
                             </a>
                         </li>

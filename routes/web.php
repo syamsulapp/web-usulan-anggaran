@@ -10,6 +10,7 @@ use App\Http\Controllers\PaguController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UraianController;
 use App\Http\Controllers\UsulanController;
+use App\Http\Controllers\VerifikasiUsulanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,9 +39,8 @@ Route::middleware('superadmin')->group(function () {
         Route::get('dashboard', function () {
             return redirect()->route('home');
         });
-        Route::get('verifikasi-usulan', function () {
-            return 'halo';
-        })->name('superadmin.verifikasi_usulan');
+        Route::get('verifikasi-usulan', [VerifikasiUsulanController::class, 'index'])->name('superadmin.verifikasi_usulan');
+        Route::get('show/{verifikasiUsulanModels}/usulan', [VerifikasiUsulanController::class, 'show'])->name('superadmin.show-usulan');
     });
 });
 
@@ -87,9 +87,12 @@ Route::middleware('user')->group(function () {
         Route::get('dashboard', function () {
             return redirect()->route('home');
         });
+        //route buat usulan
         Route::get('buat-usulan', [UsulanController::class, 'index'])->name('users.buat_usulan');
         Route::post('submit-usulan', [UsulanController::class, 'store'])->name('users.submit_usulan');
         Route::delete('delete-usulan/{usulanModels}', [UsulanController::class, 'destroy'])->name('users.delete-usulan');
         Route::post('submit-anggaran/{anggaran}/{nama}/{photo}', [UsulanController::class, 'submitAnggaran'])->name('users.submit-anggaran');
+
+        //route cetak usulan
     });
 });
