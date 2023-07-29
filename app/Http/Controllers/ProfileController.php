@@ -42,8 +42,15 @@ class ProfileController extends Controller
                 ];
             }
             $data_role = $this->role->whereId($this->user->user()->id_role)->first(); //query data roles sesuai dengan session usersnya
+            //timeline usulan
             $timeLineUsulanAnggaran = $this->statusUsulanModels->all();
-            return view('layouts.view.profile.profile', compact('data_profile', 'data_role', 'timeLineUsulanAnggaran'));
+            //activity
+            $activity = $this->statusUsulanModels
+                ->orderByDesc('id')
+                ->limit(5)
+                ->get();
+
+            return view('layouts.view.profile.profile', compact('data_profile', 'data_role', 'timeLineUsulanAnggaran', 'activity'));
         } catch (\Exception $error) {
             return view('layouts.view.profile.profile')->with('alertError', $error);
         }

@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('status', 128);
             $table->foreignId('user_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->string('nama', 128);
+            $table->string('photo', 128);
             $table->timestamps();
         });
     }

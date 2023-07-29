@@ -9,7 +9,7 @@ class StatusUsulanModels extends Model
 {
     protected $table = 'status_usulan';
 
-    protected $fillable = ['status', 'user_id', 'created_at', 'updated_at'];
+    protected $fillable = ['status', 'user_id', 'nama', 'photo', 'created_at', 'updated_at'];
 
     use HasFactory;
 }
