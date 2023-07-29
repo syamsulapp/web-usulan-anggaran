@@ -128,11 +128,11 @@ class UsulanController extends Controller
                 $this->detail_rincian->create(
                     ['user_id' => $this->user->user()->id, 'total' => (int)$anggaran]
                 );
-                $this->statusUsulanModels->create(['status' => 'anggaran telah dibuat', 'user_id' => $this->user->user()->id, 'nama' => $nama, 'photo' => $photo]);
+                $this->statusUsulanModels->create(['status' => 'diajukan', 'keterangan' => 'anggaran telah dibuat', 'user_id' => $this->user->user()->id, 'nama' => $nama, 'photo' => $photo]);
                 return redirect()->route('users.buat_usulan')->with('success', 'Berhasil Submit Usulan');
             } else {
                 $editAnggaran->update(['total' => (int)$anggaran]);
-                $this->statusUsulanModels->create(['status' => 'anggaran telah diubah', 'user_id' => $this->user->user()->id, 'nama' => $nama, 'photo' => $photo]);
+                $this->statusUsulanModels->create(['status' => 'diajukan', 'keterangan' => 'anggaran telah diubah', 'user_id' => $this->user->user()->id, 'nama' => $nama, 'photo' => $photo]);
                 return redirect()->route('users.buat_usulan')->with('success', 'Berhasil Merubah Usulan');
             }
         } catch (\Exception $error) {
