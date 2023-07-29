@@ -84,9 +84,18 @@
                             <!-- this row will not appear when printing -->
                             <div class="row no-print">
                                 <div class="col-12">
-                                    <button type="button" class="btn btn-success float-right"><i
-                                            class="far fa-check-circle"></i> Verifikasi Usulan
-                                    </button>
+                                    <form
+                                        action="{{ route('superadmin.verify-usulan-post', $totalRincianUsulan->user_id) }}"
+                                        method="POST">
+                                        @csrf
+                                        <button type="submit" name="status" class="btn btn-success float-right"
+                                            value="disetujui"><i class="far fa-check-circle"></i> Disetujui
+                                        </button>
+                                        <button type="submit" name="status" style="margin-right: 5px;"
+                                            class="btn btn-danger float-right" value="ditolak"><i
+                                                class="far fa-check-circle"></i> Ditolak
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
                         </div>

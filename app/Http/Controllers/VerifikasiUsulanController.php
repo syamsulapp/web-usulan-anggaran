@@ -70,4 +70,12 @@ class VerifikasiUsulanController extends Controller
 
         return view('layouts.view.superadmin.list_usulan_users', compact('photos', 'listUsulanByUsers', 'totalRincianUsulan'));
     }
+
+    public function verifyUsulanAnggaran($verifikasiUsulanModels, Request $request)
+    {
+        dd([
+            'id' => $verifikasiUsulanModels,
+            'request' => $request->status
+        ]);
+    }
 }
