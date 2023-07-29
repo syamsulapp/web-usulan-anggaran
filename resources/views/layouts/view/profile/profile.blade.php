@@ -171,7 +171,7 @@
                                                 </div>
                                                 <!-- /.user-block -->
                                                 <p>
-                                                    {{ $a->status }}.
+                                                    {{ $a->keterangan }},({{ $a->status }})
                                                 </p>
                                             </div>
                                             <!-- /.post -->
