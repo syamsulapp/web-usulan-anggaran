@@ -59,9 +59,10 @@ class ProfileController extends Controller
     {
         $this->validate($request, [
             'password-confirmation' => 'same:password',
-            'photos' => 'mimes:jpg,png,jpeg|max:2048|file|image',
+            'photos' => 'required|mimes:jpg,png,jpeg|max:2048|file|image',
         ], [
-            'same' => 'password tidak sama'
+            'same' => 'password tidak sama',
+            'required' => ':attribute wajib di isi'
         ]);
 
         if ($this->profileModels->whereid_users($this->user->user()->id)->first()) {
