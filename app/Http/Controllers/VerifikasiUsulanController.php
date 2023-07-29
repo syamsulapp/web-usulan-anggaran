@@ -68,6 +68,12 @@ class VerifikasiUsulanController extends Controller
 
         $totalRincianUsulan = $this->detail_rincian->whereuser_id($verifikasiUsulanModels)->first(); //get total dari list rincian
 
+        if (is_null($totalRincianUsulan)) {
+            return redirect()->route('superadmin.verifikasi_usulan')->with('alertWarning', 'belum ada usulan yang dibuat');
+        } else {
+            $totalRincianUsulan = $totalRincianUsulan;
+        }
+
         return view('layouts.view.superadmin.list_usulan_users', compact('photos', 'listUsulanByUsers', 'totalRincianUsulan'));
     }
 

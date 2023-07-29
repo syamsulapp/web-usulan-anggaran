@@ -33,6 +33,13 @@
                         {{ session('alertError') }}
                     </div>
                 @endif
+                @if (session('alertWarning'))
+                    <div class="alert alert-warning alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <h5><i class="icon fas fa-exclamation-triangle"></i> Warning!</h5>
+                        {{ session('alertWarning') }}
+                    </div>
+                @endif
             </div><!-- /.container-fluid -->
         </section>
 

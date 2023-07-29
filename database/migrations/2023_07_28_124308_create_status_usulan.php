@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('status_usulan', function (Blueprint $table) {
             $table->id();
             $table->string('status', 128);
+            $table->string('keterangan', 128);
             $table->foreignId('user_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->string('nama', 128);
             $table->string('photo', 128);
