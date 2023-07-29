@@ -33,6 +33,14 @@
 
                         <!-- Main content -->
                         <div class="invoice p-3 mb-3">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h4>
+                                        <i class="nav-icon far fa-share-square"></i> Data Usulan Anggaran.
+                                    </h4>
+                                </div>
+                                <!-- /.col -->
+                            </div>
                             <!-- Table row -->
                             <div class="row">
                                 <div class="col-12 table-responsive">
