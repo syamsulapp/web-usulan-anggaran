@@ -171,7 +171,14 @@
                                                 </div>
                                                 <!-- /.user-block -->
                                                 <p>
-                                                    {{ $a->keterangan }},({{ $a->status }})
+                                                    {{ $a->keterangan }},
+                                                    @if ($a->status === 'disetujui')
+                                                        <span class="badge badge-success right">{{ $a->status }}</span>
+                                                    @elseif($a->status === 'ditolak')
+                                                        <span class="badge badge-danger right">{{ $a->status }}</span>
+                                                    @else
+                                                        <span class="badge badge-info right">{{ $a->status }}</span>
+                                                    @endif
                                                 </p>
                                             </div>
                                             <!-- /.post -->
@@ -192,7 +199,7 @@
 
                                                             <div class="timeline-item">
                                                                 <span class="time"><i class="far fa-clock"></i>
-                                                                    12:05</span>
+                                                                    {{ $u->created_at }}</span>
 
                                                                 <h3 class="timeline-header"><a href="#">Support
                                                                         Team</a>
