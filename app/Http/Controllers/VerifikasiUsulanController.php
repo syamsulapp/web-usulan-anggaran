@@ -81,7 +81,8 @@ class VerifikasiUsulanController extends Controller
     {
         dd([
             'id' => $verifikasiUsulanModels,
-            'request' => $request->status
+            'status' => $request->status,
+            'keterangan' => 'pengajuan anda telah diterima oleh admin'
         ]);
     }
 
@@ -89,7 +90,8 @@ class VerifikasiUsulanController extends Controller
     {
         dd([
             'id' => $verifikasiUsulanModels,
-            'request' => $request->status
+            'status' => $request->status,
+            'keterangan' => $request->keterangan
         ]);
     }
 }

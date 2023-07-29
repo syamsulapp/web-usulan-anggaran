@@ -1,6 +1,6 @@
 @extends('layouts.app', ['photos' => $photos['photos'], 'nama_lengkap' => $photos['nama_lengkap']])
 
-@section('title', 'list usulan users')
+@section('title', 'Verifikasi Usulan')
 
 @section('content')
     <div class="content-wrapper">
@@ -10,7 +10,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>List Usulan</h1>
+                        <h1>Verifikasi Usulan</h1>
                     </div>
 
                     <div class="col-sm-6">
@@ -95,18 +95,44 @@
                                             value="disetujui"><i class="far fa-check-circle"></i> Disetujui
                                         </button>
                                     </form>
-                                    <!-- not verify usulan-->
-                                    <form id="tidak-menyetujui-usulan-{{ $totalRincianUsulan->user_id }}"
-                                        action="{{ route('superadmin.not-verify-usulan-post', $totalRincianUsulan->user_id) }}"
-                                        method="POST">
-                                        @csrf
-                                        <input type="text" name="status" value="ditolak" hidden>
-                                        <button type="submit" name="status" style="margin-right: 5px;"
-                                            onclick="event.preventDefault(); confirmNotVerifyUsulan('{{ $totalRincianUsulan->user_id }}')"
-                                            class="btn btn-danger float-right"><i class="far fa-check-circle"></i> Ditolak
-                                        </button>
-                                    </form>
+                                    <a href="#notVerifyUsulan" name="status" style="margin-right: 5px;" data-toggle="modal"
+                                        class="btn btn-danger float-right"><i class="far fa-check-circle"></i> Ditolak
+                                    </a>
                                 </div>
+                            </div>
+
+                            {{-- modals usulan not verify --}}
+                            <div class="modal fade" id="notVerifyUsulan">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Usulan Di Tolak</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form id="tidak-menyetujui-usulan-{{ $totalRincianUsulan->user_id }}"
+                                                action="{{ route('superadmin.not-verify-usulan-post', $totalRincianUsulan->user_id) }}"
+                                                method="POST">
+                                                @csrf
+                                                <div class="card-body">
+                                                    <input type="text" name="status" value="ditolak" hidden>
+                                                    <textarea class="form-control" rows="3" placeholder="Enter Alasan Di tolak..." name="keterangan"></textarea>
+                                                </div>
+                                                <div class="modal-footer justify-content-between">
+                                                    <button type="submit" style="margin-right: 5px;"
+                                                        onclick="event.preventDefault(); confirmNotVerifyUsulan('{{ $totalRincianUsulan->user_id }}')"
+                                                        class="btn btn-info float-right"><i class="far fa-check-circle"></i>
+                                                        Save
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
                             </div>
                         </div>
                         <!-- /.invoice -->
