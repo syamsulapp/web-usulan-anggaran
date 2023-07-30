@@ -77,6 +77,16 @@ class UsulanController extends Controller
             ->orderByDesc('id')
             ->whereuser_id($this->user->user()->id)
             ->first();
+
+        if (is_null($statusUsulan)) {
+            $statusUsulan = [
+                'status' => 'sedang dibuat',
+            ];
+        } else {
+            $statusUsulan = [
+                'status' => $statusUsulan->status
+            ];
+        }
         return view('layouts.view.users.usulan', compact('usulanList', 'photos', 'pagu', 'uraian', 'hasilCurrency', 'countUsulan', 'statusUsulan'));
     }
 

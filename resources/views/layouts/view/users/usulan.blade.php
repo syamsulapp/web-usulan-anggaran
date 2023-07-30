@@ -53,13 +53,12 @@
                                 <div class="col-12">
                                     <h4>
                                         <i class="nav-icon far fa-share-square"></i> Data Usulan Anggaran.
-
-                                        @if ($statusUsulan->status === 'diterima')
-                                            <span class="badge badge-success right">{{ $statusUsulan->status }} </span>
-                                        @elseif($statusUsulan->status === 'ditolak')
-                                            <span class="badge badge-danger right">{{ $statusUsulan->status }} </span>
+                                        @if ($statusUsulan['status'] === 'diterima')
+                                            <span class="badge badge-success right">{{ $statusUsulan['status'] }} </span>
+                                        @elseif($statusUsulan['status'] === 'ditolak')
+                                            <span class="badge badge-danger right">{{ $statusUsulan['status'] }} </span>
                                         @else
-                                            <span class="badge badge-info right">{{ $statusUsulan->status }} </span>
+                                            <span class="badge badge-info right">{{ $statusUsulan['status'] }} </span>
                                         @endif
                                         <small class="float-right">Date: {{ date('d/m/Y') }} </small>
                                     </h4>
@@ -158,7 +157,7 @@
                                         <i class="fas fa-plus-circle" data-target="#tambahAnggaran" data-toggle="modal"></i>
                                         Tambah Anggaran
                                     </button>
-                                    @if ($statusUsulan->status === 'diterima')
+                                    @if ($statusUsulan['status'] === 'diterima')
                                         <a href="{{ route('superadmin.cetak-usulan') }}" rel="noopener" target="_blank"
                                             class="btn btn-default"><i class="fas fa-print"></i> Cetak</a>
                                     @endif
