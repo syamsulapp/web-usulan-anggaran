@@ -172,7 +172,7 @@
                                                 <!-- /.user-block -->
                                                 <p>
                                                     {{ $a->keterangan }}.
-                                                    @if ($a->status === 'disetujui')
+                                                    @if ($a->status === 'diterima')
                                                         <span class="badge badge-success right">{{ $a->status }}</span>
                                                     @elseif($a->status === 'ditolak')
                                                         <span class="badge badge-danger right">{{ $a->status }}</span>
@@ -193,63 +193,45 @@
                                             <!-- timeline item -->
                                             @foreach ($timeLineUsulanAnggaran as $u)
                                                 @if ($u->user_id === Auth::user()->id)
-                                                    @if ($u->status === 'disetujui')
+                                                    @if ($u->status === 'diterima')
                                                         <div>
-                                                            <i class="fas fa-envelope bg-primary"></i>
+                                                            <i class="fas fa-envelope bg-success"></i>
 
                                                             <div class="timeline-item">
                                                                 <span class="time"><i class="far fa-clock"></i>
                                                                     {{ $u->created_at }}</span>
 
-                                                                <h3 class="timeline-header"><a href="#">Support
-                                                                        Team</a>
-                                                                    sent
-                                                                    you an email</h3>
+                                                                <h3 class="timeline-header"><a
+                                                                        href="#">{{ $data_profile['nama_lengkap'] }}</a>
+                                                                    {{ $u->status }}</h3>
 
                                                                 <div class="timeline-body">
-                                                                    Etsy doostang zoodles disqus groupon greplin oooj voxy
-                                                                    zoodles,
-                                                                    weebly ning heekya handango imeem plugg dopplr jibjab,
-                                                                    movity
-                                                                    jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo
-                                                                    kaboodle
-                                                                    quora plaxo ideeli hulu weebly balihoo...
+                                                                  {{ $u->keterangan }}
                                                                 </div>
                                                                 <div class="timeline-footer">
-                                                                    <a href="#" class="btn btn-primary btn-sm">Read
-                                                                        more</a>
                                                                     <a href="#"
-                                                                        class="btn btn-danger btn-sm">Delete</a>
+                                                                        class="btn btn-success btn-sm">{{ $u->status }}</a>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     @elseif($u->status === 'ditolak')
                                                         <div>
-                                                            <i class="fas fa-envelope bg-primary"></i>
+                                                            <i class="fas fa-envelope bg-danger"></i>
 
                                                             <div class="timeline-item">
                                                                 <span class="time"><i class="far fa-clock"></i>
                                                                     12:05</span>
 
-                                                                <h3 class="timeline-header"><a href="#">Support
-                                                                        Team</a>
-                                                                    sent
-                                                                    you an email</h3>
+                                                                <h3 class="timeline-header"><a
+                                                                        href="#">{{ $data_profile['nama_lengkap'] }}</a>
+                                                                    {{ $u->status }}</h3>
 
                                                                 <div class="timeline-body">
-                                                                    Etsy doostang zoodles disqus groupon greplin oooj voxy
-                                                                    zoodles,
-                                                                    weebly ning heekya handango imeem plugg dopplr jibjab,
-                                                                    movity
-                                                                    jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo
-                                                                    kaboodle
-                                                                    quora plaxo ideeli hulu weebly balihoo...
+                                                                    {{ $u->keterangan }}
                                                                 </div>
                                                                 <div class="timeline-footer">
-                                                                    <a href="#" class="btn btn-primary btn-sm">Read
-                                                                        more</a>
                                                                     <a href="#"
-                                                                        class="btn btn-danger btn-sm">Delete</a>
+                                                                        class="btn btn-danger btn-sm">{{ $u->status }}</a>
                                                                 </div>
                                                             </div>
                                                         </div>

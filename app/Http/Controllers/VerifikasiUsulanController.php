@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\detail_rincian;
 use App\Models\ProfileModels;
+use App\Models\StatusUsulanModels;
 use App\Models\User;
 use App\Models\UsulanModels;
 use App\Models\VerifikasiUsulanModels;
@@ -17,7 +18,8 @@ class VerifikasiUsulanController extends Controller
 
     protected $verifikasiUsulanModels,
         $user, $profileModels,
-        $usulanModels, $detail_rincian;
+        $usulanModels, $detail_rincian,
+        $statusUsulanModels;
 
     public function __construct(
         VerifikasiUsulanModels $verifikasiUsulanModels,
@@ -25,13 +27,15 @@ class VerifikasiUsulanController extends Controller
         ProfileModels
         $profileModels,
         UsulanModels $usulanModels,
-        detail_rincian $detail_rincian
+        detail_rincian $detail_rincian,
+        StatusUsulanModels $statusUsulanModels
     ) {
         $this->verifikasiUsulanModels = $verifikasiUsulanModels;
         $this->user = $user;
         $this->profileModels = $profileModels;
         $this->usulanModels = $usulanModels;
         $this->detail_rincian = $detail_rincian;
+        $this->statusUsulanModels = $statusUsulanModels;
     }
 
     public function index()
@@ -68,31 +72,49 @@ class VerifikasiUsulanController extends Controller
 
         $totalRincianUsulan = $this->detail_rincian->whereuser_id($verifikasiUsulanModels)->first(); //get total dari list rincian
 
-        if (is_null($totalRincianUsulan)) {
+        $queryProfle = $this->profileModels->whereid_users($verifikasiUsulanModels)->first();
+
+        if (is_null($totalRincianUsulan)) { // kalo usersnya belum buat usulan maka redirect kembali ke halaman verifikasi usulan kasih flash message
             return redirect()->route('superadmin.verifikasi_usulan')->with('alertWarning', 'belum ada usulan yang dibuat');
         } else {
-            $totalRincianUsulan = $totalRincianUsulan;
+            $totalRincianUsulan = $totalRincianUsulan; // akan tetapi jika sudah buat usulan maka query data usulannya
         }
 
-        return view('layouts.view.superadmin.list_usulan_users', compact('photos', 'listUsulanByUsers', 'totalRincianUsulan'));
+        return view('layouts.view.superadmin.list_usulan_users', compact('photos', 'listUsulanByUsers', 'totalRincianUsulan', 'queryProfle'));
     }
 
-    public function verifyUsulanAnggaran($verifikasiUsulanModels, Request $request)
+    public function verifyUsulanAnggaran($verifikasiUsulanModels, $nama_approve, $nama_users, $foto, Request $request)
     {
-        dd([
-            'id' => $verifikasiUsulanModels,
-            'status' => $request->status,
-            'keterangan' => 'pengajuan anda telah diterima oleh admin'
-        ]);
+        //pengajuan di terima dan memberikan alasan
+        try {
+            $this->statusUsulanModels->create([
+                'user_id' => $verifikasiUsulanModels,
+                'status' => $request->status,
+                'keterangan' => 'pengajuan' . ' ' . $nama_users . ' ' . 'diterima oleh pihak ' . ' ' . $nama_approve . ' ',
+                'nama' => $nama_approve,
+                'photo' => $foto,
+            ]);
+            return redirect()->route('superadmin.verifikasi_usulan')->with('success', 'pengajuan telah di verifikasi');
+        } catch (\Exception $error) {
+            return redirect()->route('superadmin.verifikasi_usulan')->with('error', $error);
+        }
     }
 
-    public function notVerifyUsulanAnggaran($verifikasiUsulanModels, Request $request)
+    public function notVerifyUsulanAnggaran($verifikasiUsulanModels, $nama_approve, $nama_users, $foto, Request $request)
     {
-        dd([
-            'id' => $verifikasiUsulanModels,
-            'status' => $request->status,
-            'keterangan' => $request->keterangan
-        ]);
+        //pengajuan di reject dan memberikan alasan
+        try {
+            $this->statusUsulanModels->create([
+                'user_id' => $verifikasiUsulanModels,
+                'status' => $request->status,
+                'keterangan' => 'pengajuan' . ' ' . $nama_users . ' ' . 'ditolak oleh ' . ' ' . $nama_approve . ' ' . 'karena:' . $request->keterangan,
+                'nama' => $nama_approve,
+                'photo' => $foto,
+            ]);
+            return redirect()->route('superadmin.verifikasi_usulan')->with('success', 'pengajuan telah di verifikasi');
+        } catch (\Exception $error) {
+            return redirect()->route('superadmin.verifikasi_usulan')->with('error', $error);
+        }
     }
 
     public function cetakUsulan()

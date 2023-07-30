@@ -26,6 +26,22 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
+                        @if (session('success'))
+                            <div class="alert alert-success alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert"
+                                    aria-hidden="true">&times;</button>
+                                <h5><i class="icon fas fa-check"></i> Success!</h5>
+                                {{ session('success') }}
+                            </div>
+                        @endif
+                        @if (session('error'))
+                            <div class="alert alert-danger alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert"
+                                    aria-hidden="true">&times;</button>
+                                <h5><i class="icon fas fa-check"></i> Error!</h5>
+                                {{ session('error') }}
+                            </div>
+                        @endif
                         <div class="callout callout-info">
                             <h5><i class="fas fa-info"></i> Note:</h5>
                             Harap Di verifikasi dengan sebaik mungkin
@@ -94,7 +110,7 @@
                                 <div class="col-12">
                                     <!-- verify usulan-->
                                     <form id="menyetujui-usulan-{{ $totalRincianUsulan->user_id }}"
-                                        action="{{ route('superadmin.verify-usulan-post', $totalRincianUsulan->user_id) }}"
+                                        action="{{ route('superadmin.verify-usulan-post', ['verifikasiUsulanModels' => $totalRincianUsulan->user_id, 'nama_approve' => $photos['nama_lengkap'], 'nama_users' => $queryProfle->nama_lengkap, 'foto' => $photos['photos']]) }}"
                                         method="POST">
                                         @csrf
                                         <input type="text" name="status" value="diterima" hidden>
@@ -121,7 +137,7 @@
                                         </div>
                                         <div class="modal-body">
                                             <form id="tidak-menyetujui-usulan-{{ $totalRincianUsulan->user_id }}"
-                                                action="{{ route('superadmin.not-verify-usulan-post', $totalRincianUsulan->user_id) }}"
+                                                action="{{ route('superadmin.not-verify-usulan-post', ['verifikasiUsulanModels' => $totalRincianUsulan->user_id, 'nama_approve' => $photos['nama_lengkap'], 'nama_users' => $queryProfle->nama_lengkap, 'foto' => $photos['photos']]) }}"
                                                 method="POST">
                                                 @csrf
                                                 <div class="card-body">
