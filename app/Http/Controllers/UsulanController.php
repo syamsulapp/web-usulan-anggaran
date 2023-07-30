@@ -11,6 +11,7 @@ use App\Models\Uraian;
 use App\Models\User;
 use App\Models\UsulanModels;
 use Illuminate\Http\Request;
+use Elibyy\TCPDF\Facades\TCPDF as PDF;
 
 class UsulanController extends Controller
 {
@@ -156,6 +157,26 @@ class UsulanController extends Controller
 
     public function cetakUsulan()
     {
-        return 'users cetak usulan';
+        $namaFile = 'usulan.pdf';
+
+        $data = [
+            'coba' => 'data usulan saya ini loh',
+        ];
+
+        $cetakListRincian = $this->usulanModels
+            ->whereuser_id($this->user->user()->id)
+            ->get();
+
+        $sumRincian = $this->rincian
+            ->whereuser_id($this->user->user()->id)
+            ->sum('total');
+
+        $html = view()->make('layouts.view.users.cetak-usulan', compact('cetakListRincian', 'sumRincian'))->render();
+
+        PDF::SetTitle('Cetak Usulan');
+        PDF::AddPage();
+        PDF::writeHTML($html, true, false, true);
+
+        PDF::Output(public_path($namaFile), 'I');
     }
 }

@@ -18,7 +18,6 @@ class UsulanModels extends Model
         'harga_satuan',
         'satuan',
         'total',
-        'status',
         'created_at',
         'updated_at'
     ];

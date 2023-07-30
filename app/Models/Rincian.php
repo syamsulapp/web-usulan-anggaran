@@ -19,5 +19,7 @@ class Rincian extends Model
         'harga_satuan',
         'satuan',
         'total',
+        'created_at',
+        'updated_at'
     ];
 }
