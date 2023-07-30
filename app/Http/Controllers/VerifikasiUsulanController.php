@@ -75,7 +75,7 @@ class VerifikasiUsulanController extends Controller
         $queryProfle = $this->profileModels->whereid_users($verifikasiUsulanModels)->first();
 
         if (is_null($totalRincianUsulan)) { // kalo usersnya belum buat usulan maka redirect kembali ke halaman verifikasi usulan kasih flash message
-            return redirect()->route('superadmin.verifikasi_usulan')->with('alertWarning', 'belum ada usulan yang dibuat');
+            return redirect()->route('superadmin.verifikasi_usulan')->with('error', 'belum ada usulan yang dibuat');
         } else {
             $totalRincianUsulan = $totalRincianUsulan; // akan tetapi jika sudah buat usulan maka query data usulannya
         }
