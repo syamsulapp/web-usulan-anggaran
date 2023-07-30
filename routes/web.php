@@ -43,7 +43,6 @@ Route::middleware('superadmin')->group(function () {
         Route::get('show/{verifikasiUsulanModels}/usulan', [VerifikasiUsulanController::class, 'show'])->name('superadmin.show-usulan');
         Route::post('verify/{verifikasiUsulanModels}/{nama_approve}/{nama_users}/{foto}/usulan', [VerifikasiUsulanController::class, 'verifyUsulanAnggaran'])->name('superadmin.verify-usulan-post');
         Route::post('not/verify/{verifikasiUsulanModels}/{nama_approve}/{nama_users}/{foto}/usulan', [VerifikasiUsulanController::class, 'notVerifyUsulanAnggaran'])->name('superadmin.not-verify-usulan-post');
-        Route::get('/cetak/usulan', [VerifikasiUsulanController::class, 'cetakUsulan'])->name('superadmin.cetak-usulan');
     });
 });
 
@@ -81,6 +80,9 @@ Route::middleware('admin')->group(function () {
         Route::post('uraian/store', [UraianController::class, 'store'])->name('uraian.store');
         Route::put('uraian/{id}', [UraianController::class, 'update'])->name('uraian.update');
         Route::delete('uraian/{id}', [UraianController::class, 'destroy'])->name('uraian.destroy');
+
+        //cetak usulan by admin
+        Route::get('cetak/usulan', [VerifikasiUsulanController::class, 'cetakUsulan'])->name('admin.cetak-usulan');
     });
 });
 
@@ -96,6 +98,7 @@ Route::middleware('user')->group(function () {
         Route::delete('delete-usulan/{usulanModels}', [UsulanController::class, 'destroy'])->name('users.delete-usulan');
         Route::post('submit-anggaran/{anggaran}/{nama}/{photo}', [UsulanController::class, 'submitAnggaran'])->name('users.submit-anggaran');
 
-        //route cetak usulan
+        //route cetak usulan by users
+        Route::get('cetak/usulan', [UsulanController::class, 'cetakUsulan'])->name('users.cetak-usulan');
     });
 });

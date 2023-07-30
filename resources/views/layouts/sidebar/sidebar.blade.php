@@ -97,7 +97,7 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/gallery.html" class="nav-link">
+                            <a href="{{ route('admin.cetak-usulan') }}" class="nav-link">
                                 <i class="nav-icon fas fa-book"></i>
                                 <p>
                                     Cetak Dokumen
@@ -116,14 +116,14 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a href="pages/gallery.html" class="nav-link">
                                 <i class="nav-icon fas fa-pen-square"></i>
                                 <p>
                                     Usulan
                                 </p>
                             </a>
-                        </li>
+                        </li> --}}
                     @endif
                 @else
                     <div class="card-body">

@@ -117,8 +117,9 @@ class VerifikasiUsulanController extends Controller
         }
     }
 
+    //minjem method yang ada di controller superadmin buat cetak usulan by role admin
     public function cetakUsulan()
     {
-        return 'cetak usulan';
+        return 'admin cetak usulan';
     }
 }

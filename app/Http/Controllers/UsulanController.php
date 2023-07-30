@@ -153,4 +153,9 @@ class UsulanController extends Controller
             return redirect()->route('users.buat_usulan')->with('error', $error);
         }
     }
+
+    public function cetakUsulan()
+    {
+        return 'users cetak usulan';
+    }
 }
