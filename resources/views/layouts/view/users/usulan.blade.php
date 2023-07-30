@@ -158,6 +158,10 @@
                                         <i class="fas fa-plus-circle" data-target="#tambahAnggaran" data-toggle="modal"></i>
                                         Tambah Anggaran
                                     </button>
+                                    @if ($statusUsulan->status === 'diterima')
+                                        <a href="{{ route('superadmin.cetak-usulan') }}" rel="noopener" target="_blank"
+                                            class="btn btn-default"><i class="fas fa-print"></i> Cetak</a>
+                                    @endif
                                 </div>
                             </div>
                         </div>

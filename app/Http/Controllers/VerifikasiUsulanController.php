@@ -94,4 +94,9 @@ class VerifikasiUsulanController extends Controller
             'keterangan' => $request->keterangan
         ]);
     }
+
+    public function cetakUsulan()
+    {
+        return 'cetak usulan';
+    }
 }
