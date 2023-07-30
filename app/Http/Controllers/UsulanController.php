@@ -72,9 +72,12 @@ class UsulanController extends Controller
                 'nama_lengkap' => 'nama lengkap belum ada'
             ];
         }
-        $usulanList = $this->usulanModels->all();
-
-        return view('layouts.view.users.usulan', compact('usulanList', 'photos', 'pagu', 'uraian', 'hasilCurrency', 'countUsulan'));
+        $usulanList = $this->usulanModels->all(); // query list usulan
+        $statusUsulan = $this->statusUsulanModels
+            ->orderByDesc('id')
+            ->whereuser_id($this->user->user()->id)
+            ->first();
+        return view('layouts.view.users.usulan', compact('usulanList', 'photos', 'pagu', 'uraian', 'hasilCurrency', 'countUsulan', 'statusUsulan'));
     }
 
     /**
