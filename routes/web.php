@@ -23,6 +23,11 @@ use App\Http\Controllers\VerifikasiUsulanController;
 |
 */
 
+/**
+ * 
+ *Routes (production) Version APP 1.0
+ */
+
 Route::get('/', [LoginController::class, 'showLoginForm'])->name('login');
 
 Auth::routes();
