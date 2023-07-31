@@ -48,7 +48,6 @@ Route::middleware('superadmin')->group(function () {
         Route::get('dashboard', function () {
             return redirect()->route('home');
         });
-
         //verifikasi
         Route::get('verifikasi-usulan', [VerifikasiUsulanController::class, 'index'])->name('superadmin.verifikasi_usulan');
         Route::get('show/{verifikasiUsulanModels}/usulan', [VerifikasiUsulanController::class, 'show'])->name('superadmin.show-usulan');
