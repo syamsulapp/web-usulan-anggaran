@@ -32,8 +32,14 @@ Route::get('/', [LoginController::class, 'showLoginForm'])->name('login');
 
 Auth::routes();
 
-Route::get('/home', function () {
+Route::get('home', function () {
     return redirect()->route('home'); //call redirect page home base on session if hit endpoint /home
+});
+
+Route::group(['prefix' => 'home', 'middleware' => 'auth'], function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('profile', [ProfileController::class, 'profile'])->name('profile');
+    Route::post('profile/submit', [ProfileController::class, 'profileSubmit'])->name('profile.submit');
 });
 
 // Routes untuk fitur superadmin
@@ -42,12 +48,6 @@ Route::middleware('superadmin')->group(function () {
         Route::get('dashboard', function () {
             return redirect()->route('home');
         });
-        //home
-        Route::get('/', [HomeController::class, 'index'])->name('home');
-
-        //profile
-        Route::get('profile', [ProfileController::class, 'profile'])->name('profile');
-        Route::post('profile/submit', [ProfileController::class, 'profileSubmit'])->name('profile.submit');
 
         //verifikasi
         Route::get('verifikasi-usulan', [VerifikasiUsulanController::class, 'index'])->name('superadmin.verifikasi_usulan');
@@ -63,11 +63,6 @@ Route::middleware('admin')->group(function () {
         Route::get('dashboard', function () {
             return redirect()->route('home');
         });
-        //home
-        Route::get('/', [HomeController::class, 'index'])->name('home');
-        //profile 
-        Route::get('profile', [ProfileController::class, 'profile'])->name('profile');
-        Route::post('profile/submit', [ProfileController::class, 'profileSubmit'])->name('profile.submit');
         // USER MANAGEMENT
         Route::get('users', [MasterDataUsers::class, 'index'])->name('admin.users');
         Route::post('users/store', [MasterDataUsers::class, 'store'])->name('admin.users-stores');
@@ -108,11 +103,6 @@ Route::middleware('user')->group(function () {
         Route::get('dashboard', function () {
             return redirect()->route('home');
         });
-        //home
-        Route::get('/', [HomeController::class, 'index'])->name('home');
-        //profile
-        Route::get('profile', [ProfileController::class, 'profile'])->name('profile');
-        Route::post('profile/submit', [ProfileController::class, 'profileSubmit'])->name('profile.submit');
 
         //route buat usulan
         Route::get('buat-usulan', [UsulanController::class, 'index'])->name('users.buat_usulan');
