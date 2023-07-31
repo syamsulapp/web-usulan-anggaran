@@ -27,6 +27,10 @@ Route::get('/', [LoginController::class, 'showLoginForm'])->name('login');
 
 Auth::routes();
 
+Route::get('/home', function () {
+    return redirect()->route('home'); //call redirect base on session home if hit endpoint /home
+});
+
 // Routes untuk fitur superadmin
 Route::middleware('superadmin')->group(function () {
     Route::prefix('guest')->group(function () {
