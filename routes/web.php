@@ -32,10 +32,6 @@ Route::get('/', [LoginController::class, 'showLoginForm'])->name('login');
 
 Auth::routes();
 
-Route::get('home', function () {
-    return redirect()->route('home'); //call redirect page home base on session if hit endpoint /home
-});
-
 Route::group(['prefix' => 'home', 'middleware' => 'auth'], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('profile', [ProfileController::class, 'profile'])->name('profile');
@@ -51,8 +47,8 @@ Route::middleware('superadmin')->group(function () {
         //verifikasi
         Route::get('verifikasi-usulan', [VerifikasiUsulanController::class, 'index'])->name('superadmin.verifikasi_usulan');
         Route::get('show/{verifikasiUsulanModels}/usulan', [VerifikasiUsulanController::class, 'show'])->name('superadmin.show-usulan');
-        Route::post('verify/{verifikasiUsulanModels}/{nama_approve}/{nama_users}/{foto}/usulan', [VerifikasiUsulanController::class, 'verifyUsulanAnggaran'])->name('superadmin.verify-usulan-post');
-        Route::post('not/verify/{verifikasiUsulanModels}/{nama_approve}/{nama_users}/{foto}/usulan', [VerifikasiUsulanController::class, 'notVerifyUsulanAnggaran'])->name('superadmin.not-verify-usulan-post');
+        Route::post('verify/{verifikasiUsulanModels}/{nama_approve}/{nama_users}/{photo}/usulan', [VerifikasiUsulanController::class, 'verifyUsulanAnggaran'])->name('superadmin.verify-usulan-post');
+        Route::post('not/verify/{verifikasiUsulanModels}/{nama_approve}/{nama_users}/{photo}/usulan', [VerifikasiUsulanController::class, 'notVerifyUsulanAnggaran'])->name('superadmin.not-verify-usulan-post');
     });
 });
 
