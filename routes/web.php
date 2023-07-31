@@ -25,12 +25,6 @@ use App\Http\Controllers\VerifikasiUsulanController;
 
 Route::get('/', [LoginController::class, 'showLoginForm'])->name('login');
 
-Route::prefix('home')->group(function () {
-    Route::get('/', [HomeController::class, 'index'])->name('home');
-    Route::get('profile', [ProfileController::class, 'profile'])->name('profile');
-    Route::post('profile/submit', [ProfileController::class, 'profileSubmit'])->name('profile.submit');
-});
-
 Auth::routes();
 
 // Routes untuk fitur superadmin
@@ -39,6 +33,14 @@ Route::middleware('superadmin')->group(function () {
         Route::get('dashboard', function () {
             return redirect()->route('home');
         });
+        //home
+        Route::get('/', [HomeController::class, 'index'])->name('home');
+
+        //profile
+        Route::get('profile', [ProfileController::class, 'profile'])->name('profile');
+        Route::post('profile/submit', [ProfileController::class, 'profileSubmit'])->name('profile.submit');
+
+        //verifikasi
         Route::get('verifikasi-usulan', [VerifikasiUsulanController::class, 'index'])->name('superadmin.verifikasi_usulan');
         Route::get('show/{verifikasiUsulanModels}/usulan', [VerifikasiUsulanController::class, 'show'])->name('superadmin.show-usulan');
         Route::post('verify/{verifikasiUsulanModels}/{nama_approve}/{nama_users}/{foto}/usulan', [VerifikasiUsulanController::class, 'verifyUsulanAnggaran'])->name('superadmin.verify-usulan-post');
@@ -52,6 +54,11 @@ Route::middleware('admin')->group(function () {
         Route::get('dashboard', function () {
             return redirect()->route('home');
         });
+        //home
+        Route::get('/', [HomeController::class, 'index'])->name('home');
+        //profile 
+        Route::get('profile', [ProfileController::class, 'profile'])->name('profile');
+        Route::post('profile/submit', [ProfileController::class, 'profileSubmit'])->name('profile.submit');
         // USER MANAGEMENT
         Route::get('users', [MasterDataUsers::class, 'index'])->name('admin.users');
         Route::post('users/store', [MasterDataUsers::class, 'store'])->name('admin.users-stores');
@@ -92,6 +99,12 @@ Route::middleware('user')->group(function () {
         Route::get('dashboard', function () {
             return redirect()->route('home');
         });
+        //home
+        Route::get('/', [HomeController::class, 'index'])->name('home');
+        //profile
+        Route::get('profile', [ProfileController::class, 'profile'])->name('profile');
+        Route::post('profile/submit', [ProfileController::class, 'profileSubmit'])->name('profile.submit');
+
         //route buat usulan
         Route::get('buat-usulan', [UsulanController::class, 'index'])->name('users.buat_usulan');
         Route::post('submit-usulan', [UsulanController::class, 'store'])->name('users.submit_usulan');
