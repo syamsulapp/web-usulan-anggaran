@@ -157,26 +157,30 @@ class UsulanController extends Controller
 
     public function cetakUsulan()
     {
-        $namaFile = 'usulan.pdf';
+        try {
+            $namaFile = 'usulan.pdf';
 
-        $data = [
-            'coba' => 'data usulan saya ini loh',
-        ];
+            $data = [
+                'coba' => 'data usulan saya ini loh',
+            ];
 
-        $cetakListRincian = $this->usulanModels
-            ->whereuser_id($this->user->user()->id)
-            ->get();
+            $cetakListRincian = $this->usulanModels
+                ->whereuser_id($this->user->user()->id)
+                ->get();
 
-        $sumRincian = $this->rincian
-            ->whereuser_id($this->user->user()->id)
-            ->sum('total');
+            $sumRincian = $this->rincian
+                ->whereuser_id($this->user->user()->id)
+                ->sum('total');
 
-        $html = view()->make('layouts.view.users.cetak-usulan', compact('cetakListRincian', 'sumRincian'))->render();
+            $html = view()->make('layouts.view.users.cetak-usulan', compact('cetakListRincian', 'sumRincian'))->render();
 
-        PDF::SetTitle('Cetak Usulan');
-        PDF::AddPage();
-        PDF::writeHTML($html, true, false, true);
+            PDF::SetTitle('Cetak Usulan');
+            PDF::AddPage();
+            PDF::writeHTML($html, true, false, true);
 
-        PDF::Output(public_path($namaFile), 'I');
+            PDF::Output(public_path($namaFile), 'I');
+        } catch (\Exception $error) {
+            return redirect()->route('users.buat_usulan')->with('error', $error);
+        }
     }
 }
