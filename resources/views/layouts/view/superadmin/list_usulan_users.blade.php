@@ -106,12 +106,12 @@
                             <!-- /.row -->
 
                             <!-- this row will not appear when printing -->
-                            {{-- modals usulan verify diterima--}}
+                            {{-- modals usulan verify diterima --}}
                             <div class="row no-print">
                                 <div class="col-12">
                                     <!-- verify usulan-->
                                     <form id="menyetujui-usulan-{{ $totalRincianUsulan->user_id }}"
-                                        action="{{ route('superadmin.verify-usulan-post', ['verifikasiUsulanModels' => $totalRincianUsulan->user_id, 'nama_approve' => $photos['nama_lengkap'], 'nama_users' => $queryProfle->nama_lengkap, 'foto' => $photos['photos']]) }}"
+                                        action="{{ route('superadmin.verify-usulan-post', ['verifikasiUsulanModels' => $totalRincianUsulan->user_id, 'nama_approve' => $photos['nama_lengkap'], 'nama_users' => $queryProfle->nama_lengkap, 'photo' => $photos['photos']]) }}"
                                         method="POST">
                                         @csrf
                                         <input type="text" name="status" value="diterima" hidden>
@@ -138,7 +138,7 @@
                                         </div>
                                         <div class="modal-body">
                                             <form id="tidak-menyetujui-usulan-{{ $totalRincianUsulan->user_id }}"
-                                                action="{{ route('superadmin.not-verify-usulan-post', ['verifikasiUsulanModels' => $totalRincianUsulan->user_id, 'nama_approve' => $photos['nama_lengkap'], 'nama_users' => $queryProfle->nama_lengkap, 'foto' => $photos['photos']]) }}"
+                                                action="{{ route('superadmin.not-verify-usulan-post', ['verifikasiUsulanModels' => $totalRincianUsulan->user_id, 'nama_approve' => $photos['nama_lengkap'], 'nama_users' => $queryProfle->nama_lengkap, 'photo' => $photos['photos']]) }}"
                                                 method="POST">
                                                 @csrf
                                                 <div class="card-body">
