@@ -106,6 +106,7 @@
                             <!-- /.row -->
 
                             <!-- this row will not appear when printing -->
+                            {{-- modals usulan verify diterima--}}
                             <div class="row no-print">
                                 <div class="col-12">
                                     <!-- verify usulan-->
