@@ -226,7 +226,7 @@
 
                                             <div class="timeline-item">
                                                 <span class="time"><i class="far fa-clock"></i>
-                                                    12:05</span>
+                                                    <?php echo e($u->created_at); ?></span>
 
                                                 <h3 class="timeline-header"><a href="#"><?php echo e($data_profile['nama_lengkap']); ?></a>
                                                     <?php echo e($u->status); ?>

@@ -214,7 +214,7 @@
 
                                             <div class="timeline-item">
                                                 <span class="time"><i class="far fa-clock"></i>
-                                                    12:05</span>
+                                                    {{$u->created_at}}</span>
 
                                                 <h3 class="timeline-header"><a href="#">{{ $data_profile['nama_lengkap'] }}</a>
                                                     {{ $u->status }}
