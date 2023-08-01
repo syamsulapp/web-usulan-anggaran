@@ -47,8 +47,8 @@ Route::middleware('superadmin')->group(function () {
         //verifikasi
         Route::get('verifikasi-usulan', [VerifikasiUsulanController::class, 'index'])->name('superadmin.verifikasi_usulan');
         Route::get('show/{verifikasiUsulanModels}/usulan', [VerifikasiUsulanController::class, 'show'])->name('superadmin.show-usulan');
-        Route::get('verify/{verifikasiUsulanModels}/{nama_approve}/{nama_users}/{photo}/usulan', [VerifikasiUsulanController::class, 'verifyUsulanAnggaran'])->name('superadmin.verify-usulan-post');
-        Route::get('not/verify/{verifikasiUsulanModels}/{nama_approve}/{nama_users}/{photo}/usulan', [VerifikasiUsulanController::class, 'notVerifyUsulanAnggaran'])->name('superadmin.not-verify-usulan-post');
+        Route::post('verify/usulan', [VerifikasiUsulanController::class, 'verifyUsulanAnggaran'])->name('superadmin.verify-usulan-post');
+        Route::post('not/verify/usulan', [VerifikasiUsulanController::class, 'notVerifyUsulanAnggaran'])->name('superadmin.not-verify-usulan-post');
     });
 });
 
