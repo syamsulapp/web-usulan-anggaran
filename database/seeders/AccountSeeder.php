@@ -1,0 +1,36 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+
+class AccountSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
+    {
+        DB::table('users')->insert([
+            'username' => 'superadmin',
+            'password' => Hash::make('superadmin1129321!@#'),
+            'id_lembaga' => 1,
+            'id_role' => 1, //superadmin
+            'is_active' => 'Y',
+            'created_at' => \Carbon\Carbon::now(),
+            'updated_at' => \Carbon\Carbon::now(),
+        ]);
+        DB::table('users')->insert([
+            'username' => 'admin',
+            'password' => Hash::make('admin1129321!@#'),
+            'id_lembaga' => 1,
+            'id_role' => 2, //admin
+            'is_active' => 'Y',
+            'created_at' => \Carbon\Carbon::now(),
+            'updated_at' => \Carbon\Carbon::now(),
+
+        ]);
+    }
+}
