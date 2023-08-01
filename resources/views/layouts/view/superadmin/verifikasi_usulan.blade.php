@@ -55,7 +55,7 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($verifikasiUsulan as $item)
-                                            @if ($item->id_role === 3)
+                                            @if ($item->id_role == 3)
                                                 <tr>
                                                     </td>
                                                     <td>{{ $item->username }}</td>
