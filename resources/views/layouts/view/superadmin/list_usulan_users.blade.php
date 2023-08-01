@@ -111,7 +111,7 @@
                                 <div class="col-12">
                                     <!-- verify usulan-->
                                     <form id="menyetujui-usulan-{{ $totalRincianUsulan->user_id }}"
-                                        action="{{ route('superadmin.verify-usulan-post', ['verifikasiUsulanModels' => $totalRincianUsulan->user_id, 'nama_approve' => $photos['nama_lengkap'], 'nama_users' => $queryProfle->nama_lengkap, 'photo' => $photos['photos']]) }}"
+                                        action="{{ route('superadmin.verify-usulan-post', [$totalRincianUsulan->user_id, $photos['nama_lengkap'], $queryProfle->nama_lengkap, $photos['photos']]) }}"
                                         method="POST">
                                         @csrf
                                         <input type="text" name="status" value="diterima" hidden>
@@ -138,7 +138,7 @@
                                         </div>
                                         <div class="modal-body">
                                             <form id="tidak-menyetujui-usulan-{{ $totalRincianUsulan->user_id }}"
-                                                action="{{ route('superadmin.not-verify-usulan-post', ['verifikasiUsulanModels' => $totalRincianUsulan->user_id, 'nama_approve' => $photos['nama_lengkap'], 'nama_users' => $queryProfle->nama_lengkap, 'photo' => $photos['photos']]) }}"
+                                                action="{{ route('superadmin.not-verify-usulan-post', [$totalRincianUsulan->user_id, $photos['nama_lengkap'], $queryProfle->nama_lengkap, $photos['photos']]) }}"
                                                 method="POST">
                                                 @csrf
                                                 <div class="card-body">
