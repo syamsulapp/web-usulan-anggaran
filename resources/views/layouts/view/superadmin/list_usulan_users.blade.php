@@ -112,7 +112,7 @@
                                     <!-- verify usulan-->
                                     <form id="menyetujui-usulan-{{ $totalRincianUsulan->user_id }}"
                                         action="{{ route('superadmin.verify-usulan-post', [$totalRincianUsulan->user_id, $photos['nama_lengkap'], $queryProfle->nama_lengkap, $photos['photos']]) }}"
-                                        method="POST">
+                                        method="GET">
                                         @csrf
                                         <input type="text" name="status" value="diterima" hidden>
                                         <button type="submit" name="status" class="btn btn-success float-right"
@@ -139,7 +139,7 @@
                                         <div class="modal-body">
                                             <form id="tidak-menyetujui-usulan-{{ $totalRincianUsulan->user_id }}"
                                                 action="{{ route('superadmin.not-verify-usulan-post', [$totalRincianUsulan->user_id, $photos['nama_lengkap'], $queryProfle->nama_lengkap, $photos['photos']]) }}"
-                                                method="POST">
+                                                method="GET">
                                                 @csrf
                                                 <div class="card-body">
                                                     <input type="text" name="status" value="ditolak" hidden>
