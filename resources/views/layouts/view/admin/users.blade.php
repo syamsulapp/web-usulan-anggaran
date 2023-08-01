@@ -48,7 +48,7 @@
                                 <br>
                                 <div class="col-md-2">
                                     <button type="button" class="btn btn-outline-primary btn-block" data-toggle="modal"
-                                        data-target="#tambahData-lg"><i class="fa fa-edit"></i>
+                                        data-target="#tambahData-lg"><i class="fa fa-plus"></i>
                                         tambah users
                                     </button>
                                 </div>
@@ -381,8 +381,8 @@
                                             @endif
                                         </div>
                                         <!-- /.card-body -->
-                                        <form id="active-form" action="{{ route('admin.users-verify', $item->id) }}"
-                                            method="POST">
+                                        <form id="verify-account-{{ $item->id }}"
+                                            action="{{ route('admin.users-verify', $item->id) }}" method="POST">
                                             @csrf
                                             <div class="card-body">
                                                 <input type="checkbox" id="verify" name="verify"
@@ -391,8 +391,9 @@
                                                     {{ $item->is_active === 'Y' ? 'checked' : '' }}>
                                             </div>
                                             <div class="modal-footer justify-content-between">
-                                                <button onclick="event.preventDefault(); verifyAccount()" type="submit"
-                                                    class="btn btn-primary">Verify</button>
+                                                <button
+                                                    onclick="event.preventDefault(); verifyAccount('{{ $item->id }}')"
+                                                    type="submit" class="btn btn-primary">Verify</button>
                                             </div>
                                         </form>
                                     </div>

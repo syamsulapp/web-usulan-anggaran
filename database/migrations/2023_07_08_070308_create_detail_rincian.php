@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('detail_rincian', function (Blueprint $table) {
             $table->id();
-            $table->integer('hasil');
-            $table->foreignId('rincian_id')->constrained('rincian')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->integer('total');
+            $table->foreignId('user_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
         });
     }

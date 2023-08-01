@@ -5,10 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Rincian extends Model
+class UsulanModels extends Model
 {
     protected $table = 'rincian';
-    use HasFactory;
 
     protected $fillable = [
         'uraian_id',
@@ -22,4 +21,6 @@ class Rincian extends Model
         'created_at',
         'updated_at'
     ];
+
+    use HasFactory;
 }

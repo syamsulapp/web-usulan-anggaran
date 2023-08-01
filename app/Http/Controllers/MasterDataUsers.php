@@ -11,13 +11,7 @@ use Illuminate\Support\Facades\Hash;
 
 class MasterDataUsers extends Controller
 {
-    protected $user;
-
-    protected $lembaga;
-
-    protected $profileModels;
-
-    protected $role;
+    protected $user, $lembaga, $profileModels, $role;
 
     public function __construct(User $user, Lembaga $lembaga, ProfileModels $profileModels, Role $role)
     {

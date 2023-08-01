@@ -4,26 +4,25 @@ namespace App\Http\Controllers;
 
 use App\Models\ProfileModels;
 use App\Models\Role;
+use App\Models\StatusUsulanModels;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class ProfileController extends Controller
 {
     /**
      * property menyimpan modals.
      */
-    protected $user;
+    protected $user, $profileModels, $role, $statusUsulanModels;
 
-    protected $profileModels;
-
-    protected $role;
-
-    public function __construct(User $user, ProfileModels $profileModels, Role $role)
+    public function __construct(User $user, ProfileModels $profileModels, Role $role, StatusUsulanModels $statusUsulanModels)
     {
         $this->user = $user;
         $this->profileModels = $profileModels;
         $this->role = $role;
+        $this->statusUsulanModels = $statusUsulanModels;
     }
     public function profile()
     {
@@ -43,20 +42,27 @@ class ProfileController extends Controller
                 ];
             }
             $data_role = $this->role->whereId($this->user->user()->id_role)->first(); //query data roles sesuai dengan session usersnya
-            return view('layouts.view.profile.profile', compact('data_profile', 'data_role'));
+            //timeline usulan
+            $timeLineUsulanAnggaran = $this->statusUsulanModels->all();
+            //activity
+            $activity = $this->statusUsulanModels
+                ->orderByDesc('id')
+                ->limit(5)
+                ->get();
+
+            return view('layouts.view.profile.profile', compact('data_profile', 'data_role', 'timeLineUsulanAnggaran', 'activity'));
         } catch (\Exception $error) {
             return view('layouts.view.profile.profile')->with('alertError', $error);
         }
-
-        return view('layouts.view.profile.profile', compact('data_profile'));
     }
     public function profileSubmit(Request $request)
     {
         $this->validate($request, [
             'password-confirmation' => 'same:password',
-            'photos' => 'mimes:jpg,png,jpeg|max:2048|file|image',
+            'photos' => 'required|mimes:jpg,png,jpeg|max:2048|file|image',
         ], [
-            'same' => 'password tidak sama'
+            'same' => 'password tidak sama',
+            'required' => ':attribute wajib di isi'
         ]);
 
         if ($this->profileModels->whereid_users($this->user->user()->id)->first()) {
@@ -65,9 +71,10 @@ class ProfileController extends Controller
 
                 $nama_file = time() . '-' . $file->getClientOriginalName();
 
-                $tujuan_upload = 'photo_profile';
-
-                $file->move($tujuan_upload, $nama_file);
+                $imgResize = Image::make($file->getRealPath());
+                $imgResize->resize(128, 128); // rescale jadi 128x128 biar gak lonjong img di photo profile
+                $tujuan_upload = 'photo_profile/';
+                $imgResize->save(public_path($tujuan_upload . $nama_file));
 
                 if (
                     empty($request->password) ||
@@ -98,22 +105,40 @@ class ProfileController extends Controller
                     ]);
                 }
             } else {
-                $this->profileModels->whereid_users($this->user->user()->id)->update([
-                    'nama_lengkap' => $request->nama_lengkap,
-                    'education' => $request->education,
-                    'location' => $request->location,
-                    'skill' => $request->skill,
-                    'about_me' => $request->about_me,
-                ]);
+                if (
+                    empty($request->password) ||
+                    empty($request->username)
+                ) {
+                    $this->profileModels->whereid_users($this->user->user()->id)->update([
+                        'nama_lengkap' => $request->nama_lengkap,
+                        'education' => $request->education,
+                        'location' => $request->location,
+                        'skill' => $request->skill,
+                        'about_me' => $request->about_me,
+                    ]);
+                } else {
+                    $this->user->whereId($this->user->user()->id)->update([
+                        'username' => $request->username,
+                        'password' => Hash::make($request->password),
+                    ]);
+                    $this->profileModels->whereid_users($this->user->user()->id)->update([
+                        'nama_lengkap' => $request->nama_lengkap,
+                        'education' => $request->education,
+                        'location' => $request->location,
+                        'skill' => $request->skill,
+                        'about_me' => $request->about_me,
+                    ]);
+                }
             }
         } else {
             if ($file = $request->file('photos')) {
 
                 $nama_file = time() . '-' . $file->getClientOriginalName();
 
-                $tujuan_upload = 'photo_profile';
-
-                $file->move($tujuan_upload, $nama_file);
+                $imgResize = Image::make($file->getRealPath());
+                $imgResize->resize(128, 128); // rescale jadi 128x128 biar gak lonjong img di photo profile
+                $tujuan_upload = 'photo_profile/';
+                $imgResize->save(public_path($tujuan_upload . $nama_file));
 
                 if (
                     empty($request->password) || //jika ingin mengubah username maka harus mengisi dengan passwordnya jg
@@ -146,14 +171,32 @@ class ProfileController extends Controller
                     ]);
                 }
             } else {
-                $this->profileModels->create([
-                    'nama_lengkap' => $request->nama_lengkap,
-                    'education' => $request->education,
-                    'location' => $request->location,
-                    'skill' => $request->skill,
-                    'about_me' => $request->about_me,
-                    'id_users' => $this->user->user()->id,
-                ]);
+                if (
+                    empty($request->username) ||
+                    empty($request->password)
+                ) {
+                    $this->profileModels->create([
+                        'nama_lengkap' => $request->nama_lengkap,
+                        'education' => $request->education,
+                        'location' => $request->location,
+                        'skill' => $request->skill,
+                        'about_me' => $request->about_me,
+                        'id_users' => $this->user->user()->id,
+                    ]);
+                } else {
+                    $this->user->whereId($this->user->user()->id)->update([
+                        'username' => $request->username,
+                        'password' => Hash::make($request->password),
+                    ]);
+                    $this->profileModels->create([
+                        'nama_lengkap' => $request->nama_lengkap,
+                        'education' => $request->education,
+                        'location' => $request->location,
+                        'skill' => $request->skill,
+                        'about_me' => $request->about_me,
+                        'id_users' => $this->user->user()->id,
+                    ]);
+                }
             }
         }
 

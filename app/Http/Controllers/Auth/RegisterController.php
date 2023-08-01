@@ -72,6 +72,7 @@ class RegisterController extends Controller
             'required' => ':attribute jangan di kosongkan',
             'min' => 'minimal 8 karakter',
             'confirmed' => 'password tidak sama',
+            'max' => 'file di upload lebih dari 2mb'
         ]);
     }
 

@@ -11,16 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rincian', function (Blueprint $table) {
+        Schema::create('status_usulan', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('uraian_id')->constrained('uraian')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('pagu_id')->constrained('pagu')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->string('status', 128);
+            $table->string('keterangan', 128);
             $table->foreignId('user_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->string('nama_barang');
-            $table->integer('volume');
-            $table->integer('harga_satuan');
-            $table->string('satuan');
-            $table->integer('total');
+            $table->string('nama', 128);
+            $table->string('photo', 128);
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('rincian');
+        Schema::dropIfExists('status_usulan');
     }
 };

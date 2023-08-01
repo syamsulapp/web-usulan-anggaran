@@ -9,6 +9,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PaguController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UraianController;
+use App\Http\Controllers\UsulanController;
+use App\Http\Controllers\VerifikasiUsulanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,15 +23,20 @@ use App\Http\Controllers\UraianController;
 |
 */
 
+/**
+ * 
+ *Routes (production) Version APP 1.0
+ */
+
 Route::get('/', [LoginController::class, 'showLoginForm'])->name('login');
 
-Route::prefix('home')->group(function () {
+Auth::routes();
+
+Route::group(['prefix' => 'home', 'middleware' => 'auth'], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('profile', [ProfileController::class, 'profile'])->name('profile');
     Route::post('profile/submit', [ProfileController::class, 'profileSubmit'])->name('profile.submit');
 });
-
-Auth::routes();
 
 // Routes untuk fitur superadmin
 Route::middleware('superadmin')->group(function () {
@@ -37,9 +44,11 @@ Route::middleware('superadmin')->group(function () {
         Route::get('dashboard', function () {
             return redirect()->route('home');
         });
-        Route::get('verifikasi-usulan', function () {
-            return 'halo';
-        })->name('superadmin.verifikasi_usulan');
+        //verifikasi
+        Route::get('verifikasi-usulan', [VerifikasiUsulanController::class, 'index'])->name('superadmin.verifikasi_usulan');
+        Route::get('show/{verifikasiUsulanModels}/usulan', [VerifikasiUsulanController::class, 'show'])->name('superadmin.show-usulan');
+        Route::post('verify/usulan', [VerifikasiUsulanController::class, 'verifyUsulanAnggaran'])->name('superadmin.verify-usulan-post');
+        Route::post('not/verify/usulan', [VerifikasiUsulanController::class, 'notVerifyUsulanAnggaran'])->name('superadmin.not-verify-usulan-post');
     });
 });
 
@@ -77,6 +86,9 @@ Route::middleware('admin')->group(function () {
         Route::post('uraian/store', [UraianController::class, 'store'])->name('uraian.store');
         Route::put('uraian/{id}', [UraianController::class, 'update'])->name('uraian.update');
         Route::delete('uraian/{id}', [UraianController::class, 'destroy'])->name('uraian.destroy');
+
+        //cetak usulan by admin
+        Route::get('cetak/usulan', [VerifikasiUsulanController::class, 'cetakUsulan'])->name('admin.cetak-usulan');
     });
 });
 
@@ -86,11 +98,14 @@ Route::middleware('user')->group(function () {
         Route::get('dashboard', function () {
             return redirect()->route('home');
         });
-        Route::get('buat-usulan', function () {
-            return 'halo buat usulan';
-        })->name('users.buat_usulan');
-        Route::get('revisi-usulan', function () {
-            return 'halo buat usulan';
-        })->name('users.revisi_usulan');
+
+        //route buat usulan
+        Route::get('buat-usulan', [UsulanController::class, 'index'])->name('users.buat_usulan');
+        Route::post('submit-usulan', [UsulanController::class, 'store'])->name('users.submit_usulan');
+        Route::delete('delete-usulan/{usulanModels}', [UsulanController::class, 'destroy'])->name('users.delete-usulan');
+        Route::post('submit-anggaran/{anggaran}/{nama}/{photo}', [UsulanController::class, 'submitAnggaran'])->name('users.submit-anggaran');
+
+        //route cetak usulan by users
+        Route::get('cetak/usulan', [UsulanController::class, 'cetakUsulan'])->name('users.cetak-usulan');
     });
 });
