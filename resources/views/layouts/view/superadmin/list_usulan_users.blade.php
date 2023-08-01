@@ -111,10 +111,16 @@
                                 <div class="col-12">
                                     <!-- verify usulan-->
                                     <form id="menyetujui-usulan-{{ $totalRincianUsulan->user_id }}"
-                                        action="{{ route('superadmin.verify-usulan-post', ['verifikasiUsulanModels' => $totalRincianUsulan->user_id, 'nama_approve' => $photos['nama_lengkap'], 'nama_users' => $queryProfle->nama_lengkap, 'photo' => $photos['photos']]) }}"
-                                        method="POST">
+                                        action="{{ route('superadmin.verify-usulan-post') }}" method="POST">
                                         @csrf
                                         <input type="text" name="status" value="diterima" hidden>
+                                        <input type="text" name="user_id" value="{{ $totalRincianUsulan->user_id }}"
+                                            hidden>
+                                        <input type="text" name="nama_users" value="{{ $queryProfle->nama_lengkap }}"
+                                            hidden>
+                                        <input type="text" name="nama_approve" value="{{ $photos['nama_lengkap'] }}"
+                                            hidden>
+                                        <input type="text" name="photo" value="{{ $photos['photos'] }}" hidden>
                                         <button type="submit" name="status" class="btn btn-success float-right"
                                             onclick="event.preventDefault();confirmVerifyUsulan('{{ $totalRincianUsulan->user_id }}') "
                                             value="disetujui"><i class="far fa-check-circle"></i> Disetujui
@@ -138,17 +144,25 @@
                                         </div>
                                         <div class="modal-body">
                                             <form id="tidak-menyetujui-usulan-{{ $totalRincianUsulan->user_id }}"
-                                                action="{{ route('superadmin.not-verify-usulan-post', ['verifikasiUsulanModels' => $totalRincianUsulan->user_id, 'nama_approve' => $photos['nama_lengkap'], 'nama_users' => $queryProfle->nama_lengkap, 'photo' => $photos['photos']]) }}"
-                                                method="POST">
+                                                action="{{ route('superadmin.not-verify-usulan-post') }}" method="POST">
                                                 @csrf
                                                 <div class="card-body">
                                                     <input type="text" name="status" value="ditolak" hidden>
+                                                    <input type="text" name="user_id"
+                                                        value="{{ $totalRincianUsulan->user_id }}" hidden>
+                                                    <input type="text" name="nama_users"
+                                                        value="{{ $queryProfle->nama_lengkap }}" hidden>
+                                                    <input type="text" name="nama_approve"
+                                                        value="{{ $photos['nama_lengkap'] }}" hidden>
+                                                    <input type="text" name="photo" value="{{ $photos['photos'] }}"
+                                                        hidden>
                                                     <textarea class="form-control" rows="3" placeholder="Enter Alasan Di tolak..." name="keterangan"></textarea>
                                                 </div>
                                                 <div class="modal-footer justify-content-between">
                                                     <button type="submit" style="margin-right: 5px;"
                                                         onclick="event.preventDefault(); confirmNotVerifyUsulan('{{ $totalRincianUsulan->user_id }}')"
-                                                        class="btn btn-info float-right"><i class="far fa-check-circle"></i>
+                                                        class="btn btn-info float-right"><i
+                                                            class="far fa-check-circle"></i>
                                                         Save
                                                     </button>
                                                 </div>
