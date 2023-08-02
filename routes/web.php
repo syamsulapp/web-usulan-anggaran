@@ -89,6 +89,7 @@ Route::middleware('admin')->group(function () {
 
         //cetak usulan by admin
         Route::get('cetak/usulan', [VerifikasiUsulanController::class, 'cetakUsulan'])->name('admin.cetak-usulan');
+        Route::post('print/{id}/usulan', [VerifikasiUsulanController::class, 'printUsulan'])->name('admin.print-usulan');
     });
 });
 
