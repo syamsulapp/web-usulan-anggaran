@@ -48,7 +48,7 @@
         <!-- /.login-logo -->
 
         <div class="login-logo">
-            <img src="{{ asset('assets/img/logoSIPPWarna.png') }}" width="100%">
+            <img src="{{ asset('assets/img/Logo_iain_metro.png') }}" width="80%">
         </div>
 
         <div class="card card-outline card-primary">
