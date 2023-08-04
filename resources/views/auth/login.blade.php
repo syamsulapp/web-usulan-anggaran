@@ -46,7 +46,7 @@
 
     <div class="login-box">
         <!-- /.login-logo -->
-
+        <!-- logo baru-->
         <div class="login-logo">
             <img src="{{ asset('assets/img/Logo_iain_metro.png') }}" width="80%">
         </div>
