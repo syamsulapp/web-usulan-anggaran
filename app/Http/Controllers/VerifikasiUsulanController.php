@@ -3,12 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\detail_rincian;
+use App\Models\Lembaga;
 use App\Models\ProfileModels;
+use App\Models\Rincian;
+use App\Models\Role;
 use App\Models\StatusUsulanModels;
 use App\Models\User;
 use App\Models\UsulanModels;
 use App\Models\VerifikasiUsulanModels;
 use Illuminate\Http\Request;
+use Elibyy\TCPDF\Facades\TCPDF as PDF;
+
 
 class VerifikasiUsulanController extends Controller
 {
@@ -19,7 +24,8 @@ class VerifikasiUsulanController extends Controller
     protected $verifikasiUsulanModels,
         $user, $profileModels,
         $usulanModels, $detail_rincian,
-        $statusUsulanModels;
+        $statusUsulanModels, $lembaga,
+        $role, $rincian;
 
     public function __construct(
         VerifikasiUsulanModels $verifikasiUsulanModels,
@@ -28,7 +34,10 @@ class VerifikasiUsulanController extends Controller
         $profileModels,
         UsulanModels $usulanModels,
         detail_rincian $detail_rincian,
-        StatusUsulanModels $statusUsulanModels
+        StatusUsulanModels $statusUsulanModels,
+        Lembaga $lembaga,
+        Rincian $rincian,
+        Role $role,
     ) {
         $this->verifikasiUsulanModels = $verifikasiUsulanModels;
         $this->user = $user;
@@ -36,6 +45,9 @@ class VerifikasiUsulanController extends Controller
         $this->usulanModels = $usulanModels;
         $this->detail_rincian = $detail_rincian;
         $this->statusUsulanModels = $statusUsulanModels;
+        $this->lembaga = $lembaga;
+        $this->role = $role;
+        $this->rincian = $rincian;
     }
 
     public function index()
@@ -120,8 +132,69 @@ class VerifikasiUsulanController extends Controller
     }
 
     //minjem method yang ada di controller superadmin buat cetak usulan by role admin
-    public function cetakUsulan()
+    public function cetakUsulan(Request $request)
     {
-        return 'admin cetak usulan';
+        $photos = $this->profileModels
+            ->whereid_users($this->user->user()->id)
+            ->first(); // detail photos and username by session users
+
+        if (is_null($photos)) {
+            $photos = [
+                'photos' => 'photo belum ada',
+                'nama_lengkap' => 'nama lengkap belum ada'
+            ];
+        }
+        $lembaga = $this->lembaga->all();
+        $role = $this->role->all();
+
+
+        $limit = 10;
+        if ($limit >= $request->limit) {
+            $limit = $request->limit;
+        }
+        $users = $this->user
+            ->orderByDesc('id')
+            ->whereid_role(3)
+            ->when($request->name, function ($query) use ($request) {
+                return $query->where('name', 'LIKE', "%{$request->name}%");
+            })
+            ->when($request->username, function ($query) use ($request) {
+                return $query->where('username', 'LIKE', "%{$request->username}%");
+            })
+            ->when($request->is_active, function ($query) use ($request) {
+                return $query->where('is_active', 'LIKE', "%{$request->is_active}%");
+            })
+            ->paginate($limit);
+
+        return view('layouts.view.admin.cetakUsulan', compact('users', 'photos', 'lembaga', 'role'));
+    }
+
+    public function printUsulan($id)
+    {
+        try {
+            $namaFile = 'usulan.pdf';
+
+            $data = [
+                'coba' => 'data usulan saya ini loh',
+            ];
+
+            $cetakListRincian = $this->usulanModels
+                ->whereuser_id($id)
+                ->get();
+
+            $sumRincian = $this->rincian
+                ->whereuser_id($id)
+                ->sum('total');
+
+            $html = view()->make('layouts.view.users.cetak-usulan', compact('cetakListRincian', 'sumRincian'))->render();
+
+            PDF::SetTitle('Cetak Usulan');
+            PDF::AddPage();
+            PDF::writeHTML($html, true, false, true);
+
+            PDF::Output(public_path($namaFile), 'I');
+        } catch (\Exception $error) {
+            return redirect()->route('users.buat_usulan')->with('error', $error);
+        }
     }
 }
