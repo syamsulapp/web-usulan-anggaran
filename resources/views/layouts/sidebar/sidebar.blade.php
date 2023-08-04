@@ -73,19 +73,19 @@
                                 <li class="nav-item">
                                     <a href="{{ route('pagu.index') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>{{ __('Pagu') }}</p>
+                                        <p>{{ __('Nama Akun') }}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('uraian.index') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>{{ __('Tipe Bagian') }}</p>
+                                        <p>{{ __('Nama Kegiatan') }}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('lembaga.index') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>{{ __('Lembaga(Bagian)') }}</p>
+                                        <p>{{ __('Lembaga') }}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">

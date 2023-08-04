@@ -8,6 +8,7 @@ use App\Models\ProfileModels;
 use App\Models\Rincian;
 use App\Models\Role;
 use App\Models\StatusUsulanModels;
+use App\Models\Uraian;
 use App\Models\User;
 use App\Models\UsulanModels;
 use App\Models\VerifikasiUsulanModels;
@@ -25,7 +26,7 @@ class VerifikasiUsulanController extends Controller
         $user, $profileModels,
         $usulanModels, $detail_rincian,
         $statusUsulanModels, $lembaga,
-        $role, $rincian;
+        $role, $rincian, $uraian;
 
     public function __construct(
         VerifikasiUsulanModels $verifikasiUsulanModels,
@@ -37,6 +38,7 @@ class VerifikasiUsulanController extends Controller
         StatusUsulanModels $statusUsulanModels,
         Lembaga $lembaga,
         Rincian $rincian,
+        Uraian $uraian,
         Role $role,
     ) {
         $this->verifikasiUsulanModels = $verifikasiUsulanModels;
@@ -48,6 +50,7 @@ class VerifikasiUsulanController extends Controller
         $this->lembaga = $lembaga;
         $this->role = $role;
         $this->rincian = $rincian;
+        $this->uraian = $uraian;
     }
 
     public function index()
@@ -186,7 +189,13 @@ class VerifikasiUsulanController extends Controller
                 ->whereuser_id($id)
                 ->sum('total');
 
-            $html = view()->make('layouts.view.users.cetak-usulan', compact('cetakListRincian', 'sumRincian'))->render();
+            $header = $this->usulanModels
+                ->whereuser_id($id)
+                ->first();
+
+            $namaKegiatan = $this->uraian->whereId($header->uraian_id)->first();
+
+            $html = view()->make('layouts.view.users.cetak-usulan', compact('cetakListRincian', 'sumRincian', 'header', 'namaKegiatan'))->render();
 
             PDF::SetTitle('Cetak Usulan');
             PDF::AddPage();
@@ -194,7 +203,7 @@ class VerifikasiUsulanController extends Controller
 
             PDF::Output(public_path($namaFile), 'I');
         } catch (\Exception $error) {
-            return redirect()->route('users.buat_usulan')->with('error', $error);
+            return redirect()->route('users.buat_usulan')->with('error', 'usulan belum di buat');
         }
     }
 }

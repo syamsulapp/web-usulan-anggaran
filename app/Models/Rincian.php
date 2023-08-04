@@ -14,6 +14,7 @@ class Rincian extends Model
         'uraian_id',
         'pagu_id',
         'user_id',
+        'sumber_anggaran',
         'nama_barang',
         'volume',
         'harga_satuan',
