@@ -140,15 +140,23 @@ class UsulanController extends Controller
         $formatCurrency = $this->currency((int)$anggaran);
         try {
             if (is_null($editAnggaran = $this->detail_rincian->whereuser_id($this->user->user()->id)->first())) {
-                $this->detail_rincian->create(
-                    ['user_id' => $this->user->user()->id, 'total' => (int)$anggaran]
-                );
-                $this->statusUsulanModels->create(['status' => ' diajukan', 'keterangan' => 'anggaran' . ' ' . $formatCurrency, 'user_id' => $this->user->user()->id, 'nama' => $nama, 'photo' => $photo]);
-                return redirect()->route('users.buat_usulan')->with('success', 'Berhasil Submit Usulan');
+                if ((int)$anggaran != 0) {
+                    $this->detail_rincian->create(
+                        ['user_id' => $this->user->user()->id, 'total' => (int)$anggaran]
+                    );
+                    $this->statusUsulanModels->create(['status' => ' diajukan', 'keterangan' => 'anggaran' . ' ' . $formatCurrency, 'user_id' => $this->user->user()->id, 'nama' => $nama, 'photo' => $photo]);
+                    return redirect()->route('users.buat_usulan')->with('success', 'Berhasil Submit Usulan');
+                } else {
+                    return redirect()->route('users.buat_usulan')->with('error', 'anggaran belum di buat');
+                }
             } else {
-                $editAnggaran->update(['total' => (int)$anggaran]);
-                $this->statusUsulanModels->create(['status' => 'diajukan', 'keterangan' => 'anggaran telah diubah menjadi' . ' ' . $formatCurrency, 'user_id' => $this->user->user()->id, 'nama' => $nama, 'photo' => $photo]);
-                return redirect()->route('users.buat_usulan')->with('success', 'Berhasil Merubah Usulan');
+                if ((int)$anggaran != 0) {
+                    $editAnggaran->update(['total' => (int)$anggaran]);
+                    $this->statusUsulanModels->create(['status' => 'diajukan', 'keterangan' => 'anggaran telah diubah menjadi' . ' ' . $formatCurrency, 'user_id' => $this->user->user()->id, 'nama' => $nama, 'photo' => $photo]);
+                    return redirect()->route('users.buat_usulan')->with('success', 'Berhasil Merubah Usulan');
+                } else {
+                    return redirect()->route('users.buat_usulan')->with('error', 'anggaran belum di buat');
+                }
             }
         } catch (\Exception $error) {
             return redirect()->route('users.buat_usulan')->with('error', $error);
