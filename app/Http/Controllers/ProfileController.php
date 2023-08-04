@@ -65,7 +65,7 @@ class ProfileController extends Controller
     {
         $this->validate($request, [
             'password-confirmation' => 'same:password',
-            'photos' => 'required|mimes:jpg,png,jpeg|max:2048|file|image',
+            'photos' => 'mimes:jpg,png,jpeg|max:2048|file|image',
         ], [
             'same' => 'password tidak sama',
             'required' => ':attribute wajib di isi'
