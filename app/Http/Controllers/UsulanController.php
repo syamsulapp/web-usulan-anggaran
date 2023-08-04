@@ -180,7 +180,13 @@ class UsulanController extends Controller
                 ->whereuser_id($this->user->user()->id)
                 ->sum('total');
 
-            $html = view()->make('layouts.view.users.cetak-usulan', compact('cetakListRincian', 'sumRincian'))->render();
+            $header = $this->usulanModels
+                ->whereuser_id($this->user->user()->id)
+                ->first();
+
+            $namaKegiatan = $this->uraian->whereId($header->uraian_id)->first();
+
+            $html = view()->make('layouts.view.users.cetak-usulan', compact('cetakListRincian', 'sumRincian', 'header', 'namaKegiatan'))->render();
 
             PDF::SetTitle('Cetak Usulan');
             PDF::AddPage();
