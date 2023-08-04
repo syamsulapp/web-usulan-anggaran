@@ -3,12 +3,11 @@
 @section('title', 'Registrasi Akun')
 
 @section('content')
-    <br>
-    <br>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-12">
-                <img src="{{ asset('assets/img/logoSIPPWarna.png') }}" width="50%">
+            <div class="col-md-10">
+                <!-- logo baru-->
+                <center><img src="{{ asset('assets/img/Logo_iain_metro.png') }}" width="40%"></center>
 
                 <div class="card">
                     <div class="card-header">{{ __('Register akun users') }}</div>

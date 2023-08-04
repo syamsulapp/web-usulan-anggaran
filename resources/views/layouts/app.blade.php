@@ -12,7 +12,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-    <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/sippCropped.png') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/logo_iain_metro.jpg') }}">
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
