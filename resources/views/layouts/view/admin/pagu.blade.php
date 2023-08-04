@@ -9,7 +9,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Pagu Management</h1>
+                        <h1>Nama Akun</h1>
                     </div>
 
                     <div class="col-sm-6">
@@ -36,7 +36,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Pagu Management</h3>
+                                <h3 class="card-title">Nama Akun Management</h3>
                                 <br>
                                 <br>
                                 <div class="col-md-2">
@@ -46,7 +46,7 @@
                                     </button>
                                     <button type="button" class="btn btn-outline-primary btn-block" data-toggle="modal"
                                         data-target="#tambahDatapagu-lg"><i class="fa fa-edit"></i>
-                                        Tambah Data Pagu
+                                        Tambah Data Akun
                                     </button>
                                 </div>
 
