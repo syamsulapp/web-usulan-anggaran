@@ -4,15 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Excel To HTML using codebeautify.org</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/logo_iain_metro.jpg') }}">
+
 </head>
 
 <body>
     <b>
-        <u>Code Akun</u> :- Sheet1
+        <u>Code Akun</u> : {{ $header->pagu_id }}
         <br>
-        <u>Nama Kegiatan</u> :- Sheet1
+        <u>Nama Kegiatan</u> :- {{ $namaKegiatan->nama_kegiatan }}
         <br>
-        <u>Sumber Anggaran</u> :- Sheet1
+        <u>Sumber Anggaran</u> :- {{ $header->sumber_anggaran }}
     </b>
     <hr>
     <table cellspacing=0 border=1>
