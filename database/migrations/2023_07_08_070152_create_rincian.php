@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('uraian_id')->constrained('uraian')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('pagu_id')->constrained('pagu')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('user_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->string('sumber_anggaran');
             $table->string('nama_barang');
             $table->integer('volume');
             $table->integer('harga_satuan');
