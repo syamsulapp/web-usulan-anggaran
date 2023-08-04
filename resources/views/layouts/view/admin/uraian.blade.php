@@ -9,7 +9,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Uraian Management</h1>
+                        <h1>Nama Kegiatan</h1>
                     </div>
 
                     <div class="col-sm-6">
@@ -51,13 +51,13 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Uraian Management</h3>
+                                <h3 class="card-title">Nama Kegiatan</h3>
                                 <br>
                                 <br>
                                 <div class="col-md-2">
                                     <button type="button" class="btn btn-outline-primary btn-block" data-toggle="modal"
                                         data-target="#tambahData-lg"><i class="fa fa-edit"></i>
-                                        Tambah Data Uraian
+                                        Tambah Nama Kegiatan
                                     </button>
                                 </div>
 
@@ -69,7 +69,7 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama Uraian</th>
+                                            <th>Nama Kegiatan</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -115,7 +115,7 @@
                                     <tfoot>
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama uraian</th>
+                                            <th>Nama Kegiatan</th>
                                             <th>Action</th>
                                         </tr>
                                     </tfoot>
