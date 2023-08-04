@@ -215,13 +215,13 @@
                                         <!-- radio -->
                                         <div class="form-group clearfix">
                                             <div class="icheck-primary d-inline">
-                                                <input type="radio" id="radioPrimary1" name="r1" checked>
+                                                <input type="radio" id="radioPrimary1" name="sumber_anggaran" checked value="rm">
                                                 <label for="radioPrimary1">
                                                     {{ __('RM') }}
                                                 </label>
                                             </div>
                                             <div class="icheck-primary d-inline">
-                                                <input type="radio" id="radioPrimary2" name="r1">
+                                                <input type="radio" id="radioPrimary2" name="sumber_anggaran" value="pnbp">
                                                 <label for="radioPrimary2">
                                                     {{ __('PNBP') }}
 
