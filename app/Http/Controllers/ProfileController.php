@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Lembaga;
 use App\Models\ProfileModels;
 use App\Models\Role;
 use App\Models\StatusUsulanModels;
@@ -15,14 +16,15 @@ class ProfileController extends Controller
     /**
      * property menyimpan modals.
      */
-    protected $user, $profileModels, $role, $statusUsulanModels;
+    protected $user, $profileModels, $role, $statusUsulanModels, $lembaga;
 
-    public function __construct(User $user, ProfileModels $profileModels, Role $role, StatusUsulanModels $statusUsulanModels)
+    public function __construct(User $user, ProfileModels $profileModels, Role $role, StatusUsulanModels $statusUsulanModels, Lembaga $lembaga)
     {
         $this->user = $user;
         $this->profileModels = $profileModels;
         $this->role = $role;
         $this->statusUsulanModels = $statusUsulanModels;
+        $this->lembaga = $lembaga;
     }
     public function profile()
     {
@@ -41,6 +43,10 @@ class ProfileController extends Controller
                     'about_me' => 'no content about me',
                 ];
             }
+            $showLembaga = $this->lembaga->whereId($this->user->user()->id_lembaga)->first();
+
+            $queryLembaga = $this->lembaga->all();
+
             $data_role = $this->role->whereId($this->user->user()->id_role)->first(); //query data roles sesuai dengan session usersnya
             //timeline usulan
             $timeLineUsulanAnggaran = $this->statusUsulanModels->all();
@@ -50,7 +56,7 @@ class ProfileController extends Controller
                 ->limit(5)
                 ->get();
 
-            return view('layouts.view.profile.profile', compact('data_profile', 'data_role', 'timeLineUsulanAnggaran', 'activity'));
+            return view('layouts.view.profile.profile', compact('data_profile', 'data_role', 'timeLineUsulanAnggaran', 'activity', 'showLembaga', 'queryLembaga'));
         } catch (\Exception $error) {
             return view('layouts.view.profile.profile')->with('alertError', $error);
         }
@@ -90,6 +96,10 @@ class ProfileController extends Controller
                         'about_me' => $request->about_me,
                         'photos' => $nama_file,
                     ]);
+
+                    if ($request->nama_lembaga) {
+                        $this->user->whereId($this->user->user()->id)->update(['id_lembaga' => $request->nama_lembaga]);
+                    }
                 } else {
                     $this->user->whereId($this->user->user()->id)->update([
                         'username' => $request->username,
@@ -103,6 +113,9 @@ class ProfileController extends Controller
                         'about_me' => $request->about_me,
                         'photos' => $nama_file,
                     ]);
+                    if ($request->nama_lembaga) {
+                        $this->user->whereId($this->user->user()->id)->update(['id_lembaga' => $request->nama_lembaga]);
+                    }
                 }
             } else {
                 if (
@@ -116,6 +129,9 @@ class ProfileController extends Controller
                         'skill' => $request->skill,
                         'about_me' => $request->about_me,
                     ]);
+                    if ($request->nama_lembaga) {
+                        $this->user->whereId($this->user->user()->id)->update(['id_lembaga' => $request->nama_lembaga]);
+                    }
                 } else {
                     $this->user->whereId($this->user->user()->id)->update([
                         'username' => $request->username,
@@ -128,6 +144,9 @@ class ProfileController extends Controller
                         'skill' => $request->skill,
                         'about_me' => $request->about_me,
                     ]);
+                    if ($request->nama_lembaga) {
+                        $this->user->whereId($this->user->user()->id)->update(['id_lembaga' => $request->nama_lembaga]);
+                    }
                 }
             }
         } else {
@@ -155,6 +174,9 @@ class ProfileController extends Controller
                         'photos' => $nama_file,
                         'id_users' => $this->user->user()->id,
                     ]);
+                    if ($request->nama_lembaga) {
+                        $this->user->whereId($this->user->user()->id)->update(['id_lembaga' => $request->nama_lembaga]);
+                    }
                 } else {
                     $this->user->whereId($this->user->user()->id)->update([
                         'username' => $request->username,
@@ -169,6 +191,9 @@ class ProfileController extends Controller
                         'photos' => $nama_file,
                         'id_users' => $this->user->user()->id,
                     ]);
+                    if ($request->nama_lembaga) {
+                        $this->user->whereId($this->user->user()->id)->update(['id_lembaga' => $request->nama_lembaga]);
+                    }
                 }
             } else {
                 if (
@@ -183,6 +208,9 @@ class ProfileController extends Controller
                         'about_me' => $request->about_me,
                         'id_users' => $this->user->user()->id,
                     ]);
+                    if ($request->nama_lembaga) {
+                        $this->user->whereId($this->user->user()->id)->update(['id_lembaga' => $request->nama_lembaga]);
+                    }
                 } else {
                     $this->user->whereId($this->user->user()->id)->update([
                         'username' => $request->username,
@@ -196,6 +224,9 @@ class ProfileController extends Controller
                         'about_me' => $request->about_me,
                         'id_users' => $this->user->user()->id,
                     ]);
+                    if ($request->nama_lembaga) {
+                        $this->user->whereId($this->user->user()->id)->update(['id_lembaga' => $request->nama_lembaga]);
+                    }
                 }
             }
         }
