@@ -8,7 +8,9 @@
 
 <body>
     <b>
-        <u>Sheet Name</u> :- Sheet1
+        <u>Code Akun</u> :- Sheet1
+        <br>
+        <u>Nama Kegiatan</u> :- Sheet1
     </b>
     <hr>
     <table cellspacing=0 border=1>
@@ -23,15 +25,15 @@
             <tr>
                 <td style=min-width:50px>{{ $cl->nama_barang }}</td>
                 <td style=min-width:50px>{{ $cl->volume }}</td>
-                <td style=min-width:50px>{{ $cl->harga_satuan }}</td>
+                <td style=min-width:50px>{{ 'Rp.' . number_format($cl->harga_satuan, 0, ',', '.') }}</td>
                 <td style=min-width:50px>{{ $cl->satuan }}</td>
-                <td style=min-width:50px>{{ $cl->total }}</td>
+                <td style=min-width:50px>{{ 'Rp.' . number_format($cl->total, 0, ',', '.') }}</td>
             </tr>
         @endforeach
         <br>
         <tr>
             <td style=min-width:50px>Total Anggaran</td>
-            <td style=min-width:50px>{{ $sumRincian }}</td>
+            <td style=min-width:50px>{{ 'Rp.' . number_format($sumRincian, 0, ',', '.') }}</td>
         </tr>
     </table>
     <hr>
