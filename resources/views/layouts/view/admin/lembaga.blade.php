@@ -34,13 +34,6 @@
                         {{ session('error') }}
                     </div>
                 @endif
-                @if (session('alert'))
-                    <div class="alert alert-success alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        <h5><i class="icon fas fa-check"></i> Success!</h5>
-                        {{ session('alert') }}
-                    </div>
-                @endif
             </div><!-- /.container-fluid -->
         </section>
 

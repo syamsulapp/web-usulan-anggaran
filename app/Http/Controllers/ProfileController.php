@@ -59,7 +59,7 @@ class ProfileController extends Controller
 
             return view('layouts.view.profile.profile', compact('data_profile', 'data_role', 'timeLineUsulanAnggaran', 'activity', 'showLembaga', 'queryLembaga'));
         } catch (\Exception $error) {
-            return view('layouts.view.profile.profile')->with('alertError', $error);
+            return view('layouts.view.profile.profile')->with('error', $error);
         }
     }
     public function profileSubmit(Request $request)
@@ -232,6 +232,6 @@ class ProfileController extends Controller
             }
         }
 
-        return redirect()->route('profile')->with('alert', 'Berhasil Ubah Profile');
+        return redirect()->route('profile')->with('success', 'Berhasil Ubah Profile');
     }
 }
