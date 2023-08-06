@@ -18,18 +18,18 @@
                         </ol>
                     </div>
                 </div>
-                @if (session('alert'))
+                @if (session('success'))
                     <div class="alert alert-success alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                         <h5><i class="icon fas fa-check"></i> Success!</h5>
-                        {{ session('alert') }}
+                        {{ session('success') }}
                     </div>
                 @endif
-                @if (session('alertError'))
+                @if (session('error'))
                     <div class="alert alert-danger alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                         <h5><i class="icon fas fa-check"></i> Error!</h5>
-                        {{ session('alertError') }}
+                        {{ session('error') }}
                     </div>
                 @endif
             </div><!-- /.container-fluid -->
