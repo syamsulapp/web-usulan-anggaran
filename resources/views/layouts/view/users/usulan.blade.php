@@ -190,7 +190,7 @@
                             <div class="form-group">
                                 <div class="col-sm-14">
                                     <!-- uraian -->
-                                    <label>Uraian</label>
+                                    <label>Nama Kegiatan</label>
                                     <select class="custom-select" name="uraian_id">
                                         @foreach ($uraian as $u)
                                             <option value="{{ $u->id }}">{{ $u->nama_kegiatan }}</option>
@@ -201,7 +201,7 @@
                             <div class="form-group">
                                 <div class="col-sm-14">
                                     <!-- pagu -->
-                                    <label>pagu</label>
+                                    <label>Kode Akun</label>
                                     <select class="custom-select" name="pagu_id">
                                         @foreach ($pagu as $p)
                                             <option value="{{ $p->id }}">{{ $p->jenis_alokasi_anggaran }}</option>
@@ -248,7 +248,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="volume">Volume</label>
-                                <input type="text"
+                                <input type="number"
                                     class="form-control @error('volume')
                                 is-invalid
                             @enderror"
@@ -260,7 +260,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="harga_satuan">Harga Satuan</label>
-                                <input type="text"
+                                <input type="number"
                                     class="form-control @error('harga_satuan')
                                 is-invalid
                             @enderror"
@@ -272,7 +272,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="satuan">Satuan</label>
-                                <input type="text"
+                                <input type="number"
                                     class="form-control @error('satuan')
                                 is-invalid
                             @enderror"
