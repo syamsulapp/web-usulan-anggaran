@@ -60,7 +60,7 @@
                 <a href="{{ url('/') }}" class="h1"><b>SIPP </b>{{ __('Login') }}</a>
             </div>
             <div class="card-body">
-                <p class="login-box-msg">Sistem Informasi Penganggaran Dan Perencanaan <b>IAIN METRO</b></p>
+                <p class="login-box-msg">Sistem Informasi Perencanaan Dan Penganggaran <br><b>IAIN METRO</b></p>
                 <form action="{{ route('login') }}" method="post">
                     @csrf
                     <div class="input-group mb-3">
