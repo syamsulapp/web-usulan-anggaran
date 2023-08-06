@@ -65,9 +65,7 @@ Route::middleware('admin')->group(function () {
         Route::delete('users/delete/{id}', [MasterDataUsers::class, 'delete'])->name('admin.users-delete');
         Route::post('users/verify/{id}', [MasterDataUsers::class, 'verifyAccountUsers'])->name('admin.users-verify');
 
-        // PAGU MANAGEMENT
-
-
+        // PAGU MANAGEMENT (code akun)
         Route::get('pagu', [PaguController::class, 'index'])->name('pagu.index');
         Route::post('pagu/tambah_pagu', [PaguController::class, 'tambah_pagu'])->name('tambah_pagu');
         Route::post('pagu/tambah-anggaran', [PaguController::class, 'tambah_anggaran'])->name('tambah_anggaran');
@@ -75,7 +73,7 @@ Route::middleware('admin')->group(function () {
         Route::delete('pagu/delete/{id}', [PaguController::class, 'delete'])->name('delete_pagu');
 
 
-        //Lembaga MANAGEMENT
+        //Lembaga MANAGEMENT (unit pengusul)
         Route::get('lembaga', [LembagaController::class, 'index'])->name('lembaga.index');
         Route::post('lembaga/store', [LembagaController::class, 'store'])->name('lembaga.store');
         Route::put('lembaga/{id}', [LembagaController::class, 'update'])->name('lembaga.update');
