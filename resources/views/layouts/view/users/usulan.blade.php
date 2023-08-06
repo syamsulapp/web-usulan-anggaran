@@ -139,7 +139,7 @@
                                 <!-- /.col -->
                             </div>
                             <!-- /.row -->
-
+                            {{-- state menambah usulan anggaran --}}
                             <!-- this row will not appear when printing -->
                             <div class="row no-print">
                                 <div class="col-12">
@@ -147,14 +147,15 @@
                                             class="fas fa-print"></i> Print</a> --}}
                                     <form
                                         action="{{ route('users.submit-anggaran', ['anggaran' => $countUsulan, 'nama' => $photos['nama_lengkap'], 'photo' => $photos['photos']]) }}"
-                                        , method="POST">
+                                        method="POST">
                                         @csrf
                                         <button type="submit" class="btn btn-success float-right"><i
                                                 class="far fa-credit-card"></i> Submit Anggaran
                                         </button>
                                     </form>
-                                    <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
-                                        <i class="fas fa-plus-circle" data-target="#tambahAnggaran" data-toggle="modal"></i>
+                                    <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;"
+                                        data-target="#tambahAnggaran" data-toggle="modal">
+                                        <i class="fas fa-plus-circle"></i>
                                         Tambah Anggaran
                                     </button>
                                     @if ($statusUsulan['status'] == 'diterima')
@@ -215,13 +216,15 @@
                                         <!-- radio -->
                                         <div class="form-group clearfix">
                                             <div class="icheck-primary d-inline">
-                                                <input type="radio" id="radioPrimary1" name="sumber_anggaran" checked value="rm">
+                                                <input type="radio" id="radioPrimary1" name="sumber_anggaran" checked
+                                                    value="rm">
                                                 <label for="radioPrimary1">
                                                     {{ __('RM') }}
                                                 </label>
                                             </div>
                                             <div class="icheck-primary d-inline">
-                                                <input type="radio" id="radioPrimary2" name="sumber_anggaran" value="pnbp">
+                                                <input type="radio" id="radioPrimary2" name="sumber_anggaran"
+                                                    value="pnbp">
                                                 <label for="radioPrimary2">
                                                     {{ __('PNBP') }}
 
