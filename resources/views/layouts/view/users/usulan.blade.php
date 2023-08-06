@@ -139,7 +139,7 @@
                                 <!-- /.col -->
                             </div>
                             <!-- /.row -->
-
+                            {{-- state menambah usulan anggaran --}}
                             <!-- this row will not appear when printing -->
                             <div class="row no-print">
                                 <div class="col-12">
