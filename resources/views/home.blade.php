@@ -34,12 +34,12 @@
                                 <div class="inner">
                                     <h3>{{ $lembaga }}</h3>
 
-                                    <p>Lembaga</p>
+                                    <p>Unit Pengusul</p>
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-bag"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">More info <i
+                                <a href="{{ route('lembaga.index') }}" class="small-box-footer">More info <i
                                         class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
@@ -56,7 +56,7 @@
                                 <div class="icon">
                                     <i class="ion ion-stats-bars"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">More Info <i
+                                <a href="{{ route('admin.users') }}" class="small-box-footer">More Info <i
                                         class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
@@ -88,8 +88,8 @@
                                 <div class="icon">
                                     <i class="ion ion-pie-graph"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">More info <i
-                                        class="fas fa-arrow-circle-right"></i></a>
+                                {{-- <a href="#" class="small-box-footer">More info <i
+                                        class="fas fa-arrow-circle-right"></i></a> --}}
                             </div>
                         </div>
                         <!-- ./col -->
@@ -135,7 +135,7 @@
                                     <div class="alert alert-danger alert-dismissible">
                                         <h5><i class="icon fas fa-ban"></i> Alert!</h5>
                                         {{ __('akun anda belum aktif, harap aktifkan akun agar dapat menggunakan fitur di
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                aplikasi ini.Silahkan hubungi pihak admin untuk mengaktifkan akun anda') }}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                aplikasi ini.Silahkan hubungi pihak admin untuk mengaktifkan akun anda') }}
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
