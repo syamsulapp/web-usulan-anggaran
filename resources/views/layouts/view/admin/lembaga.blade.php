@@ -67,7 +67,7 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama Lembaga</th>
+                                            <th>Unit Pengusul</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -110,7 +110,7 @@
                                     <tfoot>
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama Lembaga</th>
+                                            <th>Unit Pengusul</th>
                                             <th>Action</th>
                                         </tr>
                                     </tfoot>
@@ -172,7 +172,7 @@
                 <div class="modal-dialog modal-dialog-centered modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="editModal{{ $lembaga->id }}Label">Edit Lembaga</h4>
+                            <h4 class="modal-title" id="editModal{{ $lembaga->id }}Label">Edit Unit Pengusul</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -183,7 +183,7 @@
                                 @method('PUT')
 
                                 <div class="form-group">
-                                    <label for="editNamaLembaga{{ $lembaga->id }}">Nama Lembaga</label>
+                                    <label for="editNamaLembaga{{ $lembaga->id }}">Unit Pengusul</label>
                                     <input type="text" class="form-control" id="editNamaLembaga{{ $lembaga->id }}"
                                         name="nama_lembaga" value="{{ $lembaga->nama_lembaga }}">
                                 </div>
