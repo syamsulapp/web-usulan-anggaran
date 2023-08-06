@@ -27,7 +27,7 @@ class LembagaController extends Controller
         $lembaga->nama_lembaga = $validatedData['nama_lembaga'];
         $lembaga->save();
 
-        return redirect()->route('lembaga.index')->with('success', 'Data lembaga berhasil disimpan.');
+        return redirect()->route('lembaga.index')->with('success', 'Data Unit Pengusul berhasil disimpan.');
     }
 
     public function update(Request $request, $id)
@@ -40,7 +40,7 @@ class LembagaController extends Controller
         $lembaga->nama_lembaga = $validatedData['nama_lembaga'];
         $lembaga->save();
 
-        return redirect()->route('lembaga.index')->with('success', 'Data lembaga berhasil diperbarui.');
+        return redirect()->route('lembaga.index')->with('success', 'Data Unit Pengusul berhasil diperbarui.');
     }
 
     public function destroy($id)
@@ -49,11 +49,11 @@ class LembagaController extends Controller
         $lembaga = Lembaga::find($id);
 
         if (!$lembaga) {
-            return redirect()->back()->with('error', 'Lembaga tidak ditemukan.');
+            return redirect()->back()->with('error', 'Unit Pengusul tidak ditemukan.');
         }
 
         $lembaga->delete();
 
-        return redirect()->back()->with('success', 'Lembaga berhasil dihapus.');
+        return redirect()->back()->with('success', 'Unit Pengusul berhasil dihapus.');
     }
 }
