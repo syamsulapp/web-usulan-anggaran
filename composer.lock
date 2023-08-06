@@ -1116,6 +1116,18 @@
         },
         {
             "name": "laravel/framework",
+<<<<<<< HEAD
+            "version": "v10.15.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/framework.git",
+                "reference": "c7599dc92e04532824bafbd226c2936ce6a905b8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/c7599dc92e04532824bafbd226c2936ce6a905b8",
+                "reference": "c7599dc92e04532824bafbd226c2936ce6a905b8",
+=======
             "version": "v10.17.0",
             "source": {
                 "type": "git",
@@ -1126,6 +1138,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/framework/zipball/a0e3f5ac5b6258f6ede9a2a2c5cc3820baea24a2",
                 "reference": "a0e3f5ac5b6258f6ede9a2a2c5cc3820baea24a2",
+>>>>>>> b8f35105aa419b50ab1061dd150cc5944defe32d
                 "shasum": ""
             },
             "require": {
@@ -1312,6 +1325,9 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
+<<<<<<< HEAD
+            "time": "2023-07-11T13:43:52+00:00"
+=======
             "time": "2023-08-01T14:08:45+00:00"
         },
         {
@@ -1361,6 +1377,7 @@
                 "source": "https://github.com/laravel/prompts/tree/v0.1.1"
             },
             "time": "2023-07-31T15:03:02+00:00"
+>>>>>>> b8f35105aa419b50ab1061dd150cc5944defe32d
         },
         {
             "name": "laravel/sanctum",
@@ -6027,6 +6044,18 @@
         },
         {
             "name": "laravel/pint",
+<<<<<<< HEAD
+            "version": "v1.10.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/pint.git",
+                "reference": "f56798088068af8bd75a8f2c4ecae022990fdf75"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/pint/zipball/f56798088068af8bd75a8f2c4ecae022990fdf75",
+                "reference": "f56798088068af8bd75a8f2c4ecae022990fdf75",
+=======
             "version": "v1.10.5",
             "source": {
                 "type": "git",
@@ -6037,6 +6066,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/pint/zipball/a458fb057bfa2f5a09888a8aa349610be807b0c3",
                 "reference": "a458fb057bfa2f5a09888a8aa349610be807b0c3",
+>>>>>>> b8f35105aa419b50ab1061dd150cc5944defe32d
                 "shasum": ""
             },
             "require": {
@@ -6089,7 +6119,11 @@
                 "issues": "https://github.com/laravel/pint/issues",
                 "source": "https://github.com/laravel/pint"
             },
+<<<<<<< HEAD
+            "time": "2023-07-11T15:18:27+00:00"
+=======
             "time": "2023-07-14T10:26:01+00:00"
+>>>>>>> b8f35105aa419b50ab1061dd150cc5944defe32d
         },
         {
             "name": "laravel/sail",
@@ -6829,6 +6863,18 @@
         },
         {
             "name": "phpunit/phpunit",
+<<<<<<< HEAD
+            "version": "10.2.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/phpunit.git",
+                "reference": "68484779b5a2ed711fbdeba6ca01910d87acdff2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/68484779b5a2ed711fbdeba6ca01910d87acdff2",
+                "reference": "68484779b5a2ed711fbdeba6ca01910d87acdff2",
+=======
             "version": "10.2.6",
             "source": {
                 "type": "git",
@@ -6839,6 +6885,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/1c17815c129f133f3019cc18e8d0c8622e6d9bcd",
                 "reference": "1c17815c129f133f3019cc18e8d0c8622e6d9bcd",
+>>>>>>> b8f35105aa419b50ab1061dd150cc5944defe32d
                 "shasum": ""
             },
             "require": {
@@ -6910,7 +6957,11 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
+<<<<<<< HEAD
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.2.4"
+=======
                 "source": "https://github.com/sebastianbergmann/phpunit/tree/10.2.6"
+>>>>>>> b8f35105aa419b50ab1061dd150cc5944defe32d
             },
             "funding": [
                 {
@@ -6926,7 +6977,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
+            "time": "2023-07-10T04:06:08+00:00"
+=======
             "time": "2023-07-17T12:08:28+00:00"
+>>>>>>> b8f35105aa419b50ab1061dd150cc5944defe32d
         },
         {
             "name": "sebastian/cli-parser",

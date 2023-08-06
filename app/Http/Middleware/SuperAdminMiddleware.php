@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\ProfileModels;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,8 +20,13 @@ class SuperAdminMiddleware
         if (
             Auth::check()
             && Auth::user()->id_role == 1
-            && Auth::user()->is_active === 'Y'
+            && Auth::user()->is_active == 'Y'
         ) {
+            if ($cekPhoto = ProfileModels::whereid_users(Auth::user()->id)->first()) {
+                if (empty($cekPhoto->photos)) { //kalo fotonya gak upload maka redirect to profile untuk upload foto(melengkapi data profile)
+                    return redirect()->route('profile')->with('alertError', 'lengkapi profile superadmin untuk kebutuhan verifikasi usulan dari users');
+                }
+            }
             return $next($request);
         }
 

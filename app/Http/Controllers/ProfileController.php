@@ -43,10 +43,11 @@ class ProfileController extends Controller
                     'about_me' => 'no content about me',
                 ];
             }
+            //show lembaga base on sessionUsers
             $showLembaga = $this->lembaga->whereId($this->user->user()->id_lembaga)->first();
-
+            //query list lembaga
             $queryLembaga = $this->lembaga->all();
-
+            // show data roles by sessionUsers
             $data_role = $this->role->whereId($this->user->user()->id_role)->first(); //query data roles sesuai dengan session usersnya
             //timeline usulan
             $timeLineUsulanAnggaran = $this->statusUsulanModels->all();

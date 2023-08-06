@@ -44,11 +44,18 @@
                         <!-- Profile Image -->
                         <div class="card card-primary card-outline">
                             <div class="card-body box-profile">
-                                <div class="text-center">
-                                    <img class="profile-user-img img-fluid img-circle"
-                                        src="{{ url('photo_profile', $data_profile['photos']) }}"
-                                        alt="User profile picture">
-                                </div>
+                                @if ($data_profile['photos'] != null)
+                                    <div class="text-center">
+                                        <img class="profile-user-img img-fluid img-circle"
+                                            src="{{ url('photo_profile', $data_profile['photos']) }}"
+                                            alt="User profile picture">
+                                    </div>
+                                @else
+                                    <div class="text-center">
+                                        <img class="profile-user-img img-fluid img-circle" src="{{ url('noProfile.jpg') }}"
+                                            alt="User profile picture">
+                                    </div>
+                                @endif
 
                                 <h3 class="profile-username text-center">{{ $data_profile['nama_lengkap'] }}</h3>
 
@@ -87,7 +94,7 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <strong><i class="fas fa-book mr-1"></i> Unit Lembaga</strong>
+                                <strong><i class="fas fa-book mr-1"></i> Unit Pengusul</strong>
 
                                 <p class="text-muted">
                                     {{ $showLembaga->nama_lembaga }}
@@ -295,13 +302,14 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label for="inputEmail" class="col-sm-2 col-form-label">Nama
-                                                    Lembaga</label>
+                                                <label for="inputEmail" class="col-sm-2 col-form-label">Unit
+                                                    Pengusul</label>
                                                 <div class="col-sm-10">
                                                     <div class="col-sm-14">
                                                         <select class="custom-select" name="nama_lembaga">
                                                             @foreach ($queryLembaga as $l)
-                                                                <option value="{{ $l->id }}"{{ $showLembaga->id === $l->id ? 'selected' : '' }}>
+                                                                <option
+                                                                    value="{{ $l->id }}"{{ $showLembaga->id === $l->id ? 'selected' : '' }}>
                                                                     {{ $l->nama_lembaga }}</option>
                                                             @endforeach
                                                         </select>
