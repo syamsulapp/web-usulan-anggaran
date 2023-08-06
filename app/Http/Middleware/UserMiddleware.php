@@ -20,7 +20,7 @@ class UserMiddleware
         if (
             Auth::check()
             && Auth::user()->id_role == 3
-            && Auth::user()->is_active === 'Y'
+            && Auth::user()->is_active == 'Y'
         ) {
             if (is_null(ProfileModels::whereid_users(Auth::user()->id)->first())) {
                 return redirect()->route('profile');
