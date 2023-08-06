@@ -87,7 +87,7 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <strong><i class="fas fa-book mr-1"></i> Unit Lembaga</strong>
+                                <strong><i class="fas fa-book mr-1"></i> Unit Pengusul</strong>
 
                                 <p class="text-muted">
                                     {{ $showLembaga->nama_lembaga }}
@@ -295,8 +295,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label for="inputEmail" class="col-sm-2 col-form-label">Nama
-                                                    Lembaga</label>
+                                                <label for="inputEmail" class="col-sm-2 col-form-label">Unit Pengusul</label>
                                                 <div class="col-sm-10">
                                                     <div class="col-sm-14">
                                                         <select class="custom-select" name="nama_lembaga">
