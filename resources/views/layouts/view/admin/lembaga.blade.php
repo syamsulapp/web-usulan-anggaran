@@ -1,6 +1,6 @@
 @extends('layouts.app', ['photos' => $photos['photos'], 'nama_lengkap' => $photos['nama_lengkap']])
 
-@section('title', 'Lembaga(Bagian) Management')
+@section('title', 'Unit Pengusul Management')
 
 @section('content')
     <div class="content-wrapper">
@@ -9,13 +9,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Lembaga(Bagian) Management</h1>
+                        <h1>Unit Pengusul</h1>
                     </div>
 
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                            <li class="breadcrumb-item active"><a href="{{ route('admin.users') }}">Master Data</a></li>
+                            <li class="breadcrumb-item active"><a href="{{ route('admin.users') }}">Unit Pengusul</a></li>
                         </ol>
                     </div>
                 </div>
@@ -34,13 +34,6 @@
                         {{ session('error') }}
                     </div>
                 @endif
-                @if (session('alert'))
-                    <div class="alert alert-success alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        <h5><i class="icon fas fa-check"></i> Success!</h5>
-                        {{ session('alert') }}
-                    </div>
-                @endif
             </div><!-- /.container-fluid -->
         </section>
 
@@ -51,17 +44,15 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Lembaga(Bagian) Management</h3>
+                                <h3 class="card-title">Management Unit Pengusul</h3>
                                 <br>
                                 <br>
                                 <div class="col-md-2">
                                     <button type="button" class="btn btn-outline-primary btn-block" data-toggle="modal"
                                         data-target="#tambahData-lg"><i class="fa fa-edit"></i>
-                                        Tambah Data Lembaga(Bagian)
+                                        Tambah Data Unit Pengusul
                                     </button>
                                 </div>
-
-
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -69,7 +60,7 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama Lembaga</th>
+                                            <th>Unit Pengusul</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -105,7 +96,6 @@
                                                             </form>
                                                         </div>
                                                     </div>
-
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -113,7 +103,7 @@
                                     <tfoot>
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama Lembaga</th>
+                                            <th>Unit Pengusul</th>
                                             <th>Action</th>
                                         </tr>
                                     </tfoot>
@@ -136,7 +126,7 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Tambah Data Lembaga</h4>
+                        <h4 class="modal-title">Tambah Data Unit Pengusul</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -146,9 +136,9 @@
                             @csrf
 
                             <div class="form-group">
-                                <label>Nama Lembaga</label>
+                                <label>Nama Unit Pengusul</label>
                                 <input type="text" class="form-control @error('nama_lembaga') is-invalid @enderror"
-                                    name="nama_lembaga" id="nama_lembaga" placeholder="Masukkan Nama Lembaga"
+                                    name="nama_lembaga" id="nama_lembaga" placeholder="Masukkan Nama Unit Pengusul"
                                     value="{{ old('nama_lembaga') }}">
                                 @error('nama_lembaga')
                                     <span class="invalid-feedback" role="alert">
@@ -175,7 +165,7 @@
                 <div class="modal-dialog modal-dialog-centered modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="editModal{{ $lembaga->id }}Label">Edit Lembaga</h4>
+                            <h4 class="modal-title" id="editModal{{ $lembaga->id }}Label">Edit Unit Pengusul</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -186,7 +176,7 @@
                                 @method('PUT')
 
                                 <div class="form-group">
-                                    <label for="editNamaLembaga{{ $lembaga->id }}">Nama Lembaga</label>
+                                    <label for="editNamaLembaga{{ $lembaga->id }}">Unit Pengusul</label>
                                     <input type="text" class="form-control" id="editNamaLembaga{{ $lembaga->id }}"
                                         name="nama_lembaga" value="{{ $lembaga->nama_lembaga }}">
                                 </div>
@@ -197,16 +187,6 @@
                 </div>
             </div>
         @endforeach
-
-
-        {{-- MODAL EDIT --}}
-
-    </div>
-    </div>
-    <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-    </div>
     </div>
 
 @endsection

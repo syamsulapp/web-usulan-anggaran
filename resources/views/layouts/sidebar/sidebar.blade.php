@@ -11,7 +11,11 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="{{ url('photo_profile', $photo) }}" class="img-circle elevation-2" alt="User Image">
+                @if ($photo != null)
+                    <img src="{{ url('photo_profile', $photo) }}" class="img-circle elevation-2" alt="User Image">
+                @else
+                    <img src="{{ url('noProfile.jpg') }}" class="img-circle elevation-2" alt="User Image">
+                @endif
             </div>
             <div class="info">
                 <a href="{{ route('profile') }}" class="d-block">{{ $nama_lengkap }}</a>
@@ -85,7 +89,7 @@
                                 <li class="nav-item">
                                     <a href="{{ route('lembaga.index') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>{{ __('Lembaga') }}</p>
+                                        <p>{{ __('Unit Pengusul') }}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">

@@ -33,7 +33,7 @@
                             </div>
                             <div class="row mb-3">
                                 <label for="lembaga"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('Lembaga') }}</label>
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Unit Pengusul') }}</label>
 
                                 <div class="col-md-6">
                                     <select name="lembaga" id="lembaga" class="form-control" autocomplete="lembaga"

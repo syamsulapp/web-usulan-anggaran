@@ -203,7 +203,7 @@ class VerifikasiUsulanController extends Controller
 
             PDF::Output(public_path($namaFile), 'I');
         } catch (\Exception $error) {
-            return redirect()->route('users.buat_usulan')->with('error', 'usulan belum di buat');
+            return redirect()->route('admin.cetak-usulan')->with('error', 'usulan belum ada');
         }
     }
 }

@@ -106,7 +106,7 @@
 </script>
 <script>
     function confirmDelete(id) {
-        if (confirm('Apakah Anda yakin ingin menghapus lembaga ini?')) {
+        if (confirm('Apakah Anda yakin ingin menghapus Unit Pengusul ini?')) {
             document.getElementById('delete-form-' + id).submit();
         }
     }

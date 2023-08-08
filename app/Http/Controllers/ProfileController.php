@@ -43,10 +43,11 @@ class ProfileController extends Controller
                     'about_me' => 'no content about me',
                 ];
             }
+            //show lembaga base on sessionUsers
             $showLembaga = $this->lembaga->whereId($this->user->user()->id_lembaga)->first();
-
+            //query list lembaga
             $queryLembaga = $this->lembaga->all();
-
+            // show data roles by sessionUsers
             $data_role = $this->role->whereId($this->user->user()->id_role)->first(); //query data roles sesuai dengan session usersnya
             //timeline usulan
             $timeLineUsulanAnggaran = $this->statusUsulanModels->all();
@@ -58,7 +59,7 @@ class ProfileController extends Controller
 
             return view('layouts.view.profile.profile', compact('data_profile', 'data_role', 'timeLineUsulanAnggaran', 'activity', 'showLembaga', 'queryLembaga'));
         } catch (\Exception $error) {
-            return view('layouts.view.profile.profile')->with('alertError', $error);
+            return view('layouts.view.profile.profile')->with('error', $error);
         }
     }
     public function profileSubmit(Request $request)
@@ -231,6 +232,6 @@ class ProfileController extends Controller
             }
         }
 
-        return redirect()->route('profile')->with('alert', 'Berhasil Ubah Profile');
+        return redirect()->route('profile')->with('success', 'Berhasil Ubah Profile');
     }
 }
