@@ -25,7 +25,7 @@ use App\Http\Controllers\VerifikasiUsulanController;
 
 /**
  * 
- *Routes (production) Version APP 1.0 Release To Production SIPP
+ *Routes (production) Version APP 1.0 Release To Production SIPP (Sistem Informasi Perencanaan Dan Penganggaran)
  */
 
 Route::get('/', [LoginController::class, 'showLoginForm'])->name('login');
