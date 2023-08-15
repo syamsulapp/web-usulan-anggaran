@@ -19,7 +19,6 @@ class DatabaseSeeder extends Seeder
             LembagaSeeder::class,
             AccountSeeder::class,
             ProfileSeeder::class,
-            UsersSeeder::class
         ]);
     }
 }
