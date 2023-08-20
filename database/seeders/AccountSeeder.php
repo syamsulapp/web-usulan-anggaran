@@ -13,24 +13,44 @@ class AccountSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('users')->insert([
-            'username' => 'superadmin',
-            'password' => Hash::make('superadmin1129321!@#'),
-            'id_lembaga' => 1,
-            'id_role' => 1, //superadmin
-            'is_active' => 'Y',
-            'created_at' => \Carbon\Carbon::now(),
-            'updated_at' => \Carbon\Carbon::now(),
-        ]);
-        DB::table('users')->insert([
-            'username' => 'admin',
-            'password' => Hash::make('admin1129321!@#'),
-            'id_lembaga' => 1,
-            'id_role' => 2, //admin
-            'is_active' => 'Y',
-            'created_at' => \Carbon\Carbon::now(),
-            'updated_at' => \Carbon\Carbon::now(),
+        $account = [
+            [
+                'username' => 'superadmin',
+                'password' => Hash::make('superadmin1129321!@#'),
+                'id_lembaga' => 1,
+                'id_role' => 1, //superadmin
+                'is_active' => 'Y',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now(),
+            ], [
+                'username' => 'admin',
+                'password' => Hash::make('admin1129321!@#'),
+                'id_lembaga' => 1,
+                'id_role' => 2, //admin
+                'is_active' => 'Y',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now(),
 
-        ]);
+            ], [
+                'username' => 'dummy1',
+                'password' => Hash::make('dummy12345'),
+                'id_lembaga' => 1,
+                'id_role' => 3,
+                'is_active' => 'Y',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now(),
+            ], [
+                'username' => 'dummy2',
+                'password' => Hash::make('dummy123456'),
+                'id_lembaga' => 1,
+                'id_role' => 3,
+                'is_active' => 'Y',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now(),
+            ]
+        ];
+        foreach ($account as $a) {
+            DB::table('users')->insert($a);
+        }
     }
 }
