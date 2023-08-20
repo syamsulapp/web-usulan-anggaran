@@ -1,4 +1,4 @@
-![Logo_iain_metro](https://github.com/syamsulapp/web-usulan-anggaran/assets/38209592/599168b4-80f8-4f0b-9a74-54382c561e5e)
+<div align="center"><img src="https://github.com/syamsulapp/web-usulan-anggaran/assets/38209592/599168b4-80f8-4f0b-9a74-54382c561e5e" alt="laravelImg" style="width: 300px"></div>
 
 # introduce
 
