@@ -1,3 +1,5 @@
+![Logo_iain_metro](https://github.com/syamsulapp/web-usulan-anggaran/assets/38209592/599168b4-80f8-4f0b-9a74-54382c561e5e)
+
 # introduce
 
 <h5>project SIPP di build menggunakan framework laravel versi 10 dengan versi php 8.1>= dan versi composer 2.5.8, jadi pastikan versi php yang anda gunakan sudah sesuai</h5>
