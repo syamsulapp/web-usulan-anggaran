@@ -13,19 +13,23 @@ class ProfileSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('profile')->insert([
-            'nama_lengkap' => 'SuperAdmin',
-            'about_me' => 'super admin',
-            'id_users' => 1,
-            'created_at' => \Carbon\Carbon::now(),
-            'updated_at' => \Carbon\Carbon::now(),
-        ]);
-        DB::table('profile')->insert([
+
+        $profile = [[
             'nama_lengkap' => 'Admin',
             'about_me' => 'Admin',
             'id_users' => 2,
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now(),
-        ]);
+        ], [
+            'nama_lengkap' => 'SuperAdmin',
+            'about_me' => 'super admin',
+            'id_users' => 1,
+            'created_at' => \Carbon\Carbon::now(),
+            'updated_at' => \Carbon\Carbon::now(),
+        ]];
+
+        foreach ($profile as $p) {
+            DB::table('profile')->insert($p);
+        }
     }
 }
