@@ -104,12 +104,6 @@ localhost:8000 -> sesuaikan dengan base url kalian
 
 ```
 
-# unit test SIPP feature
-
-```bash
-php artisan test
-```
-
 # account default
 
 ```bash
